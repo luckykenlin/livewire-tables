@@ -33,7 +33,7 @@ abstract class LivewireTables extends Component
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows' => $this->models()
+            'rows' => $this->models(),
         ]);
     }
 
