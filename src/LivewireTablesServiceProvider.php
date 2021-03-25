@@ -2,9 +2,9 @@
 
 namespace Luckykenlin\LivewireTables;
 
+use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 
 class LivewireTablesServiceProvider extends PackageServiceProvider
 {
