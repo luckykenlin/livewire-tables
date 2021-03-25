@@ -6,15 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/luckykenlin/livewire-tables.svg?style=flat-square)](https://packagist.org/packages/luckykenlin/livewire-tables)
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-livewire-tables-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-livewire-tables-laravel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+A dynamic table component for Laravel Livewire.
 
 ## Installation
 
@@ -43,11 +35,26 @@ return [
 ];
 ```
 
-## Usage
+### Using this package in a Laravel project
+You can easily use this packge in a local Laravel project, after cloning:
 
-```php
-$livewire-tables = new Luckykenlin\LivewireTables();
-echo $livewire-tables->echoPhrase('Hello, Luckykenlin!');
+1. Specify a new repository in your composer.json file of the Laravel project (not this package!):
+```
+// composer.json
+
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../../livewire-tables" // the relative path to your package
+    }
+  ]
+}
+```
+
+2. Require the package in the local Laravel project:
+``` 
+composer require luckykenlin/livewire-tables
 ```
 
 ## Testing
