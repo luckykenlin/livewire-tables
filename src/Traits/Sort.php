@@ -23,12 +23,12 @@ trait Sort
 
     public function sortableColumns(): array
     {
-        return array_filter($this->columns(), fn($column) => $column->sortable);
+        return array_filter($this->columns(), fn ($column) => $column->sortable);
     }
 
     public function addSort(): self
     {
-        if (!$this->sort) {
+        if (! $this->sort) {
             return $this;
         }
 
@@ -41,6 +41,7 @@ trait Sort
     {
         if (Str::contains($this->sort, '.')) {
             $relationship = $this->relationship($this->sort);
+
             return $this->attribute($builder, $relationship->name, $relationship->attribute);
         }
 

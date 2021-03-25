@@ -8,6 +8,6 @@ trait Filter
 
     public function filterFields(): array
     {
-        return array_filter($this->columns(), fn($column) => $column->filterable);
+        return array_filter($this->columns(), fn ($column) => $column->filterable);
     }
 }
