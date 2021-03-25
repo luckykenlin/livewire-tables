@@ -1,8 +1,9 @@
 {
     "name": "luckykenlin/livewire-tables",
-    "description": "A dynamic table component for Laravel Livewire.",
+    "description": "livewire-tables",
     "keywords": [
         "luckykenlin",
+        "livewire-tables",
         "livewire",
         "datatables",
         "tables",
@@ -10,7 +11,6 @@
     ],
     "homepage": "https://github.com/luckykenlin/livewire-tables",
     "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "Ken Lin",
@@ -19,18 +19,22 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
-        "ext-json": "*",
-        "livewire/livewire": "^2.0",
-        "illuminate/support": "^8.0"
+        "php": "^8.0",
+        "spatie/laravel-package-tools": "^1.4.3",
+        "illuminate/contracts": "^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.0"
+        "brianium/paratest": "^6.2",
+        "nunomaduro/collision": "^5.3",
+        "orchestra/testbench": "^6.15",
+        "phpunit/phpunit": "^9.3",
+        "spatie/laravel-ray": "^1.9",
+        "vimeo/psalm": "^4.4"
     },
     "autoload": {
         "psr-4": {
-            "Luckykenlin\\LivewireTables\\": "src"
+            "Luckykenlin\\LivewireTables\\": "src",
+            "Luckykenlin\\LivewireTables\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
@@ -39,7 +43,9 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "psalm": "vendor/bin/psalm",
+        "test": "./vendor/bin/testbench package:test --parallel",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
         "sort-packages": true
@@ -47,8 +53,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Luckykenlin\\LivewireTables\\Providers\\LivewireTableServiceProvider"
-            ]
+                "Luckykenlin\\LivewireTables\\LivewireTablesServiceProvider"
+            ],
+            "aliases": {
+                "LivewireTables": "Luckykenlin\\LivewireTables\\LivewireTablesFacade"
+            }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
