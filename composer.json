@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/contracts": "^8.0",
         "livewire/livewire": "^2.0"
@@ -45,7 +45,7 @@
     },
     "scripts": {
         "psalm": "vendor/bin/psalm",
-        "test": "./vendor/bin/testbench package:test --parallel",
+        "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
