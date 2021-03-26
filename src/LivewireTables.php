@@ -20,16 +20,16 @@ abstract class LivewireTables extends Component
         $this->query = $this->initialQuery();
     }
 
-    abstract protected function query(): Builder;
+    abstract protected function query();
 
-    abstract protected function columns(): array;
+    abstract protected function columns();
 
     protected function view(): string
     {
         return 'livewire.table';
     }
 
-    public function render(): View
+    public function render()
     {
         return view($this->view(), [
             'columns' => $this->columns(),
