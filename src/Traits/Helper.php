@@ -52,18 +52,21 @@ trait Helper
 
                     $last_query->addSelect($table . '.' . $attribute);
                     $query->leftJoin($table, $foreign, $other);
+
                     break;
 
                 case $model instanceof HasOneOrMany:
                     $table = $model->getRelated()->getTable();
                     $foreign = $model->getQualifiedForeignKeyName();
                     $other = $model->getQualifiedParentKeyName();
+
                     break;
 
                 case $model instanceof BelongsTo:
                     $table = $model->getRelated()->getTable();
                     $foreign = $model->getQualifiedForeignKeyName();
                     $other = $model->getQualifiedOwnerKeyName();
+
                     break;
 
                 default:
