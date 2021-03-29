@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-
 class Date extends Column
 {
     /**

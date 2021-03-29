@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-
 class ID extends Column
 {
     /**
