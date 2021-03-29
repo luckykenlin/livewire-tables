@@ -30,7 +30,7 @@
             <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                 <div class="my-2 sm:my-0 flex items-center space-x-2">
                     <label>
-                        <select name="perPage" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" wire:model="perPage">
+                        <select name="perPage" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-0 focus:ring-gray-600 focus:border-gray-600 sm:text-sm sm:leading-5" wire:model="perPage">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -86,10 +86,10 @@
                                     <span wire:key="paginator-page{{ $page }}">
                                         @if ($page == $paginator->currentPage())
                                             <span aria-current="page">
-                                                <span class="bg-gray-200 relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5">{{ $page }}</span>
+                                                <span class="bg-gray-200 relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-600 bg-white border border-gray-300 cursor-default leading-5">{{ $page }}</span>
                                             </span>
                                         @else
-                                            <button wire:click="gotoPage({{ $page }})" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                            <button wire:click="gotoPage({{ $page }})" class="hover:bg-gray-200 relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                                 {{ $page }}
                                             </button>
                                         @endif

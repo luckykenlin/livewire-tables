@@ -1,7 +1,7 @@
 <div class="overflow-x-auto px-6 sm:px-0">
     <div class="min-w-screen flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full">
-            <div class="flex justify-between">
+            <div class="grid grid-cols-4 gap-2">
                 @if($searchable)
                     <x-livewire-tables-search-bar placeholder="{{$searchPlaceholder}}" wire:model="search"/>
                 @endif

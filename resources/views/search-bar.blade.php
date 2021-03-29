@@ -1,6 +1,7 @@
-<div class="pt-2 relative text-gray-600">
-    <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none focus:ring-0 focus:ring-gray-600 focus:border-gray-600"
-           type="text" name="search" {{$attributes}}
+<div class="w-full pt-2 relative text-gray-600">
+    <input
+        class="w-full bg-white h-10 px-5 pr-16 text-sm rounded-md border-2 border-gray-300 focus:outline-none focus:ring-0 focus:ring-gray-600 focus:border-gray-600"
+        type="text" name="search" {{$attributes}}
     >
     <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
         <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
