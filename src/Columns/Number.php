@@ -12,5 +12,5 @@ class Number extends Column
     /**
      * @var string
      */
-    public string $type = 'number';
+    public $type = 'number';
 }

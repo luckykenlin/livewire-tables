@@ -12,7 +12,7 @@ class ID extends Column
     /**
      * @var string
      */
-    public string $type = 'id';
+    public $type = 'id';
 
     /**
      * @param string $name

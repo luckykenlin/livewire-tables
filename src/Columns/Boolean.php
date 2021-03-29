@@ -12,12 +12,12 @@ class Boolean extends Column
     /**
      * @var string
      */
-    public string $type = 'boolean';
+    public $type = 'boolean';
 
-    public string $trueValue = "Yes";
-    public string $falseValue = "No";
+    public $trueValue = "Yes";
+    public $falseValue = "No";
 
-    public string $view = "livewire.boolean-field";
+    public $view = "livewire-tables::boolean-field";
 
     public function trueValue($value)
     {

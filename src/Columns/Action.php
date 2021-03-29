@@ -12,11 +12,11 @@ class Action extends Column
     /**
      * @var string
      */
-    public string $type = 'action';
+    public $type = 'action';
 
-    public bool $fixed = false;
+    public $fixed = false;
 
-    public string $view = 'livewire-tables::table-actions';
+    public $view = 'livewire-tables::table-actions';
 
     /**
      * @param string $name

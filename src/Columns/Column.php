@@ -13,42 +13,42 @@ class Column
     /**
      * @var string
      */
-    public string $type = 'string';
+    public $type = 'string';
 
     /**
      * @var string
      */
-    protected string $name;
+    protected $name;
 
     /**
      * @var string
      */
-    protected string $attribute;
+    protected $attribute;
 
     /**
      * @var bool
      */
-    protected bool $searchable = false;
+    protected $searchable = false;
 
     /**
      * @var bool
      */
-    protected bool $sortable = false;
+    protected $sortable = false;
 
     /**
      * @var bool
      */
-    protected bool $filterable = false;
+    protected $filterable = false;
 
     /**
      * @var bool
      */
-    protected bool $exportable = false;
+    protected $exportable = false;
 
     /**
      * @var string
      */
-    protected string $view = '';
+    protected $view = '';
 
     /**
      * @var
@@ -117,7 +117,7 @@ class Column
      *
      * @return $this
      */
-    public function format(callable $callable): Column
+    public function format(callable $callable)
     {
         $this->formatCallback = $callable;
 
@@ -127,7 +127,7 @@ class Column
     /**
      * @return bool
      */
-    public function isFormatted(): bool
+    public function isFormatted()
     {
         return is_callable($this->formatCallback);
     }

@@ -12,5 +12,5 @@ class Status extends Column
     /**
      * @var string
      */
-    public string $type = 'status';
+    public $type = 'status';
 }
