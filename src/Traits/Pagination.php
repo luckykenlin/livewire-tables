@@ -8,20 +8,20 @@ trait Pagination
 {
     use WithPagination;
 
-    public bool $paginate = true;
-    public int $perPage = 10;
+    public $paginate = true;
+    public $perPage = 10;
 
     public function paginationView()
     {
-        return "livewire.pagination";
+        return "livewire-tables::pagination";
     }
 
-    public function updatingSearch(): void
+    public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    public function updatingPerPage(): void
+    public function updatingPerPage()
     {
         $this->resetPage();
     }

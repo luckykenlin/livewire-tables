@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 
 trait Sort
 {
-    public string $sort = '';
-    public string $direction = 'desc';
+    public $sort = '';
+    public $direction = 'desc';
 
     public function sort($field)
     {
@@ -21,14 +21,14 @@ trait Sort
         $this->direction = $this->direction === "asc" ? "desc" : "asc";
     }
 
-    public function sortableColumns(): array
+    public function sortableColumns()
     {
-        return array_filter($this->columns(), fn ($column) => $column->sortable);
+        return array_filter($this->columns(), fn($column) => $column->sortable);
     }
 
-    public function addSort(): self
+    public function addSort()
     {
-        if (! $this->sort) {
+        if (!$this->sort) {
             return $this;
         }
 
@@ -37,7 +37,7 @@ trait Sort
         return $this;
     }
 
-    public function getSortColumn(Builder $builder): string
+    public function getSortColumn(Builder $builder)
     {
         if (Str::contains($this->sort, '.')) {
             $relationship = $this->relationship($this->sort);

@@ -2,37 +2,36 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 trait Search
 {
-    public string $search = '';
-    public string $searchPlaceholder = 'Type for search..';
-    public bool $searchable = true;
+    public $search = '';
+    public $searchPlaceholder = 'Type for search..';
+    public $searchable = true;
 
-    public function clearSearch(): void
+    public function clearSearch()
     {
         $this->search = '';
     }
 
-    public function searchableColumns(): array
+    public function searchableColumns()
     {
-        return array_filter($this->columns(), fn ($column) => $column->searchable);
+        return array_filter($this->columns(), fn($column) => $column->searchable);
     }
 
-    public function addSearch(): self
+    public function addSearch()
     {
-        if (trim($this->search) === '' || ! $this->searchable) {
+        if (trim($this->search) === '' || !$this->searchable) {
             return $this;
         }
 
-        $this->query->where(function (Builder $builder) {
+        $this->query->where(function ($builder) {
             foreach ($this->searchableColumns() as $column) {
                 if (Str::contains($column->attribute, '.')) {
                     $relationship = $this->relationship($column->attribute);
 
-                    $builder->orWhereHas($relationship->name, function (Builder $builder) use ($relationship) {
+                    $builder->orWhereHas($relationship->name, function ($builder) use ($relationship) {
                         $builder->where($relationship->attribute, 'like', '%' . trim($this->search) . '%');
                     });
                 } else {

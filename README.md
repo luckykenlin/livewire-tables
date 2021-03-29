@@ -34,7 +34,10 @@ This is the contents of the published config file:
 return [
 ];
 ```
-
+You can publish the views file with:
+```bash
+php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-views"
+```
 ### Using this package in a Laravel project
 You can easily use this packge in a local Laravel project, after cloning:
 

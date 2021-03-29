@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables;
 
+use Illuminate\Support\Facades\Blade;
 use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -21,5 +22,7 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_livewire_tables_table')
             ->hasCommand(LivewireTablesCommand::class);
+
+        Blade::component('livewire-tables::search-bar', 'livewire-tables-search-bar');
     }
 }

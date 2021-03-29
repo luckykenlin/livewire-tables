@@ -4,9 +4,9 @@ namespace Luckykenlin\LivewireTables\Traits;
 
 trait Action
 {
-    public string $itemKey = '';
-    public bool $deletable = true;
-    public bool $confirmingDeletion = false;
+    public $itemKey = '';
+    public $deletable = true;
+    public $confirmingDeletion = false;
 
     public function delete()
     {

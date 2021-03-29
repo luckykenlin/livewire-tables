@@ -2,17 +2,29 @@
 
 namespace Luckykenlin\LivewireTables;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
 use Livewire\Component;
-use Livewire\WithPagination;
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Traits\Sort;
+use Luckykenlin\LivewireTables\Traits\Action;
+use Luckykenlin\LivewireTables\Traits\Export;
+use Luckykenlin\LivewireTables\Traits\Filter;
+use Luckykenlin\LivewireTables\Traits\Helper;
+use Luckykenlin\LivewireTables\Traits\Search;
+use Luckykenlin\LivewireTables\Traits\Pagination;
+
 
 abstract class LivewireTables extends Component
 {
-    use WithPagination;
+    use Pagination, Filter, Search, Action, Sort, Export, Helper;
 
-    protected Builder $query;
+    protected $query;
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'page' => ['except' => 1],
+        'sort' => ['except' => ''],
+    ];
 
     public function __construct($id = null)
     {
@@ -24,9 +36,9 @@ abstract class LivewireTables extends Component
 
     abstract protected function columns();
 
-    protected function view(): string
+    protected function view()
     {
-        return 'livewire.table';
+        return 'livewire-tables::table';
     }
 
     public function render()
@@ -39,6 +51,8 @@ abstract class LivewireTables extends Component
 
     protected function models()
     {
+        $this->addSearch()->addSort();
+
         return $this->query->paginate($this->perPage);
     }
 

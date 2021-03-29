@@ -4,5 +4,5 @@ namespace Luckykenlin\LivewireTables\Traits;
 
 trait Export
 {
-    public bool $exportable = false;
+    public $exportable = false;
 }

@@ -2,19 +2,18 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 
 trait Helper
 {
-    protected function getModel(Builder $query)
+    protected function getModel($query)
     {
         return $query->getModel();
     }
 
-    protected function getTable(Builder $query)
+    protected function getTable($query)
     {
         return $this->getModel($query)->getTable();
     }
@@ -29,7 +28,7 @@ trait Helper
         ];
     }
 
-    public function attribute(Builder $query, $relationships, $attribute): string
+    public function attribute($query, $relationships, $attribute)
     {
         $table = '';
         $last_query = $query;
