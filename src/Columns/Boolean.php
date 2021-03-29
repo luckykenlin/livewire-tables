@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-
 /**
  * Class Boolean
  * @package App\Tools
@@ -22,12 +21,14 @@ class Boolean extends Column
     public function trueValue($value)
     {
         $this->trueValue = $value;
+
         return $this;
     }
 
     public function falseValue($value)
     {
         $this->falseValue = $value;
+
         return $this;
     }
 }
