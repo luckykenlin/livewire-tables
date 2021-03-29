@@ -4,7 +4,6 @@ namespace Luckykenlin\LivewireTables\Columns;
 
 use Illuminate\Support\Str;
 
-
 class Column
 {
     /**
