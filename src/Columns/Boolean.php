@@ -2,10 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-/**
- * Class Boolean
- * @package App\Tools
- */
+
 class Boolean extends Column
 {
     /**

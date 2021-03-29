@@ -4,10 +4,7 @@ namespace Luckykenlin\LivewireTables\Columns;
 
 use Illuminate\Support\Str;
 
-/**
- * Class Column
- * @package App\Tools
- */
+
 class Column
 {
     /**
@@ -106,7 +103,7 @@ class Column
     }
 
     /**
-     * @param null $name
+     * @param string $name
      * @param null $attribute
      * @return static
      */
