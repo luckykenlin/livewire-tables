@@ -17,12 +17,12 @@ trait Search
 
     public function searchableColumns()
     {
-        return array_filter($this->columns(), fn($column) => $column->searchable);
+        return array_filter($this->columns(), fn ($column) => $column->searchable);
     }
 
     public function addSearch()
     {
-        if (trim($this->search) === '' || !$this->searchable) {
+        if (trim($this->search) === '' || ! $this->searchable) {
             return $this;
         }
 

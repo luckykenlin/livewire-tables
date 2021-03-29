@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-
 /**
  * Class Action
  * @package App\Tools
@@ -31,6 +30,7 @@ class Action extends Column
     public function fixed()
     {
         $this->fixed = true;
+
         return $this;
     }
 }

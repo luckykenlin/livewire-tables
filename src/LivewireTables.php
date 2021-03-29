@@ -2,21 +2,26 @@
 
 namespace Luckykenlin\LivewireTables;
 
-use Livewire\Component;
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Traits\Sort;
+use Illuminate\Support\Arr;
+use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Action;
 use Luckykenlin\LivewireTables\Traits\Export;
 use Luckykenlin\LivewireTables\Traits\Filter;
 use Luckykenlin\LivewireTables\Traits\Helper;
-use Luckykenlin\LivewireTables\Traits\Search;
 use Luckykenlin\LivewireTables\Traits\Pagination;
-
+use Luckykenlin\LivewireTables\Traits\Search;
+use Luckykenlin\LivewireTables\Traits\Sort;
 
 abstract class LivewireTables extends Component
 {
-    use Pagination, Filter, Search, Action, Sort, Export, Helper;
+    use Pagination;
+    use Filter;
+    use Search;
+    use Action;
+    use Sort;
+    use Export;
+    use Helper;
 
     protected $query;
 

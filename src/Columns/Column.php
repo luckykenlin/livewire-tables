@@ -81,6 +81,7 @@ class Column
     public function searchable()
     {
         $this->searchable = true;
+
         return $this;
     }
 
@@ -90,6 +91,7 @@ class Column
     public function sortable()
     {
         $this->sortable = true;
+
         return $this;
     }
 
@@ -99,6 +101,7 @@ class Column
     public function filterable()
     {
         $this->filterable = true;
+
         return $this;
     }
 
@@ -139,6 +142,7 @@ class Column
     public function view($view)
     {
         $this->view = $view;
+
         return $this;
     }
 }

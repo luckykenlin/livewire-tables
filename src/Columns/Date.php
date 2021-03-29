@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Columns;
 
-
 /**
  * Class Date
  * @package App\Tools
