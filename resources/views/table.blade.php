@@ -38,7 +38,7 @@
                                         </div>
                                     </th>
                                 @else
-                                    <th class="px-6 py-3 flex justify-center align-items-center {{$column->type === "action"? "absolute w-32 right-0 bg-gray-200 text-gray-600 uppercase text-sml" : ""}}">
+                                    <th class="px-6 py-3 {{$column->type === "action"? "absolute w-32 right-0 bg-gray-200 text-gray-600 uppercase text-sml" : ""}}">
                                         <div class="flex justify-center items-center space-x-1">
                                             <span>{{$column->name}}</span>
                                         </div>
