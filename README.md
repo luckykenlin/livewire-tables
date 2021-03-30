@@ -16,13 +16,6 @@ You can install the package via composer:
 composer require luckykenlin/livewire-tables
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-config"
@@ -59,6 +52,65 @@ You can easily use this packge in a local Laravel project, after cloning:
 ``` 
 composer require luckykenlin/livewire-tables
 ```
+
+## Usage
+
+### Creating Tables
+
+To create a table component you draw inspiration from the below stub:
+
+```php
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Columns\Action;
+use Luckykenlin\LivewireTables\Columns\Column;
+use Luckykenlin\LivewireTables\Columns\ID;
+use Luckykenlin\LivewireTables\LivewireTables;
+
+class UsersTable extends LivewireTables
+{
+    public function query(): Builder
+    {
+        return User::query();
+    }
+
+    public function columns(): array
+    {
+        return [
+            ID::make()->sortable()->label("#"),
+            Column::make('Name', 'name')->searchable()->sortable(),
+            Column::make('Email', 'email')->searchable()->sortable(),
+
+            Action::make()
+        ];
+    }
+}
+
+```
+
+Your component must implement two methods:
+
+```php
+/**
+ * This defines the start of the query, usually Model::query() but can also eager load relationships and counts if needed.
+ */
+public function query() : Builder;
+
+/**
+ * This defines the columns of the table, they don't necessarily have to map to columns on the database table.
+ */
+public function columns() : array;
+```
+
+### Rendering the Table
+
+Place the following where you want the table to appear.
+
+`<livewire:users-table />`
 
 ## Testing
 
