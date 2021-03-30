@@ -141,4 +141,11 @@ class Column
 
         return $this;
     }
+
+    public function label($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 }
