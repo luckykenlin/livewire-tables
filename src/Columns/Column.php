@@ -45,6 +45,16 @@ class Column
     /**
      * @var bool
      */
+    protected $hideOnExport = false;
+
+    /**
+     * @var bool
+     */
+    protected $hideOnTable = false;
+
+    /**
+     * @var bool
+     */
     protected $exportable = false;
 
     /**
@@ -106,6 +116,28 @@ class Column
 
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function hideOnExport()
+    {
+        $this->hideOnExport = true;
+
+        return $this;
+    }
+
+
+    /**
+     * @return $this
+     */
+    public function hideOnTable()
+    {
+        $this->hideOnTable = true;
+
+        return $this;
+    }
+
 
     /**
      * @param string $name

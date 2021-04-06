@@ -18,38 +18,40 @@
                             <thead>
                             <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                                 @foreach($columns as $column)
-                                    @if($column->sortable)
-                                        <th class="px-6 py-3" wire:click="sort('{{$column->attribute}}')">
-                                            <div class="flex justify-start items-center space-x-1">
-                                                <span>{{$column->name}}</span>
-                                                @if($column->attribute === $sort)
-                                                    @if($this->direction === "asc")
-                                                        <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg"
-                                                             viewBox="0 0 20 20"
-                                                             fill="currentColor">
-                                                            <path fill-rule="evenodd"
-                                                                  d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                                                  clip-rule="evenodd"/>
-                                                        </svg>
-                                                    @else
-                                                        <svg class="w-3 h-3 text-primary"
-                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                             fill="currentColor">
-                                                            <path fill-rule="evenodd"
-                                                                  d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                                                                  clip-rule="evenodd"/>
-                                                        </svg>
+                                    @unless ($column->hideOnTable)
+                                        @if($column->sortable)
+                                            <th class="px-6 py-3" wire:click="sort('{{$column->attribute}}')">
+                                                <div class="flex justify-start items-center space-x-1">
+                                                    <span>{{$column->name}}</span>
+                                                    @if($column->attribute === $sort)
+                                                        @if($this->direction === "asc")
+                                                            <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg"
+                                                                 viewBox="0 0 20 20"
+                                                                 fill="currentColor">
+                                                                <path fill-rule="evenodd"
+                                                                      d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                                                                      clip-rule="evenodd"/>
+                                                            </svg>
+                                                        @else
+                                                            <svg class="w-3 h-3 text-primary"
+                                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                                 fill="currentColor">
+                                                                <path fill-rule="evenodd"
+                                                                      d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                                                                      clip-rule="evenodd"/>
+                                                            </svg>
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            </div>
-                                        </th>
-                                    @else
-                                        <th class="px-6 py-3 {{$column->type === "action"? "absolute w-32 right-0 bg-gray-100 text-gray-600 uppercase text-sml" : ""}}">
-                                            <div class="flex justify-start items-center space-x-1">
-                                                <span>{{$column->name}}</span>
-                                            </div>
-                                        </th>
-                                    @endif
+                                                </div>
+                                            </th>
+                                        @else
+                                            <th class="px-6 py-3 {{$column->type === "action"? "absolute w-32 right-0 bg-gray-100 text-gray-600 uppercase text-sml" : ""}}">
+                                                <div class="flex justify-start items-center space-x-1">
+                                                    <span>{{$column->name}}</span>
+                                                </div>
+                                            </th>
+                                        @endif
+                                    @endunless
                                 @endforeach
                             </tr>
                             </thead>
@@ -57,13 +59,15 @@
                             @forelse ($rows as $row)
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     @foreach($columns as $column)
-                                        @if($column->view)
-                                            @include($column->view)
-                                        @else
-                                            <td class="h-12 py-3 px-6 text-left">
-                                                <span>{{$this->columnValue($row, $column)}}</span>
-                                            </td>
-                                        @endif
+                                        @unless ($column->hideOnTable)
+                                            @If($column->view)
+                                                @include($column->view)
+                                            @else
+                                                <td class="h-12 py-3 px-6 text-left">
+                                                    <span>{{$this->columnValue($row, $column)}}</span>
+                                                </td>
+                                            @endif
+                                        @endunless
                                     @endforeach
                                 </tr>
                             @empty

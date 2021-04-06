@@ -28,5 +28,6 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
         Blade::component('livewire-tables::edit-action', 'livewire-tables-edit-action');
         Blade::component('livewire-tables::boolean-filter', 'livewire-tables-boolean-filter');
         Blade::component('livewire-tables::date-filter', 'livewire-tables-date-filter');
+        Blade::component('livewire-tables::multiple-select-filter', 'livewire-tables-multiple-select-filter');
     }
 }

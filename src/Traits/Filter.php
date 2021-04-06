@@ -43,7 +43,7 @@ trait Filter
 
     public function doDateFilters()
     {
-        if (count($this->booleanFilters) < 1) {
+        if (count($this->dateFilters) < 1) {
             return $this;
         }
 
@@ -64,10 +64,6 @@ trait Filter
         }
 
         $this->query->where(function ($query) {
-            foreach ($this->dateFilters as $column => $value) {
-                if (empty($value)) continue;
-                $query->whereIn($column, $value);
-            }
         });
 
         return $this;
