@@ -49,7 +49,9 @@ trait Filter
 
         $this->query->where(function ($query) {
             foreach ($this->dateFilters as $column => $value) {
-                if (empty($value)) continue;
+                if (empty($value)) {
+                    continue;
+                }
                 $query->whereBetween($column, $this->getTimeRange($value));
             }
         });
@@ -64,7 +66,6 @@ trait Filter
         }
 
         $this->query->where(function ($query) {
-
         });
 
         return $this;

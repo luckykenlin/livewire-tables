@@ -127,7 +127,6 @@ class Column
         return $this;
     }
 
-
     /**
      * @return $this
      */
@@ -137,7 +136,6 @@ class Column
 
         return $this;
     }
-
 
     /**
      * @param string $name
