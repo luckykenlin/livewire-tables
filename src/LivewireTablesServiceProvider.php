@@ -24,5 +24,7 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->hasCommand(LivewireTablesCommand::class);
 
         Blade::component('livewire-tables::search-bar', 'livewire-tables-search-bar');
+        Blade::component('livewire-tables::delete-action', 'livewire-tables-delete-action');
+        Blade::component('livewire-tables::edit-action', 'livewire-tables-edit-action');
     }
 }

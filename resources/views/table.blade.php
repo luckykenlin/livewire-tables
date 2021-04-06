@@ -9,13 +9,13 @@
                 </div>
                 <div class="bg-white rounded my-6 relative">
                     <div class="overflow-x-scroll mr-32">
-                        <table class="min-w-max w-full table-auto" wire:loading.class="opacity-50">
+                        <table class="min-w-max w-full table-auto whitespace-nowrap" wire:loading.class="opacity-50">
                             <thead>
                             <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                                 @foreach($columns as $column)
                                     @if($column->sortable)
                                         <th class="px-6 py-3" wire:click="sort('{{$column->attribute}}')">
-                                            <div class="flex justify-center items-center space-x-1">
+                                            <div class="flex justify-start items-center space-x-1">
                                                 <span>{{$column->name}}</span>
                                                 @if($column->attribute === $sort)
                                                     @if($this->direction === "asc")
@@ -40,7 +40,7 @@
                                         </th>
                                     @else
                                         <th class="px-6 py-3 {{$column->type === "action"? "absolute w-32 right-0 bg-gray-100 text-gray-600 uppercase text-sml" : ""}}">
-                                            <div class="flex justify-center items-center space-x-1">
+                                            <div class="flex justify-start items-center space-x-1">
                                                 <span>{{$column->name}}</span>
                                             </div>
                                         </th>
@@ -55,7 +55,7 @@
                                         @if($column->view)
                                             @include($column->view)
                                         @else
-                                            <td class="h-12 py-3 px-6 text-left whitespace-nowrap text-center">
+                                            <td class="h-12 py-3 px-6 text-left">
                                                 <span>{{$this->columnValue($row, $column)}}</span>
                                             </td>
                                         @endif
@@ -64,7 +64,7 @@
                             @empty
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="text-center py-10" colspan="99">
-                                    <span class="text-2xl font-semibold text-gray-400">
+                                    <span class="text-2xl font-semibold text-gray-400 tracking-widest">
                                         {{ __('No results to display.') }}
                                     </span>
                                     </td>

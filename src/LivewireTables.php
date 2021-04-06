@@ -5,7 +5,7 @@ namespace Luckykenlin\LivewireTables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Livewire\Component;
-use Luckykenlin\LivewireTables\Traits\Action;
+use Luckykenlin\LivewireTables\Traits\Delete;
 use Luckykenlin\LivewireTables\Traits\Export;
 use Luckykenlin\LivewireTables\Traits\Filter;
 use Luckykenlin\LivewireTables\Traits\Helper;
@@ -18,9 +18,9 @@ abstract class LivewireTables extends Component
     use Pagination;
     use Filter;
     use Search;
-    use Action;
     use Sort;
     use Export;
+    use Delete;
     use Helper;
 
     protected $query;
@@ -37,9 +37,9 @@ abstract class LivewireTables extends Component
         $this->query = $this->initialQuery();
     }
 
-    abstract protected function query();
+    abstract protected function query(): Builder;
 
-    abstract protected function columns();
+    abstract protected function columns(): array;
 
     protected function view()
     {

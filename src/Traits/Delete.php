@@ -2,7 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
-trait Action
+trait Delete
 {
     public $itemKey = '';
     public $deletable = true;

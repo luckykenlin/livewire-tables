@@ -85,7 +85,7 @@ class UsersTable extends LivewireTables
             Column::make('Name', 'name')->searchable()->sortable(),
             Column::make('Email', 'email')->searchable()->sortable(),
 
-            Action::make()
+            Action::make()->view("livewire-tables::table-actions")
         ];
     }
 }

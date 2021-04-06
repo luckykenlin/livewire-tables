@@ -9,8 +9,6 @@ class Action extends Column
      */
     public $type = 'action';
 
-    public $fixed = false;
-
     public $view = 'livewire-tables::table-actions';
 
     /**
@@ -21,12 +19,5 @@ class Action extends Column
     public static function make($name = "Actions", $attribute = null)
     {
         return new static($name, $attribute);
-    }
-
-    public function fixed()
-    {
-        $this->fixed = true;
-
-        return $this;
     }
 }
