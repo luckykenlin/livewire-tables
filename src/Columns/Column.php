@@ -14,6 +14,12 @@ class Column
     /**
      * @var string
      */
+    public $component = '';
+
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -147,5 +153,10 @@ class Column
         $this->name = $name;
 
         return $this;
+    }
+
+    public function canFilter()
+    {
+        return $this->filterable && $this->component;
     }
 }

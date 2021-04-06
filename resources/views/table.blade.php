@@ -2,10 +2,15 @@
     <div class="overflow-x-auto px-6 sm:px-0">
         <div class="min-w-screen flex items-center justify-center font-sans overflow-hidden">
             <div class="w-full">
-                <div class="grid grid-cols-4 gap-2  px-4 mt-4">
+                <div class="grid grid-cols-4 gap-2  px-4 mt-4 items-end">
                     @if($searchable)
                         <x-livewire-tables-search-bar placeholder="{{$searchPlaceholder}}" wire:model="search"/>
                     @endif
+                    @foreach($columns as $index => $column)
+                        @if($column->canFilter())
+                            <x-dynamic-component :component="$column->component" :column="$column"/>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="bg-white rounded my-6 relative">
                     <div class="overflow-x-scroll mr-32">
@@ -62,7 +67,7 @@
                                     @endforeach
                                 </tr>
                             @empty
-                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <tr class="border-b border-gray-200">
                                     <td class="text-center py-10" colspan="99">
                                     <span class="text-2xl font-semibold text-gray-400 tracking-widest">
                                         {{ __('No results to display.') }}

@@ -7,5 +7,5 @@ class Text extends Column
     /**
      * @var string
      */
-    public $type = 'string';
+    public $type = 'text';
 }

@@ -35,6 +35,7 @@ abstract class LivewireTables extends Component
     {
         parent::__construct($id);
         $this->query = $this->initialQuery();
+        $this->initFilter();
     }
 
     abstract protected function query(): Builder;
@@ -56,7 +57,7 @@ abstract class LivewireTables extends Component
 
     protected function models()
     {
-        $this->addSearch()->addSort();
+        $this->addFilter()->addSearch()->addSort();
 
         return $this->query->paginate($this->perPage);
     }
