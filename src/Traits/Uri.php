@@ -30,6 +30,7 @@ trait Uri
     public function setUriKey($uri)
     {
         $this->uriKey = $uri;
+
         return $this;
     }
 }
