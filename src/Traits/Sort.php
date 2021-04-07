@@ -46,7 +46,7 @@ trait Sort
      */
     public function sortableColumns()
     {
-        return array_filter($this->columns(), fn($column) => $column->sortable);
+        return array_filter($this->columns(), fn ($column) => $column->sortable);
     }
 
     /**
@@ -56,7 +56,7 @@ trait Sort
      */
     public function addSort()
     {
-        if (!$this->sort) {
+        if (! $this->sort) {
             return $this;
         }
 
