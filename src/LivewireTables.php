@@ -13,6 +13,7 @@ use Luckykenlin\LivewireTables\Traits\Helper;
 use Luckykenlin\LivewireTables\Traits\Pagination;
 use Luckykenlin\LivewireTables\Traits\Search;
 use Luckykenlin\LivewireTables\Traits\Sort;
+use Luckykenlin\LivewireTables\Traits\Uri;
 
 /**
  * Class LivewireTables
@@ -23,6 +24,7 @@ abstract class LivewireTables extends Component
     use Pagination;
     use Filter;
     use Search;
+    use Uri;
     use Sort;
     use Export;
     use Delete;
@@ -51,6 +53,7 @@ abstract class LivewireTables extends Component
     {
         parent::__construct($id);
         $this->query = $this->initialQuery();
+        $this->setUriKey($this->uriKey() ?: $this->getTable($this->query));
         $this->initFilter();
     }
 

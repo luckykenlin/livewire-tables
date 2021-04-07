@@ -2,7 +2,7 @@
     <div class="flex item-center justify-center">
 
         {{--    example edit icon with link  --}}
-        {{--    <x-livewire-tables-edit-action :url="route('users.edit', [$row->id])"/> --}}
+        <x-livewire-tables-edit-action :url='url("$uriKey/$row->id/edit")'/>
 
         @if($deletable)
             <x-livewire-tables-delete-action wire:click="confirmDeletion({{$row->id}})"/>

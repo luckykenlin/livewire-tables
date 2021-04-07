@@ -14,7 +14,7 @@ class ID extends Column
      * @param null $attribute
      * @return static
      */
-    public static function make($name = "ID", $attribute = null)
+    public static function make($name = "ID", $attribute = "id")
     {
         return new static($name, $attribute);
     }
