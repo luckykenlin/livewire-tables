@@ -29,7 +29,6 @@ abstract class LivewireTables extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'page' => ['except' => 1],
-        'sort' => ['except' => ''],
     ];
 
     public function __construct($id = null)
