@@ -4,12 +4,28 @@ namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Support\Str;
 
+/**
+ * Trait Filter
+ * @package Luckykenlin\LivewireTables\Traits
+ */
 trait Filter
 {
+    /**
+     * @var array
+     */
     public $booleanFilters = [];
+    /**
+     * @var array
+     */
     public $dateFilters = [];
+    /**
+     * @var array
+     */
     public $multipleSelectFilter = [];
 
+    /**
+     *
+     */
     public function initFilter()
     {
         foreach ($this->columns() as $column) {
@@ -17,6 +33,9 @@ trait Filter
         }
     }
 
+    /**
+     * @return $this
+     */
     public function addFilter()
     {
         $this->doBooleanFilters()->doDateFilters()->doMultipleSelectFilters();
@@ -24,6 +43,9 @@ trait Filter
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function doBooleanFilters()
     {
         if (count($this->booleanFilters) < 1) {
@@ -41,6 +63,9 @@ trait Filter
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function doDateFilters()
     {
         if (count($this->dateFilters) < 1) {
@@ -59,6 +84,9 @@ trait Filter
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function doMultipleSelectFilters()
     {
         if (count($this->multipleSelectFilter) < 1) {
@@ -71,6 +99,10 @@ trait Filter
         return $this;
     }
 
+    /**
+     * @param $column
+     * @return string
+     */
     public function getFilterColumn($column)
     {
         if (Str::contains($column, '.')) {
@@ -80,6 +112,10 @@ trait Filter
         return "{$this->getTable($this->query())}.$column";
     }
 
+    /**
+     * @param $timeString
+     * @return array
+     */
     public function getTimeRange($timeString)
     {
         return Str::of($timeString)

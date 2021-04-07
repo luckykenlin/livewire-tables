@@ -4,22 +4,48 @@ namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Support\Str;
 
+/**
+ * Trait Search
+ * @package Luckykenlin\LivewireTables\Traits
+ */
 trait Search
 {
+    /**
+     * @var string
+     */
     public $search = '';
+    /**
+     * @var string
+     */
     public $searchPlaceholder = 'Type for search..';
+    /**
+     * @var bool
+     */
     public $searchable = true;
 
+    /**
+     * Reset search.
+     */
     public function clearSearch()
     {
         $this->search = '';
     }
 
+    /**
+     * Get searchable columns.
+     *
+     * @return array
+     */
     public function searchableColumns()
     {
         return array_filter($this->columns(), fn ($column) => $column->searchable);
     }
 
+    /**
+     * Execute search action.
+     *
+     * @return $this
+     */
     public function addSearch()
     {
         if (trim($this->search) === '' || ! $this->searchable) {

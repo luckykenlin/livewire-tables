@@ -7,8 +7,17 @@ use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
+/**
+ * Class LivewireTablesServiceProvider
+ * @package Luckykenlin\LivewireTables
+ */
 class LivewireTablesServiceProvider extends PackageServiceProvider
 {
+    /**
+     * Package configuration.
+     *
+     * @param Package $package
+     */
     public function configurePackage(Package $package): void
     {
         /*
@@ -23,6 +32,14 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->hasMigration('create_livewire_tables_table')
             ->hasCommand(LivewireTablesCommand::class);
 
+        $this->registerComponents();
+    }
+
+    /**
+     * Register view components to laravel.
+     */
+    public function registerComponents()
+    {
         Blade::component('livewire-tables::search-bar', 'livewire-tables-search-bar');
         Blade::component('livewire-tables::delete-action', 'livewire-tables-delete-action');
         Blade::component('livewire-tables::edit-action', 'livewire-tables-edit-action');

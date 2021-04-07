@@ -21,16 +21,18 @@ trait Sort
     public $direction = 'desc';
 
     /**
-     * @param $field
+     * Sort by column.
+     *
+     * @param $column
      */
-    public function sort($field)
+    public function sort($column)
     {
-        $this->sort === $field ? $this->reverseSort() : $this->sort = $field;
+        $this->sort === $column ? $this->reverseSort() : $this->sort = $column;
         $this->resetPage();
     }
 
     /**
-     *
+     * Reverse sort direction.
      */
     public function reverseSort()
     {
@@ -38,19 +40,23 @@ trait Sort
     }
 
     /**
+     * Get sortable columns.
+     *
      * @return array
      */
     public function sortableColumns()
     {
-        return array_filter($this->columns(), fn ($column) => $column->sortable);
+        return array_filter($this->columns(), fn($column) => $column->sortable);
     }
 
     /**
+     * Execute sort action.
+     *
      * @return $this
      */
     public function addSort()
     {
-        if (! $this->sort) {
+        if (!$this->sort) {
             return $this;
         }
 
@@ -60,6 +66,8 @@ trait Sort
     }
 
     /**
+     * Get sort column with or without relation.
+     *
      * @param Builder $builder
      * @return string
      */
@@ -68,6 +76,7 @@ trait Sort
         if (Str::contains($this->sort, '.')) {
             $relationship = $this->relationship($this->sort);
 
+            /** left join when sort by relationship */
             return $this->attribute($builder, $relationship->name, $relationship->attribute);
         }
 
