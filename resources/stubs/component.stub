@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\DummyModel;
+use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Columns\ID;
+use Luckykenlin\LivewireTables\Columns\Date;
+use Luckykenlin\LivewireTables\LivewireTables;
+
+class DummyTable extends LivewireTables
+{
+    public function query(): Builder
+    {
+        return DummyModel::query();
+    }
+
+    public function columns(): array
+    {
+        return [
+            ID::make()->sortable()->label("#"),
+            Date::make('Created At')->searchable()->sortable(),
+            Date::make('Updated At')->searchable()->sortable(),
+        ];
+    }
+}
