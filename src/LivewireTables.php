@@ -4,6 +4,7 @@ namespace Luckykenlin\LivewireTables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Delete;
 use Luckykenlin\LivewireTables\Traits\Export;
@@ -68,7 +69,7 @@ abstract class LivewireTables extends Component
             return app()->call($column->formatCallback, ['value' => Arr::get($row->toArray(), $column->attribute)]);
         }
 
-        return Arr::get($row->toArray(), $column->attribute);
+        return Arr::get($row->toArray(), Str::snake($column->attribute));
     }
 
     /**
