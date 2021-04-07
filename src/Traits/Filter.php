@@ -33,7 +33,7 @@ trait Filter
         $this->query->where(function ($query) {
             foreach ($this->booleanFilters as $column => $value) {
                 if (strlen($value)) {
-                    $query->where($column, $value);
+                    $query->where($this->getFilterColumn($column), $value);
                 }
             }
         });
@@ -50,7 +50,7 @@ trait Filter
         $this->query->where(function ($query) {
             foreach ($this->dateFilters as $column => $value) {
                 if (empty($value)) continue;
-                $query->whereBetween($column, $this->getTimeRange($value));
+                $query->whereBetween($this->getFilterColumn($column), $this->getTimeRange($value));
             }
         });
 
@@ -68,6 +68,15 @@ trait Filter
         });
 
         return $this;
+    }
+
+    public function getFilterColumn($column)
+    {
+        if (Str::contains($column, '.')) {
+            return $column;
+        }
+
+        return "{$this->getTable($this->query())}.$column";
     }
 
     public function getTimeRange($timeString)
