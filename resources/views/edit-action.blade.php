@@ -1,3 +1,4 @@
+@props(['url' => '#'])
 <a href="{{$url}}" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
          stroke="currentColor">
