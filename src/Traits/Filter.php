@@ -64,7 +64,6 @@ trait Filter
         }
 
         $this->query->where(function ($query) {
-
         });
 
         return $this;
