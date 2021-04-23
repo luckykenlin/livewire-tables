@@ -8,6 +8,11 @@
 
 A dynamic table component for Laravel Livewire.
 
+## Requirements
+- [Laravel](https://laravel.com/docs)
+- [Livewire](https://laravel-livewire.com/docs)
+- [TailwindCSS](https://tailwindcss.com/docs)
+
 ## Installation
 
 You can install the package via composer:
