@@ -32,7 +32,7 @@ class ColumnTest extends TestCase
     {
         return [
             ['Name', 'custom_name'],
-            ['ID', 'user.id']
+            ['ID', 'user.id'],
         ];
     }
 
@@ -71,7 +71,7 @@ class ColumnTest extends TestCase
             'hideOnExport' => false,
             'hideOnTable' => false,
             'exportable' => false,
-            'formatCallback' => null
+            'formatCallback' => null,
         ], $subject);
     }
 }

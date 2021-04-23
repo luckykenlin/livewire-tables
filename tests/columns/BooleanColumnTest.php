@@ -21,7 +21,7 @@ class BooleanColumnTest extends TestCase
     {
         return [
             ['Feature', 'is_feature'],
-            ['Feature', 'user.is_feature']
+            ['Feature', 'user.is_feature'],
         ];
     }
 
@@ -76,7 +76,7 @@ class BooleanColumnTest extends TestCase
             'hideOnExport' => false,
             'hideOnTable' => false,
             'exportable' => false,
-            'formatCallback' => null
+            'formatCallback' => null,
         ], $subject);
     }
 }

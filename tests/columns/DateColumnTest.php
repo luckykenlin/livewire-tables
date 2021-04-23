@@ -21,7 +21,7 @@ class DateColumnTest extends TestCase
     {
         return [
             ['CreateDAt', 'created_at'],
-            ['UpdatedAt', 'user.updated_at']
+            ['UpdatedAt', 'user.updated_at'],
         ];
     }
 
@@ -70,7 +70,7 @@ class DateColumnTest extends TestCase
             'hideOnExport' => false,
             'hideOnTable' => false,
             'exportable' => false,
-            'formatCallback' => null
+            'formatCallback' => null,
         ], $subject);
     }
 }
