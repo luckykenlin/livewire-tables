@@ -94,6 +94,7 @@ trait Filter
         }
 
         $this->query->where(function ($query) {
+            //todo
         });
 
         return $this;

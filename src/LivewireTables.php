@@ -76,7 +76,7 @@ abstract class LivewireTables extends Component
      *
      * @return array
      */
-    //   abstract protected function filters(): array;
+//    abstract protected function filters(): array;
 
     /**
      * Customize table ui.
