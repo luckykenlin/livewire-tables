@@ -12,6 +12,11 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->withFactories(__DIR__.'/database/factories');
+        $this->artisan('migrate', ['--database' => 'sqlite'])->run();
+
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Luckykenlin\\LivewireTables\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
@@ -26,6 +31,7 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.key', 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF');
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
             'driver' => 'sqlite',

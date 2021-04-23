@@ -20,52 +20,52 @@ class Column
     /**
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
      * @var string
      */
-    protected $attribute;
+    public $attribute;
 
     /**
      * @var bool
      */
-    protected $searchable = false;
+    public $searchable = false;
 
     /**
      * @var bool
      */
-    protected $sortable = false;
+    public $sortable = false;
 
     /**
      * @var bool
      */
-    protected $filterable = false;
+    public $filterable = false;
 
     /**
      * @var bool
      */
-    protected $hideOnExport = false;
+    public $hideOnExport = false;
 
     /**
      * @var bool
      */
-    protected $hideOnTable = false;
+    public $hideOnTable = false;
 
     /**
      * @var bool
      */
-    protected $exportable = false;
+    public $exportable = false;
 
     /**
      * @var string
      */
-    protected $view = '';
+    public $view = '';
 
     /**
      * @var
      */
-    protected $formatCallback;
+    public $formatCallback;
 
     /**
      * Column constructor.
@@ -188,5 +188,10 @@ class Column
     public function canFilter()
     {
         return $this->filterable && $this->component;
+    }
+
+    public function toArray()
+    {
+        return get_object_vars($this);
     }
 }
