@@ -60,7 +60,7 @@ class IDColumnTest extends TestCase
             'hideOnExport' => false,
             'hideOnTable' => false,
             'exportable' => false,
-            'formatCallback' => null
+            'formatCallback' => null,
         ], $subject);
     }
 }
