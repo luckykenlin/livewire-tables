@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Tests;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Luckykenlin\LivewireTables\LivewireTablesServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
