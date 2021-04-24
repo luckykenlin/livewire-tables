@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 /**
@@ -122,6 +123,7 @@ trait Filter
         return Str::of($timeString)
             ->replace(" ", "")
             ->explode("-")
+            ->map(fn ($value) => Carbon::parse($value))
             ->toArray();
     }
 }

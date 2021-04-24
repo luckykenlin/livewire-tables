@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -32,19 +33,37 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->hasMigration('create_livewire_tables_table')
             ->hasCommand(LivewireTablesCommand::class);
 
-        $this->registerComponents();
+        $this->configureComponents();
     }
 
     /**
-     * Register view components to laravel.
+     * Configure view components to laravel.
      */
-    public function registerComponents()
+    public function configureComponents()
     {
-        Blade::component('livewire-tables::search-bar', 'livewire-tables-search-bar');
-        Blade::component('livewire-tables::delete-action', 'livewire-tables-delete-action');
-        Blade::component('livewire-tables::edit-action', 'livewire-tables-edit-action');
-        Blade::component('livewire-tables::boolean-filter', 'livewire-tables-boolean-filter');
-        Blade::component('livewire-tables::date-filter', 'livewire-tables-date-filter');
-        Blade::component('livewire-tables::multiple-select-filter', 'livewire-tables-multiple-select-filter');
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('button');
+            $this->registerComponent('secondary-button');
+            $this->registerComponent('danger-button');
+            $this->registerComponent('search-bar');
+            $this->registerComponent('delete-action');
+            $this->registerComponent('edit-action');
+            $this->registerComponent('boolean-filter');
+            $this->registerComponent('date-filter');
+            $this->registerComponent('multiple-select-filter');
+            $this->registerComponent('dialog-modal');
+            $this->registerComponent('modal');
+        });
+    }
+
+    /**
+     * Register the given component.
+     *
+     * @param  string  $component
+     * @return void
+     */
+    protected function registerComponent(string $component)
+    {
+        Blade::component('livewire-tables::'.$component, 'livewire-tables-'.$component);
     }
 }

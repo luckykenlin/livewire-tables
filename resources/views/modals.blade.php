@@ -1,5 +1,5 @@
 @if($deletable)
-    <x-jet-dialog-modal wire:model="confirmingDeletion">
+    <x-livewire-tables-dialog-modal wire:model="confirmingDeletion">
         <x-slot name="title">
             {{ __('Delete Item') }}
         </x-slot>
@@ -9,13 +9,13 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingDeletion')" wire:loading.attr="disabled">
+            <x-livewire-tables-secondary-button wire:click="$toggle('confirmingDeletion')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-livewire-tables-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
+            <x-livewire-tables-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
                 {{ __('Delete') }}
-            </x-jet-danger-button>
+            </x-livewire-tables-danger-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-livewire-tables-dialog-modal>
 @endif

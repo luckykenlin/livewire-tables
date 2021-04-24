@@ -1,46 +1,34 @@
 <?php
 
-namespace Mediconesystems\LivewireDatatables\Tests\Classes;
+namespace Luckykenlin\LivewireTables\Tests\Classes;
 
-use Mediconesystems\LivewireDatatables\BooleanColumn;
-use Mediconesystems\LivewireDatatables\Column;
-use Mediconesystems\LivewireDatatables\DateColumn;
-use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-use Mediconesystems\LivewireDatatables\NumberColumn;
-use Mediconesystems\LivewireDatatables\Tests\Models\DummyModel;
+use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Columns\Boolean;
+use Luckykenlin\LivewireTables\Columns\Column;
+use Luckykenlin\LivewireTables\Columns\Date;
+use Luckykenlin\LivewireTables\Columns\ID;
+use Luckykenlin\LivewireTables\Columns\Text;
+use Luckykenlin\LivewireTables\LivewireTables;
+use Luckykenlin\LivewireTables\Tests\Models\DummyModel;
 
-class DummyTable extends LivewireDatatable
+class DummyTable extends LivewireTables
 {
-    public $perPage = 10;
-    public $model = DummyModel::class;
+    public function query(): Builder
+    {
+        return DummyModel::query();
+    }
 
-    public function columns()
+    public function columns(): array
     {
         return [
-            NumberColumn::name('id')
-                ->label('ID')
-                ->linkTo('dummy_model', 6),
-
-            Column::name('subject')
-                ->filterable(),
-
-            Column::name('category')
-                ->filterable(['A', 'B', 'C']),
-
-            Column::name('body')
-                ->truncate()
-                ->filterable(),
-
-            BooleanColumn::name('flag')
-                ->filterable(),
-
-            DateColumn::name('expires_at')
-                ->label('Expiry')
-                ->format('jS F Y')
-                ->hide(),
-
-            Column::name('dummy_has_one.name')
-                ->label('Relation'),
+            ID::make()->label("#")->sortable(),
+            Column::make("Subject")->searchable(),
+            Column::make("Category"),
+            Boolean::make("Flag")->trueValue("Marked")->falseValue("Unmarked")->filterable(),
+            Text::make("Body"),
+            Date::make("Expiry", "expires_at"),
+            Date::make("Updated At", "updated_at")->hideOnTable(),
+            Date::make("Created At", "created_at"),
         ];
     }
 }

@@ -62,14 +62,14 @@ abstract class LivewireTables extends Component
      *
      * @return Builder
      */
-    abstract protected function query(): Builder;
+    abstract public function query(): Builder;
 
     /**
      * Define table columns.
      *
      * @return array
      */
-    abstract protected function columns(): array;
+    abstract public function columns(): array;
 
     /**
      * Define table filter columns.
@@ -83,7 +83,7 @@ abstract class LivewireTables extends Component
      *
      * @return string
      */
-    protected function view()
+    public function view()
     {
         return 'livewire-tables::table';
     }
@@ -106,7 +106,7 @@ abstract class LivewireTables extends Component
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    protected function models()
+    public function models()
     {
         $this->addFilter()->addSearch()->addSort();
 
