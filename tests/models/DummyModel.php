@@ -2,10 +2,12 @@
 
 namespace Luckykenlin\LivewireTables\Tests\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DummyModel extends Model
 {
+    use hasFactory;
     protected $guarded = ['id'];
 
     protected $hidden = [
