@@ -42,6 +42,7 @@
     "autoload-dev": {
         "psr-4": {
             "Luckykenlin\\LivewireTables\\Tests\\": "tests",
+            "App\\Http\\Livewire\\": "tests/classes",
             "Luckykenlin\\LivewireTables\\Tests\\Database\\Factories\\": "tests/database/factories",
             "Luckykenlin\\LivewireTables\\Tests\\Models\\": "tests/models"
         }
