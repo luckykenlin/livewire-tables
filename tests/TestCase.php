@@ -5,10 +5,10 @@ namespace Luckykenlin\LivewireTables\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
+use Illuminate\Support\Facades\Facade as Facade;
 use Livewire\LivewireServiceProvider;
 use Luckykenlin\LivewireTables\LivewireTablesServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Illuminate\Support\Facades\Facade as Facade;
 
 class TestCase extends Orchestra
 {
