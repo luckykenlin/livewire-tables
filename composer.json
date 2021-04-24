@@ -41,7 +41,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Luckykenlin\\LivewireTables\\Tests\\": "tests"
+            "Luckykenlin\\LivewireTables\\Tests\\": "tests",
+            "Luckykenlin\\LivewireTables\\Tests\\Models\\": "tests/models"
         }
     },
     "scripts": {
