@@ -3,9 +3,11 @@
 namespace Luckykenlin\LivewireTables\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\LivewireServiceProvider;
 use Luckykenlin\LivewireTables\LivewireTablesServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Illuminate\Support\Facades\Facade as Facade;
 
 class TestCase extends Orchestra
 {
@@ -20,6 +22,17 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Luckykenlin\\LivewireTables\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        $this->afterApplicationCreated(function () {
+            $this->makeACleanSlate();
+        });
+
+        $this->beforeApplicationDestroyed(function () {
+            $this->makeACleanSlate();
+        });
+
+        parent::setUp();
+        Facade::setFacadeApplication(app());
     }
 
     protected function getPackageProviders($app)
@@ -30,8 +43,17 @@ class TestCase extends Orchestra
         ];
     }
 
+    public function makeACleanSlate()
+    {
+        Artisan::call('view:clear');
+    }
+
     public function getEnvironmentSetUp($app)
     {
+        $app['config']->set('view.paths', [
+            __DIR__.'/../views',
+            resource_path('views'),
+        ]);
         $app['config']->set('app.key', 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF');
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
