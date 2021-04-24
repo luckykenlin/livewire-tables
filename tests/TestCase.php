@@ -17,10 +17,6 @@ class TestCase extends Orchestra
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->withFactories(__DIR__.'/database/factories');
         $this->artisan('migrate', ['--database' => 'sqlite'])->run();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Luckykenlin\\LivewireTables\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
     }
 
     protected function getPackageProviders($app)
