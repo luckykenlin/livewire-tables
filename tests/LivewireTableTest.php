@@ -70,14 +70,14 @@ class LivewireTableTest extends TestCase
 
         $subject = Livewire::test(DummyTable::class)
             ->set('booleanFilters', [
-                "flag" => 0
+                "flag" => 0,
             ]);
 
         $this->assertEquals(2, $subject->viewData("rows")->toArray()['total']);
 
         $subject = Livewire::test(DummyTable::class)
             ->set('booleanFilters', [
-                "flag" => 1
+                "flag" => 1,
             ]);
 
         $this->assertEquals(1, $subject->viewData("rows")->toArray()['total']);
@@ -95,7 +95,7 @@ class LivewireTableTest extends TestCase
 
         $subject = Livewire::test(DummyTable::class)
             ->set('dateFilters', [
-                "created_at" => $preWeek->addDay()->format("Y/m/d") . " - " . $now->addDay()->format("Y/m/d")
+                "created_at" => $preWeek->addDay()->format("Y/m/d") . " - " . $now->addDay()->format("Y/m/d"),
             ]);
         $this->assertEquals(3, $subject->viewData("rows")->toArray()['total']);
     }
