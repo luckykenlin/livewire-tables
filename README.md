@@ -63,7 +63,9 @@ composer require luckykenlin/livewire-tables
 ### Creating Tables
 
 To create a table component you draw inspiration from the below stub:
-
+```bash
+php artisan make:table UsersTable
+```
 ```php
 <?php
 
