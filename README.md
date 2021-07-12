@@ -125,6 +125,17 @@ Place the following where you want the table to appear.
 
 `<livewire:users-table />`
 
+### Column Methods
+| Method | Arguments | Result | Example |
+|----|----|----|----|
+|**label**|*String* $name|Changes the display name of a column|```Column::name('id')->label('ID)```|
+|**format**|[*Callback* $format]| Format display as callback function |```Column::name('price')->format(function($value) => { return '$'.$value}),```|
+|**hideOnTable**| |Marks column to start as hidden|```Column::name('id')->hideOnTable()```|
+|**sortable**| |Marks column can be sorted|```Column::name('dob')->sortable(),```|
+|**searchable**| |Includes the column in the global search|```Column::name('name')->searchable()```|
+|**filterable**| |Adds a filter to the column, according to Column type|```Column::name('status')->filterable()```|
+|**view**|*String* $viewName| customize column render view | ```Column::name('status')->view('vendoer.livewire-tables.boolean.blade.php')```|
+
 ## Testing
 
 ```bash
