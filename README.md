@@ -66,6 +66,12 @@ To create a table component you draw inspiration from the below stub:
 ```bash
 php artisan make:table UsersTable
 ```
+
+To specific model use --model:
+```bash
+php artisan make:table UsersTable --model=User
+```
+
 ```php
 <?php
 
