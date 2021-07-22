@@ -123,10 +123,10 @@ abstract class LivewireTables extends Component
     public function columnValue($row, $column)
     {
         if ($column->isFormatted()) {
-            return app()->call($column->formatCallback, ['value' => Arr::get($row->toArray(), $column->attribute)]);
+            return app()->call($column->formatCallback, ['value' => $row[$column->attribute], 'record' => $row]);
         }
 
-        return Arr::get($row->toArray(), Str::snake($column->attribute));
+        return $row[$column->attribute];
     }
 
     /**
