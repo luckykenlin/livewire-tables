@@ -36,6 +36,7 @@
     "autoload": {
         "psr-4": {
             "Luckykenlin\\LivewireTables\\": "src",
+            "Luckykenlin\\LivewireTables\\Tests\\": "tests",
             "Luckykenlin\\LivewireTables\\Database\\Factories\\": "database/factories"
         }
     },
