@@ -73,5 +73,35 @@ class ColumnTest extends TestCase
             'exportable' => false,
             'formatCallback' => null,
         ], $subject);
+
+    }
+
+    /** @test */
+    public function column_boolable_function_accept_bool_param()
+    {
+        $subject = Column::make('table.column', 'id')
+            ->label('Column')
+            ->searchable(false)
+            ->filterable(false)
+            ->sortable(false)
+            ->hideOnTable(false)
+            ->toArray();
+
+
+        $this->assertEquals([
+            'type' => 'string',
+            'name' => 'Column',
+            'attribute' => 'id',
+            'component' => '',
+            'view' => '',
+            'searchable' => false,
+            'sortable' => false,
+            'filterable' => false,
+            'hideOnExport' => false,
+            'hideOnTable' => false,
+            'exportable' => false,
+            'formatCallback' => null,
+        ], $subject);
+
     }
 }

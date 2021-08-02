@@ -88,51 +88,56 @@ class Column
     }
 
     /**
+     * @param bool $shouldSearch
      * @return $this
      */
-    public function searchable()
+    public function searchable($shouldSearch = true)
     {
-        $this->searchable = true;
+        $this->searchable = $shouldSearch;
 
         return $this;
     }
 
     /**
+     * @param bool $shouldSort
      * @return $this
      */
-    public function sortable()
+    public function sortable($shouldSort = true)
     {
-        $this->sortable = true;
+        $this->sortable = $shouldSort;
 
         return $this;
     }
 
     /**
+     * @param bool $shouldFilter
      * @return $this
      */
-    public function filterable()
+    public function filterable($shouldFilter = true)
     {
-        $this->filterable = true;
+        $this->filterable = $shouldFilter;
 
         return $this;
     }
 
     /**
+     * @param bool $shouldExport
      * @return $this
      */
-    public function hideOnExport()
+    public function hideOnExport($shouldExport = true)
     {
-        $this->hideOnExport = true;
+        $this->hideOnExport = $shouldExport;
 
         return $this;
     }
 
     /**
+     * @param bool $shouldHide
      * @return $this
      */
-    public function hideOnTable()
+    public function hideOnTable($shouldHide = true)
     {
-        $this->hideOnTable = true;
+        $this->hideOnTable = $shouldHide;
 
         return $this;
     }
