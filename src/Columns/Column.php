@@ -69,10 +69,10 @@ class Column
 
     /**
      * Column constructor.
-     * @param $name
-     * @param $attribute
+     * @param string $name
+     * @param string|null $attribute
      */
-    public function __construct($name, $attribute)
+    public function __construct(string $name, ?string $attribute)
     {
         $this->name = $name;
         $this->attribute = $attribute ?? Str::snake(Str::lower($name));

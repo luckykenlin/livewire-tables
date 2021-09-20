@@ -49,7 +49,7 @@
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
+        "psalm": "vendor/bin/psalm --output-format=github",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },

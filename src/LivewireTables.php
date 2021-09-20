@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Delete;
 use Luckykenlin\LivewireTables\Traits\Export;
-use Luckykenlin\LivewireTables\Traits\Filter;
 use Luckykenlin\LivewireTables\Traits\Helper;
 use Luckykenlin\LivewireTables\Traits\Pagination;
 use Luckykenlin\LivewireTables\Traits\Search;
@@ -22,7 +21,6 @@ use Luckykenlin\LivewireTables\Traits\Uri;
 abstract class LivewireTables extends Component
 {
     use Pagination;
-    use Filter;
     use Search;
     use Uri;
     use Sort;
@@ -76,7 +74,10 @@ abstract class LivewireTables extends Component
      *
      * @return array
      */
-//    abstract protected function filters(): array;
+    protected function filters(): array
+    {
+        return [];
+    }
 
     /**
      * Customize table ui.
@@ -108,8 +109,6 @@ abstract class LivewireTables extends Component
      */
     public function models()
     {
-        $this->addFilter()->addSearch()->addSort();
-
         return $this->query->paginate($this->perPage);
     }
 
