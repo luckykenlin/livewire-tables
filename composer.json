@@ -3,11 +3,13 @@
     "description": "livewire-tables",
     "keywords": [
         "luckykenlin",
-        "livewire-tables",
+        "CRUD",
+        "livewire tables",
         "livewire",
         "datatables",
         "tables",
-        "laravel"
+        "laravel",
+        "laravel tables"
     ],
     "homepage": "https://github.com/luckykenlin/livewire-tables",
     "license": "MIT",

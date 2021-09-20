@@ -5,7 +5,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/luckykenlin/livewire-tables.svg?style=flat-square)](https://packagist.org/packages/luckykenlin/livewire-tables)
 
 
-A dynamic table component for Laravel Livewire.
+A dynamic livewire table component for laravel.
 
 ## Requirements
 - [Laravel](https://laravel.com/docs)
