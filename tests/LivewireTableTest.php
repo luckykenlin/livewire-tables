@@ -30,6 +30,7 @@ class LivewireTableTest extends TestCase
             7 => 'Created At',
         ], collect($subject->viewData('columns'))->map->name->toArray());
     }
+
 //
 //    /** @test */
 //    public function it_can_order_results()
