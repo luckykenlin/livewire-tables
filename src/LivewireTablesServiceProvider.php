@@ -30,7 +30,7 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->name('livewire-tables')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_livewire_tables_table')
+            ->hasTranslations()
             ->hasCommand(LivewireTablesCommand::class);
 
         $this->configureComponents();
@@ -42,17 +42,19 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
     public function configureComponents()
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
-            $this->registerComponent('button');
-            $this->registerComponent('secondary-button');
-            $this->registerComponent('danger-button');
-            $this->registerComponent('search-bar');
-            $this->registerComponent('delete-action');
-            $this->registerComponent('edit-action');
-            $this->registerComponent('boolean-filter');
-            $this->registerComponent('date-filter');
-            $this->registerComponent('multiple-select-filter');
-            $this->registerComponent('dialog-modal');
-            $this->registerComponent('modal');
+            Blade::component('livewire-tables::tailwind.datatable', 'livewire-tables::datatable');
+            Blade::component('livewire-tables::tailwind.components.table.table', 'livewire-tables::table');
+            Blade::component('livewire-tables::tailwind.components.table.heading', 'livewire-tables::table.heading');
+            Blade::component('livewire-tables::tailwind.components.table.footer', 'livewire-tables::table.footer');
+            Blade::component('livewire-tables::tailwind.components.table.row', 'livewire-tables::table.row');
+            Blade::component('livewire-tables::tailwind.components.table.cell', 'livewire-tables::table.cell');
+
+            Blade::component('livewire-tables::tailwind.components.table.table', 'livewire-tables::tw.table');
+            Blade::component('livewire-tables::tailwind.components.table.heading', 'livewire-tables::tw.table.heading');
+            Blade::component('livewire-tables::tailwind.components.table.footer', 'livewire-tables::tw.table.footer');
+            Blade::component('livewire-tables::tailwind.components.table.row', 'livewire-tables::tw.table.row');
+            Blade::component('livewire-tables::tailwind.components.table.cell', 'livewire-tables::tw.table.cell');
+
         });
     }
 

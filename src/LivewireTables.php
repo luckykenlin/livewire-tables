@@ -2,17 +2,11 @@
 
 namespace Luckykenlin\LivewireTables;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Livewire\Component;
-use Luckykenlin\LivewireTables\Traits\Delete;
-use Luckykenlin\LivewireTables\Traits\Export;
-use Luckykenlin\LivewireTables\Traits\Helper;
-use Luckykenlin\LivewireTables\Traits\Pagination;
-use Luckykenlin\LivewireTables\Traits\Search;
-use Luckykenlin\LivewireTables\Traits\Sort;
-use Luckykenlin\LivewireTables\Traits\Uri;
+use Livewire\WithPagination;
 
 /**
  * Class LivewireTables
@@ -20,18 +14,24 @@ use Luckykenlin\LivewireTables\Traits\Uri;
  */
 abstract class LivewireTables extends Component
 {
-    use Pagination;
-    use Search;
-    use Uri;
-    use Sort;
-    use Export;
-    use Delete;
-    use Helper;
+    use WithPagination;
+
+    public string $primaryKey = 'id';
+    public bool $showSearch = true;
+    public bool $responsive = true;
+    public bool $showPagination = true;
+    public bool $paginationEnabled = true;
+    public ?string $search = null;
+
+
+    public string $defaultSortColumn = '';
+    public string $defaultSortDirection = 'asc';
+
 
     /**
      * @var Builder
      */
-    protected $query;
+    protected Builder $query;
 
     /**
      * Show query string on url.
@@ -39,21 +39,8 @@ abstract class LivewireTables extends Component
      * @var array
      */
     protected $queryString = [
-        'search' => ['except' => ''],
-        'page' => ['except' => 1],
+        'search' => ['except' => '']
     ];
-
-    /**
-     * LivewireTables constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        parent::__construct($id);
-        $this->query = $this->initialQuery();
-        $this->setUriKey($this->uriKey() ?: $this->getTable($this->query));
-        $this->initFilter();
-    }
 
     /**
      * Define base table query.
@@ -84,17 +71,17 @@ abstract class LivewireTables extends Component
      *
      * @return string
      */
-    public function view()
+    public function view(): string
     {
-        return 'livewire-tables::table';
+        return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
     }
 
     /**
      * Render table.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return View
      */
-    public function render()
+    public function render(): View
     {
         return view($this->view(), [
             'columns' => $this->columns(),
@@ -105,36 +92,25 @@ abstract class LivewireTables extends Component
     /**
      * Get table data.
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public function models()
+    public function models(): LengthAwarePaginator
     {
-        return $this->query->paginate($this->perPage);
+        return $this->query()->paginate();
     }
 
-    /**
-     * Get column value.
-     *
-     * @param $row
-     * @param $column
-     * @return array|\ArrayAccess|mixed
-     */
-    public function columnValue($row, $column)
+    public function sortBy(string $field): ?string
     {
-        if ($column->isFormatted()) {
-            return app()->call($column->formatCallback, ['value' => Arr::get($row->toArray(), $column->attribute), 'record' => $row]);
-        }
-
-        return Arr::get($row->toArray(), Str::snake($column->attribute));
-    }
-
-    /**
-     * Initial query and avoid sql ambiguous column name via join connection.
-     *
-     * @return Builder
-     */
-    private function initialQuery()
-    {
-        return $this->query()->select("{$this->getTable($this->query())}.*");
+//        if (! isset($this->sorts[$field])) {
+//            return $this->sorts[$field] = 'asc';
+//        }
+//
+//        if ($this->sorts[$field] === 'asc') {
+//            return $this->sorts[$field] = 'desc';
+//        }
+//
+//        unset($this->sorts[$field]);
+//
+//        return null;
     }
 }

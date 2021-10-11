@@ -9,27 +9,27 @@ use Luckykenlin\LivewireTables\Tests\Models\DummyModel;
 
 class LivewireTableTest extends TestCase
 {
-    /** @test */
-    public function it_can_mount_using_the_class()
-    {
-        DummyModel::factory()
-            ->state(['subject' => 'How to sell paper in Scranton PA'])
-            ->create();
-
-        $subject = Livewire::test(DummyTable::class)
-            ->assertSee('How to sell paper in Scranton PA');
-        $this->assertIsArray($subject->viewData('columns'));
-        $this->assertEquals([
-            0 => '#',
-            1 => 'Subject',
-            2 => 'Category',
-            3 => 'Flag',
-            4 => 'Body',
-            5 => 'Expiry',
-            6 => 'Updated At',
-            7 => 'Created At',
-        ], collect($subject->viewData('columns'))->map->name->toArray());
-    }
+//    /** @test */
+//    public function it_can_mount_using_the_class()
+//    {
+//        DummyModel::factory()
+//            ->state(['subject' => 'How to sell paper in Scranton PA'])
+//            ->create();
+//
+//        $subject = Livewire::test(DummyTable::class)
+//            ->assertSee('How to sell paper in Scranton PA');
+//        $this->assertIsArray($subject->viewData('columns'));
+//        $this->assertEquals([
+//            0 => '#',
+//            1 => 'Subject',
+//            2 => 'Category',
+//            3 => 'Flag',
+//            4 => 'Body',
+//            5 => 'Expiry',
+//            6 => 'Updated At',
+//            7 => 'Created At',
+//        ], collect($subject->viewData('columns'))->map->name->toArray());
+//    }
 
 //
 //    /** @test */
