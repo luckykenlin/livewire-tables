@@ -173,7 +173,6 @@ class Column
         return $this;
     }
 
-
     /**
      * @param bool $condition
      * @return $this
@@ -262,7 +261,6 @@ class Column
 
         return $this;
     }
-
 
     /**
      * @param $view
@@ -354,5 +352,4 @@ class Column
 
         return $value ?? '';
     }
-
 }

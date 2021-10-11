@@ -54,7 +54,6 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             Blade::component('livewire-tables::tailwind.components.table.footer', 'livewire-tables::tw.table.footer');
             Blade::component('livewire-tables::tailwind.components.table.row', 'livewire-tables::tw.table.row');
             Blade::component('livewire-tables::tailwind.components.table.cell', 'livewire-tables::tw.table.cell');
-
         });
     }
 
