@@ -2,13 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Facades\Schema;
-use Rappasoft\LaravelLivewireTables\Utilities\ColumnUtilities;
-use Rappasoft\LaravelLivewireTables\Views\Column;
-use Rappasoft\LaravelLivewireTables\Views\Filter;
 
 trait Sortable
 {
@@ -31,6 +25,10 @@ trait Sortable
      */
     public string $defaultSortDirection = 'desc';
 
+    /**
+     * @param Builder $builder
+     * @return Builder
+     */
     public function applySorting(Builder $builder): Builder
     {
         if ($this->sortingEnabled === false) {
@@ -53,6 +51,7 @@ trait Sortable
                 continue;
             }
 
+            //todo
             $builder->orderBy($column->getAttribute(), $direction);
         }
 
@@ -60,6 +59,10 @@ trait Sortable
 
     }
 
+    /**
+     * @param string $field
+     * @return string|null
+     */
     public function sortBy(string $field): ?string
     {
         if (!$this->sortingEnabled) {
@@ -79,6 +82,9 @@ trait Sortable
         return null;
     }
 
+    /**
+     * @param string $field
+     */
     public function removeSort(string $field): void
     {
         if (isset($this->sorts[$field])) {
@@ -86,6 +92,9 @@ trait Sortable
         }
     }
 
+    /**
+     *
+     */
     public function resetSorts(): void
     {
         $this->sorts = [];

@@ -7,7 +7,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
+use Luckykenlin\LivewireTables\Traits\Pagination;
+use Luckykenlin\LivewireTables\Traits\Searchable;
 use Luckykenlin\LivewireTables\Traits\Sortable;
 
 /**
@@ -16,20 +17,16 @@ use Luckykenlin\LivewireTables\Traits\Sortable;
  */
 abstract class LivewireTables extends Component
 {
-    use WithPagination;
+    use Pagination;
     use Sortable;
+    use Searchable;
 
     public string $primaryKey = 'id';
-    public bool $showSearch = true;
     public bool $responsive = true;
-    public bool $showPagination = true;
-    public bool $paginationEnabled = true;
-    public ?string $search = null;
-    public string $paginationTheme;
+
     protected Builder $builder;
 
     public bool $debugEnabled = false;
-
 
     /**
      * @var Builder
@@ -111,7 +108,7 @@ abstract class LivewireTables extends Component
         $this->applySorting($this->builder);
 
         if ($this->paginationEnabled) {
-            return $this->builder->paginate();
+            return $this->builder->paginate($this->perPage);
         }
 
         return $this->builder->get();
