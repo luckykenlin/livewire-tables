@@ -35,13 +35,12 @@ trait Sortable
             return $builder;
         }
 
-        if (!empty($this->defaultSortColumn) && !count($this->sorts)) {
+        if (! empty($this->defaultSortColumn) && ! count($this->sorts)) {
             return $builder->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
         }
 
         foreach ($this->sorts as $field => $direction) {
-
-            if (!in_array($direction, ['asc', 'desc'])) {
+            if (! in_array($direction, ['asc', 'desc'])) {
                 $direction = 'desc';
             }
 
@@ -56,7 +55,6 @@ trait Sortable
         }
 
         return $builder;
-
     }
 
     /**
@@ -65,11 +63,11 @@ trait Sortable
      */
     public function sortBy(string $field): ?string
     {
-        if (!$this->sortingEnabled) {
+        if (! $this->sortingEnabled) {
             return null;
         }
 
-        if (!isset($this->sorts[$field])) {
+        if (! isset($this->sorts[$field])) {
             return $this->sorts[$field] = 'asc';
         }
 
