@@ -5,8 +5,10 @@ namespace Luckykenlin\LivewireTables;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Luckykenlin\LivewireTables\Traits\Sortable;
 
 /**
  * Class LivewireTables
@@ -15,6 +17,7 @@ use Livewire\WithPagination;
 abstract class LivewireTables extends Component
 {
     use WithPagination;
+    use Sortable;
 
     public string $primaryKey = 'id';
     public bool $showSearch = true;
@@ -22,10 +25,10 @@ abstract class LivewireTables extends Component
     public bool $showPagination = true;
     public bool $paginationEnabled = true;
     public ?string $search = null;
+    public string $paginationTheme;
+    protected Builder $builder;
 
-
-    public string $defaultSortColumn = '';
-    public string $defaultSortDirection = 'asc';
+    public bool $debugEnabled = false;
 
 
     /**
@@ -41,6 +44,15 @@ abstract class LivewireTables extends Component
     protected $queryString = [
         'search' => ['except' => ''],
     ];
+
+    public function __construct(?string $id = null)
+    {
+        parent::__construct($id);
+
+        $this->paginationTheme = config('livewire-tables.theme');
+
+        $this->builder = $this->query();
+    }
 
     /**
      * Define base table query.
@@ -85,32 +97,37 @@ abstract class LivewireTables extends Component
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows' => $this->models(),
+            'rows' => $this->rows()
         ]);
     }
 
     /**
      * Get table data.
      *
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator|Collection
      */
-    public function models(): LengthAwarePaginator
+    public function rows(): LengthAwarePaginator|Collection
     {
-        return $this->query()->paginate();
+        $this->applySorting($this->builder);
+
+        if ($this->paginationEnabled) {
+            return $this->builder->paginate();
+        }
+
+        return $this->builder->get();
     }
 
-    public function sortBy(string $field): ?string
+
+    /**
+     * Get a column object by its field
+     *
+     * @param string $field
+     * @return mixed
+     */
+    protected function getColumn(string $field): mixed
     {
-//        if (! isset($this->sorts[$field])) {
-//            return $this->sorts[$field] = 'asc';
-//        }
-//
-//        if ($this->sorts[$field] === 'asc') {
-//            return $this->sorts[$field] = 'desc';
-//        }
-//
-//        unset($this->sorts[$field]);
-//
-//        return null;
+        return collect($this->columns())
+            ->where('field', $field)
+            ->first();
     }
 }

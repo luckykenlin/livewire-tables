@@ -7,9 +7,10 @@
                     <x-livewire-tables::table.heading/>
                 @else
                     <x-livewire-tables::table.heading
+                        :sortingEnabled="$sortingEnabled"
                         :sortable="$column->isSortable()"
-                        :text="$column->getText()"
-                        :direction="$column->getText() ? $sorts[$column->getText()] ?? null : null"
+                        :field="$column->getField()"
+                        :direction="$column->getField() ? $sorts[$column->getField()] ?? null : null"
                         :class="$column->class() ?? ''"
                     />
                 @endif

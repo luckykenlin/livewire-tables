@@ -15,7 +15,7 @@ class Column
     /**
      * @var string|null
      */
-    public ?string $text;
+    public ?string $field;
 
     /**
      * @var string|null
@@ -74,24 +74,24 @@ class Column
 
     /**
      * Column constructor.
-     * @param string|null $text
+     * @param string|null $field
      * @param string|null $attribute
      */
-    public function __construct(?string $text, ?string $attribute)
+    public function __construct(?string $field, ?string $attribute)
     {
-        $this->text = $text;
+        $this->field = $field;
 
-        $this->attribute = $attribute ?? Str::snake(Str::lower($text));
+        $this->attribute = $attribute ?? Str::snake(Str::lower($field));
     }
 
     /**
-     * @param string $text
+     * @param string $field
      * @param string|null $attribute
      * @return static
      */
-    public static function make(string $text, ?string $attribute = null): Column
+    public static function make(string $field, ?string $attribute = null): Column
     {
-        return new static($text, $attribute);
+        return new static($field, $attribute);
     }
 
     /**
@@ -217,7 +217,7 @@ class Column
     }
 
     /**
-     * Check if the view is callable.
+     * @return bool
      */
     public function isRenderable(): bool
     {
@@ -274,12 +274,12 @@ class Column
     }
 
     /**
-     * @param $text
+     * @param $field
      * @return $this
      */
-    public function label($text): static
+    public function label($field): static
     {
-        $this->text = $text;
+        $this->field = $field;
 
         return $this;
     }
@@ -287,9 +287,9 @@ class Column
     /**
      * @return string|null
      */
-    public function getText(): ?string
+    public function getField(): ?string
     {
-        return $this->text;
+        return $this->field;
     }
 
     /**
