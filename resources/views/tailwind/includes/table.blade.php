@@ -7,6 +7,7 @@
                     <x-livewire-tables::table.heading/>
                 @else
                     <x-livewire-tables::table.heading
+                        :attribute="$column->getAttribute()"
                         :sortingEnabled="$sortingEnabled"
                         :sortable="$column->isSortable()"
                         :field="$column->getField()"

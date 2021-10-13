@@ -9,12 +9,16 @@ trait Pagination
     use WithPagination;
 
     /**
+     * Theme of pagination.
+     *
      * @var string
      */
     public string $paginationTheme = 'tailwind';
 
     /**
      * Amount of items to show per page.
+     *
+     * @var int
      */
     public int $perPage = 25;
 
@@ -27,16 +31,34 @@ trait Pagination
 
     /**
      * Show the per page select.
+     *
+     * @var bool
      */
     public bool $showPerPage = true;
+
     /**
+     * Show pagination.
+     *
      * @var bool
      */
     public bool $showPagination = true;
+
     /**
+     * Enable pagination.
+     *
      * @var bool
      */
     public bool $paginationEnabled = true;
+
+    /**
+     * Resolve page name for multiple component present.
+     *
+     * @return string
+     */
+    public function pageName(): string
+    {
+        return 'page';
+    }
 
     /**
      * https://laravel-livewire.com/docs/pagination
@@ -55,4 +77,5 @@ trait Pagination
     {
         $this->resetPage();
     }
+
 }

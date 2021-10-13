@@ -9,8 +9,8 @@
                     </div>
 
                     <div class="md:flex md:items-center">
-{{--                        <div>@include('livewire-tables::tailwind.includes.bulk-actions')</div>--}}
-{{--                        <div>@include('livewire-tables::tailwind.includes.column-select')</div>--}}
+                        {{--                        <div>@include('livewire-tables::tailwind.includes.bulk-actions')</div>--}}
+                        {{--                        <div>@include('livewire-tables::tailwind.includes.column-select')</div>--}}
                         <div>@includeWhen($paginationEnabled && $showPerPage,'livewire-tables::tailwind.includes.per-page')</div>
                     </div>
                 </div>

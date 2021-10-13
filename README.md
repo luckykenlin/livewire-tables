@@ -102,11 +102,11 @@ class UsersTable extends LivewireTables
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')->sortable()->label("#"),
+            Column::make('#', 'id')->sortable(),
             Column::make('Name', 'name')->searchable()->sortable(),
             Column::make('Email', 'email')->searchable()->sortable(),
 
-            Action::make()->view("livewire-tables::table-actions")
+            Action::make()
         ];
     }
 }

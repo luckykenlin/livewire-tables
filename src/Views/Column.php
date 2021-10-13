@@ -338,6 +338,13 @@ class Column
         return call_user_func($this->formatCallback, $value);
     }
 
+    /**
+     * Resolve column result.
+     *
+     * @param Column $column
+     * @param object $model
+     * @return array|false|mixed|object|string
+     */
     public function resolveColumn(Column $column, object $model)
     {
         $value = data_get($model, $column->getAttribute());
@@ -351,5 +358,13 @@ class Column
         }
 
         return $value ?? '';
+    }
+
+    /**
+     * Check if the column has a relationship.
+     */
+    public function hasRelationship(): bool
+    {
+        return str_contains($this->attribute, '.');
     }
 }

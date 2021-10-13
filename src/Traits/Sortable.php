@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Views\Column;
 
 trait Sortable
 {
@@ -12,20 +13,36 @@ trait Sortable
     public array $sorts = [];
 
     /**
+     * Enable sorting.
+     *
      * @var bool
      */
     public bool $sortingEnabled = true;
 
     /**
+     * Set as single sorting.
+     *
+     * @var bool
+     */
+    public bool $singleColumnSorting = false;
+
+    /**
+     * Set default sort column.
+     *
      * @var string
      */
     public string $defaultSortColumn = 'updated_at';
+
     /**
+     * Set default sort direction.
+     *
      * @var string
      */
     public string $defaultSortDirection = 'desc';
 
     /**
+     * Trick of sorting.
+     *
      * @param Builder $builder
      * @return Builder
      */
@@ -35,66 +52,80 @@ trait Sortable
             return $builder;
         }
 
-        if (! empty($this->defaultSortColumn) && ! count($this->sorts)) {
-            return $builder->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
-        }
-
-        foreach ($this->sorts as $field => $direction) {
-            if (! in_array($direction, ['asc', 'desc'])) {
+        foreach ($this->sorts as $attribute => $direction) {
+            if (!in_array($direction, ['asc', 'desc'])) {
                 $direction = 'desc';
             }
 
-            $column = $this->getColumn($field);
-
-            if (is_null($column)) {
-                continue;
-            }
-
-            //todo
-            $builder->orderBy($column->getAttribute(), $direction);
+            $builder->orderBy($this->getSortAttribute($builder, $attribute), $direction);
         }
 
         return $builder;
     }
 
     /**
-     * @param string $field
-     * @return string|null
+     * Sort column onclick.
+     *
+     * @param string $attribute
+     * @return string|string[]|null
      */
-    public function sortBy(string $field): ?string
+    public function sortBy(string $attribute): array|string|null
     {
-        if (! $this->sortingEnabled) {
+        if (!$this->sortingEnabled) {
             return null;
         }
 
-        if (! isset($this->sorts[$field])) {
-            return $this->sorts[$field] = 'asc';
+        if ($this->singleColumnSorting && count($this->sorts) && !isset($this->sorts[$attribute])) {
+            $this->sorts = [];
         }
 
-        if ($this->sorts[$field] === 'asc') {
-            return $this->sorts[$field] = 'desc';
+        if (!isset($this->sorts[$attribute])) {
+            return $this->sorts[$attribute] = 'asc';
         }
 
-        unset($this->sorts[$field]);
+        if ($this->sorts[$attribute] === 'asc') {
+            return $this->sorts[$attribute] = 'desc';
+        }
+
+        unset($this->sorts[$attribute]);
 
         return null;
     }
 
     /**
-     * @param string $field
+     * @param string $attribute
      */
-    public function removeSort(string $field): void
+    public function removeSort(string $attribute): void
     {
-        if (isset($this->sorts[$field])) {
-            unset($this->sorts[$field]);
+        if (isset($this->sorts[$attribute])) {
+            unset($this->sorts[$attribute]);
         }
     }
 
-    /**
-     *
-     */
     public function resetSorts(): void
     {
         $this->sorts = [];
+    }
+
+    /**
+     * Get sort column with or without relation.
+     *
+     * @param Builder $builder
+     * @param string $attribute
+     * @return string
+     */
+    public function getSortAttribute(Builder $builder, string $attribute): string
+    {
+        // Check if the column has relationship
+        if (str_contains($attribute, '.')) {
+
+            $relationship = $this->relationship($attribute);
+
+            // left join attribute by relationship.
+            return $this->attribute($builder, $relationship->name, $relationship->attribute);
+
+        }
+
+        return sprintf('%s.%s', $this->getTable($builder), $attribute);
     }
 }

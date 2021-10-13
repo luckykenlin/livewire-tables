@@ -6,10 +6,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Pagination;
+use Luckykenlin\LivewireTables\Traits\Relation;
 use Luckykenlin\LivewireTables\Traits\Searchable;
 use Luckykenlin\LivewireTables\Traits\Sortable;
+use Livewire\Component;
 
 /**
  * Class LivewireTables
@@ -17,21 +18,34 @@ use Luckykenlin\LivewireTables\Traits\Sortable;
  */
 abstract class LivewireTables extends Component
 {
-    use Pagination;
-    use Sortable;
-    use Searchable;
+    use Pagination, Relation, Sortable, Searchable;
 
+    /**
+     * @var string
+     */
     public string $primaryKey = 'id';
+
+    /**
+     * @var bool
+     */
     public bool $responsive = true;
 
-    protected Builder $builder;
-
+    /**
+     * @var bool
+     */
     public bool $debugEnabled = false;
+
+    /**
+     * @var string
+     */
+    public string $emptyMessage;
 
     /**
      * @var Builder
      */
-    protected Builder $query;
+    protected Builder $builder;
+
+    public array $props;
 
     /**
      * Show query string on url.
@@ -40,13 +54,16 @@ abstract class LivewireTables extends Component
      */
     protected $queryString = [
         'search' => ['except' => ''],
+        'sorts' => ['except' => ''],
     ];
 
     public function __construct(?string $id = null)
     {
         parent::__construct($id);
 
-        $this->paginationTheme = config('livewire-tables.theme');
+        $this->paginationTheme = config('livewire-tables.theme_template');
+
+        $this->emptyMessage = $this->emptyMessage ?? config(config('livewire-tables.empty_message')) ?? 'Whoops! No results.';
 
         $this->builder = $this->query();
     }
@@ -82,7 +99,7 @@ abstract class LivewireTables extends Component
      */
     public function view(): string
     {
-        return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
+        return 'livewire-tables::' . config('livewire-tables.theme_template') . '.datatable';
     }
 
     /**
@@ -107,23 +124,12 @@ abstract class LivewireTables extends Component
     {
         $this->applySorting($this->builder);
 
+        $this->applySearch($this->builder);
+
         if ($this->paginationEnabled) {
-            return $this->builder->paginate($this->perPage);
+            return $this->builder->paginate(perPage: $this->perPage, pageName: $this->pageName());
         }
 
         return $this->builder->get();
-    }
-
-    /**
-     * Get a column object by its field
-     *
-     * @param string $field
-     * @return mixed
-     */
-    protected function getColumn(string $field): mixed
-    {
-        return collect($this->columns())
-            ->where('field', $field)
-            ->first();
     }
 }
