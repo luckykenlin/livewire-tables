@@ -36,7 +36,7 @@ return [
     |
     */
     'actions' => [
-//        Action::enableShowAction(),
+        Action::enableShowAction(),
         Action::enableEditAction(),
         Action::enableDeleteAction(),
     ]

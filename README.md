@@ -26,13 +26,6 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 You can publish the views file with:
 
 ```bash
