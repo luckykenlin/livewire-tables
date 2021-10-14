@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables;
 
-use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Livewire;
 use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;

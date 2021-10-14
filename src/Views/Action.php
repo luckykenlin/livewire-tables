@@ -35,11 +35,11 @@ class Action extends Column
     {
         parent::__construct($field, $attribute);
 
-        $this->hideShowButton = !static::enabled(static::enableShowAction());
+        $this->hideShowButton = ! static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = !static::enabled(static::enableEditAction());
+        $this->hideEditButton = ! static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
 
         $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.table.action';
     }
@@ -54,17 +54,15 @@ class Action extends Column
     public static function make(string $field = 'Action', ?string $attribute = null): Action
     {
         return tap(new static($field, $attribute), function ($action) {
-
             $action->render(
-                fn($model) => view($action->view, [
+                fn ($model) => view($action->view, [
                     'row' => $model,
                     'hideShowButton' => $action->hideShowButton,
                     'hideEditButton' => $action->hideEditButton,
-                    'hideDeleteButton' => $action->hideDeleteButton
+                    'hideDeleteButton' => $action->hideDeleteButton,
                 ])
             )
                 ->excludeFromExport();
-
         });
     }
 
