@@ -25,11 +25,6 @@ class Column
     /**
      * @var string|null
      */
-    public ?string $view;
-
-    /**
-     * @var string|null
-     */
     public ?string $class = null;
 
     /**
@@ -263,17 +258,6 @@ class Column
     }
 
     /**
-     * @param $view
-     * @return $this
-     */
-    public function view($view): static
-    {
-        $this->view = $view;
-
-        return $this;
-    }
-
-    /**
      * @param $field
      * @return $this
      */
@@ -343,9 +327,9 @@ class Column
      *
      * @param Column $column
      * @param object $model
-     * @return array|false|mixed|object|string
+     * @return mixed
      */
-    public function resolveColumn(Column $column, object $model)
+    public function resolveColumn(Column $column, object $model): mixed
     {
         $value = data_get($model, $column->getAttribute());
 

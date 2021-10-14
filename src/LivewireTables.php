@@ -45,8 +45,6 @@ abstract class LivewireTables extends Component
      */
     protected Builder $builder;
 
-    public array $props;
-
     /**
      * Show query string on url.
      *
@@ -111,7 +109,7 @@ abstract class LivewireTables extends Component
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows' => $this->rows(),
+            'rows' => $this->rows()
         ]);
     }
 
