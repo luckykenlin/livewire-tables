@@ -6,11 +6,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Pagination;
 use Luckykenlin\LivewireTables\Traits\Relation;
 use Luckykenlin\LivewireTables\Traits\Searchable;
 use Luckykenlin\LivewireTables\Traits\Sortable;
-use Livewire\Component;
 
 /**
  * Class LivewireTables

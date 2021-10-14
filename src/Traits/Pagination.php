@@ -77,5 +77,4 @@ trait Pagination
     {
         $this->resetPage();
     }
-
 }
