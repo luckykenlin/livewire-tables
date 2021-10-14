@@ -6,7 +6,9 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Luckykenlin\LivewireTables\Traits\NewResource;
 use Luckykenlin\LivewireTables\Traits\Pagination;
 use Luckykenlin\LivewireTables\Traits\Relation;
 use Luckykenlin\LivewireTables\Traits\Searchable;
@@ -18,12 +20,22 @@ use Luckykenlin\LivewireTables\Traits\Sortable;
  */
 abstract class LivewireTables extends Component
 {
-    use Pagination, Relation, Sortable, Searchable;
+    use Pagination, Relation, Sortable, Searchable, NewResource;
 
     /**
      * @var string
      */
     public string $primaryKey = 'id';
+
+    /**
+     * @var Model
+     */
+    public Model $model;
+
+    /**
+     * @var string
+     */
+    public string $table;
 
     /**
      * @var bool
@@ -55,15 +67,23 @@ abstract class LivewireTables extends Component
         'sorts' => ['except' => ''],
     ];
 
+    protected $listeners = ['delete'];
+
     public function __construct(?string $id = null)
     {
         parent::__construct($id);
 
-        $this->paginationTheme = config('livewire-tables.theme_template');
+        $this->paginationTheme = config('livewire-tables.theme') ?? 'tailwind';
 
-        $this->emptyMessage = $this->emptyMessage ?? config(config('livewire-tables.empty_message')) ?? 'Whoops! No results.';
+        $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message') ?? 'Whoops! No results.';
 
         $this->builder = $this->query();
+
+        $this->model = $this->getModel($this->builder);
+
+        $this->table = $this->getTable($this->builder);
+
+        $this->newResource = $this->newResource();
     }
 
     /**
@@ -91,16 +111,6 @@ abstract class LivewireTables extends Component
     }
 
     /**
-     * Customize table ui.
-     *
-     * @return string
-     */
-    public function view(): string
-    {
-        return 'livewire-tables::' . config('livewire-tables.theme_template') . '.datatable';
-    }
-
-    /**
      * Render table.
      *
      * @return View
@@ -111,6 +121,16 @@ abstract class LivewireTables extends Component
             'columns' => $this->columns(),
             'rows' => $this->rows()
         ]);
+    }
+
+    /**
+     * Customize table ui.
+     *
+     * @return string
+     */
+    public function view(): string
+    {
+        return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
     }
 
     /**
@@ -129,5 +149,13 @@ abstract class LivewireTables extends Component
         }
 
         return $this->builder->get();
+    }
+
+    /**
+     * Delete an element base on its ID.
+     */
+    public function delete(string $id): void
+    {
+        $this->model->query()->findOrFail($id)->delete();
     }
 }

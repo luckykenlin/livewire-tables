@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables;
 
 use Illuminate\View\Compilers\BladeCompiler;
+use Livewire\Livewire;
 use Luckykenlin\LivewireTables\Commands\LivewireTablesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -32,16 +33,6 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
             ->hasTranslations()
             ->hasCommand(LivewireTablesCommand::class);
 
-        $this->configureComponents();
-    }
-
-    /**
-     * Configure view components to laravel.
-     */
-    public function configureComponents()
-    {
-        $this->callAfterResolving(BladeCompiler::class, function () {
-
-        });
+        Livewire::component('delete-button', DeleteComponent::class);
     }
 }

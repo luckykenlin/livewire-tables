@@ -28,6 +28,11 @@ class Column
     public ?string $class = null;
 
     /**
+     * @var string|null
+     */
+    public ?string $view = null;
+
+    /**
      * @var bool
      */
     public bool $blank = false;
@@ -72,7 +77,7 @@ class Column
      * @param string|null $field
      * @param string|null $attribute
      */
-    public function __construct(?string $field, ?string $attribute)
+    public function __construct(?string $field = null, ?string $attribute = null)
     {
         $this->field = $field;
 
@@ -294,6 +299,17 @@ class Column
     public function class(): ?string
     {
         return $this->class;
+    }
+
+    /**
+     * Set view.
+     *
+     * @param string $view
+     * @return string|null
+     */
+    public function view(string $view): ?string
+    {
+        return $this->view = $view;
     }
 
     /**

@@ -20,7 +20,7 @@ trait Pagination
      *
      * @var int
      */
-    public int $perPage = 25;
+    public int $perPage = 10;
 
     /**
      * The options to limit the amount of results per page.

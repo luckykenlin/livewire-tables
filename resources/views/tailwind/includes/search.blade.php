@@ -9,7 +9,7 @@
     </div>
     <input
         wire:model.debounce.{{$searchDebounce}}ms="search"
-        placeholder="{{ __('Search') }}"
+        placeholder="@lang('livewire-tables::strings.search')"
         type="text"
         class="block px-10 w-full border-gray-300 rounded-md shadow-sm transition duration-150 ease-in-out sm:text-sm sm:leading-5 dark:bg-gray-700 dark:text-white dark:border-gray-600 @if (isset($search) && strlen($search)) rounded-l-md rounded-r-none focus:ring-0 focus:border-gray-300 @else focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md @endif"
     />
