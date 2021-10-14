@@ -11,12 +11,11 @@ class Action
     {
         return Column::make($field)
             ->render(function ($model) use ($view) {
-
                 $component = $view ?? self::defaultView();
 
                 return view($component, [
                     'id' => $model->id,
-                    'resource' => $model->getTable()
+                    'resource' => $model->getTable(),
                 ]);
             })
             ->excludeFromExport();

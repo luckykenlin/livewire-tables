@@ -41,7 +41,6 @@ class LivewireTablesServiceProvider extends PackageServiceProvider
     public function configureComponents()
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
-
         });
     }
 }
