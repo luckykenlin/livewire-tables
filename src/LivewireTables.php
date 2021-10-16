@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Luckykenlin\LivewireTables\Traits\Deletable;
+use Luckykenlin\LivewireTables\Traits\Filterable;
 use Luckykenlin\LivewireTables\Traits\NewResource;
 use Luckykenlin\LivewireTables\Traits\Pagination;
 use Luckykenlin\LivewireTables\Traits\Relation;
@@ -20,7 +22,7 @@ use Luckykenlin\LivewireTables\Traits\Sortable;
  */
 abstract class LivewireTables extends Component
 {
-    use Pagination, Relation, Sortable, Searchable, NewResource;
+    use NewResource, Pagination, Relation, Sortable, Searchable, Filterable, Deletable;
 
     /**
      * @var string
@@ -38,16 +40,43 @@ abstract class LivewireTables extends Component
     public string $table;
 
     /**
+     * Whether to refresh the table at a certain interval
+     * false is off
+     * If it's an integer it will be treated as milliseconds (2000 = refresh every 2 seconds)
+     *
+     * @var bool
+     */
+    public bool $refresh = false;
+
+    /**
+     * Refresh table each XX seconds.
+     */
+    public int $refreshInSeconds = 2;
+
+    /**
+     * Display a responsive table.
+     *
      * @var bool
      */
     public bool $responsive = true;
 
     /**
+     * Display a debug info.
+     *
      * @var bool
      */
     public bool $debugEnabled = false;
 
     /**
+     * Display an offline message when there is no connection.
+     *
+     * @var bool
+     */
+    public bool $offlineIndicator = true;
+
+    /**
+     * The message to show when there are no results from a search or query.
+     *
      * @var string
      */
     public string $emptyMessage;
@@ -67,6 +96,9 @@ abstract class LivewireTables extends Component
         'sorts' => ['except' => ''],
     ];
 
+    /**
+     * @var string[]
+     */
     protected $listeners = ['delete'];
 
     public function __construct(?string $id = null)
@@ -105,7 +137,7 @@ abstract class LivewireTables extends Component
      *
      * @return array
      */
-    protected function filters(): array
+    public function filters(): array
     {
         return [];
     }
@@ -124,7 +156,7 @@ abstract class LivewireTables extends Component
     }
 
     /**
-     * Customize table ui.
+     * Default table ui.
      *
      * @return string
      */
@@ -140,22 +172,16 @@ abstract class LivewireTables extends Component
      */
     public function rows(): LengthAwarePaginator|Collection
     {
-        $this->applySorting($this->builder);
+        $this->applyFilter($this->builder);
 
         $this->applySearch($this->builder);
+
+        $this->applySorting($this->builder);
 
         if ($this->paginationEnabled) {
             return $this->builder->paginate(perPage: $this->perPage, pageName: $this->pageName());
         }
 
         return $this->builder->get();
-    }
-
-    /**
-     * Delete an element base on its ID.
-     */
-    public function delete(string $id): void
-    {
-        $this->model->query()->findOrFail($id)->delete();
     }
 }

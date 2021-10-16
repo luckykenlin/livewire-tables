@@ -10,57 +10,62 @@ class Column
     /**
      * @var string
      */
-    public string $type = 'string';
+    public static string $type = 'string';
 
     /**
      * @var string|null
      */
-    public ?string $field;
+    protected ?string $field;
 
     /**
      * @var string|null
      */
-    public ?string $attribute;
+    protected ?string $attribute;
 
     /**
      * @var string|null
      */
-    public ?string $class = null;
+    protected ?string $class = null;
 
     /**
      * @var string|null
      */
-    public ?string $view = null;
+    protected ?string $view = null;
 
     /**
      * @var bool
      */
-    public bool $blank = false;
+    protected bool $blank = false;
 
     /**
      * @var bool
      */
-    public bool $searchable = false;
+    protected bool $searchable = false;
 
     /**
      * @var bool
      */
-    public bool $sortable = false;
+    protected bool $sortable = false;
 
     /**
      * @var bool
      */
-    public bool $selected = false;
+    protected bool $selected = false;
 
     /**
      * @var bool
      */
-    public bool $hideOnExport = false;
+    protected bool $hideOnExport = false;
 
     /**
      * @var bool
      */
-    public bool $hidden = false;
+    protected bool $hidden = false;
+
+    /**
+     * @var bool
+     */
+    protected bool $asHtml = false;
 
     /**
      * @var Closure|null
@@ -156,7 +161,7 @@ class Column
      * @param bool $shouldExport
      * @return $this
      */
-    public function hideOnExport(bool $shouldExport = true): static
+    public function hideOnExportIf(bool $shouldExport = true): static
     {
         $this->hideOnExport = $shouldExport;
 
@@ -238,6 +243,50 @@ class Column
     public function isFormatted(): bool
     {
         return is_callable($this->formatCallback);
+    }
+
+    /**
+     * Html column.
+     */
+    public function asHtml(): self
+    {
+        $this->asHtml = true;
+
+        return $this;
+    }
+
+    /**
+     * Html column.
+     */
+    public function notAsHtml(): self
+    {
+        $this->asHtml = false;
+
+        return $this;
+    }
+
+    /**
+     * Check if the column is raw.
+     */
+    public function isHtml(): bool
+    {
+        return $this->asHtml;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExcludeFromExport(): bool
+    {
+        return $this->hideOnExport;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIncludeFromExport(): bool
+    {
+        return !$this->hideOnExport;
     }
 
     /**
@@ -347,14 +396,18 @@ class Column
      */
     public function resolveColumn(Column $column, object $model): mixed
     {
+        // Get value from model
         $value = data_get($model, $column->getAttribute());
+
+        // Invoke transform.
+        $value = $column->transform($value);
 
         if ($column->isRenderable()) {
             return $column->renderCallback($model);
         }
-
+        
         if ($column->isFormatted()) {
-            return $column->formatted($value);
+            return $column->formatted($value, $column, $model);
         }
 
         return $value ?? '';
@@ -366,5 +419,14 @@ class Column
     public function hasRelationship(): bool
     {
         return str_contains($this->attribute, '.');
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function transform($value): mixed
+    {
+        return $value;
     }
 }

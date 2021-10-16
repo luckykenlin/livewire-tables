@@ -8,7 +8,15 @@
             :columnClass="$column->class()"
         >
 
-            {{$column->resolveColumn($column, $row)}}
+            @if ($column->isHtml())
+
+                {{ new \Illuminate\Support\HtmlString($column->resolveColumn($column, $row)) }}
+
+            @else
+
+                {{$column->resolveColumn($column, $row)}}
+
+            @endif
 
         </x-livewire-tables::table.cell>
 

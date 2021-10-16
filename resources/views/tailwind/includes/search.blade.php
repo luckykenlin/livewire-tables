@@ -1,4 +1,4 @@
-<div class="flex rounded-md shadow-sm relative">
+<div class="flex rounded shadow-sm relative">
     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <!-- icon: heroicon-s-search -->
         <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -11,7 +11,7 @@
         wire:model.debounce.{{$searchDebounce}}ms="search"
         placeholder="@lang('livewire-tables::strings.search')"
         type="text"
-        class="block px-10 w-full border-gray-300 rounded-md shadow-sm transition duration-150 ease-in-out sm:text-sm sm:leading-5 dark:bg-gray-700 dark:text-white dark:border-gray-600 @if (isset($search) && strlen($search)) rounded-l-md rounded-r-none focus:ring-0 focus:border-gray-300 @else focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md @endif"
+        class="block px-10 w-full border-gray-300 rounded shadow-sm transition duration-150 ease-in-out sm:text-sm sm:leading-5 dark:bg-gray-700 dark:text-white dark:border-gray-600 @if (isset($search) && strlen($search)) rounded-l-md rounded-r-none focus:ring-0 focus:border-gray-300 @else focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded @endif"
     />
 
     @if (trim($search) && $clearSearchButton)

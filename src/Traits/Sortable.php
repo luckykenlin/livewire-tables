@@ -3,7 +3,6 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Views\Column;
 
 trait Sortable
 {

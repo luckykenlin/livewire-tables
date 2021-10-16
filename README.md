@@ -80,9 +80,8 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Columns\Action;
-use Luckykenlin\LivewireTables\Columns\Column;
-use Luckykenlin\LivewireTables\Columns\ID;
+use Luckykenlin\LivewireTables\Views\Action;
+use Luckykenlin\LivewireTables\Views\Column;
 use Luckykenlin\LivewireTables\LivewireTables;
 
 class UsersTable extends LivewireTables

@@ -1,19 +1,29 @@
 <?php
 
-namespace Luckykenlin\LivewireTables;
+namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class DeleteComponent extends Component
 {
+    /**
+     * @var string
+     */
     public string $itemId;
 
+    /**
+     * @param $itemId
+     */
     public function mount($itemId)
     {
         $this->itemId = $itemId;
     }
 
-    public function render()
+    /**
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire-tables::' . config('livewire-tables.theme') . '.includes.delete-button');
     }
