@@ -29,7 +29,7 @@ class BooleanFilter extends Filter
      * @param string|null $name
      * @param string|null $view
      */
-    public function __construct(string $column, ?string $name, ?string $view)
+    public function __construct(string $column, ?string $name = null, ?string $view = null)
     {
         parent::__construct(column: $column);
 
@@ -42,6 +42,15 @@ class BooleanFilter extends Filter
         $this->trueValue = trans('livewire-tables::filters.trueValue');
 
         $this->falseValue = trans('livewire-tables::filters.falseValue');
+    }
+
+    /**
+     * @param string $column
+     * @return BooleanFilter
+     */
+    public static function make(string $column): BooleanFilter
+    {
+        return new static($column);
     }
 
     /**
@@ -85,6 +94,9 @@ class BooleanFilter extends Filter
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function view(): string
     {
         return 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';

@@ -63,17 +63,6 @@ abstract class Filter
     abstract public function apply(Request $request, Builder $query, mixed $value): Builder;
 
     /**
-     * @param string|null $column
-     * @param string|null $uriKey
-     * @param string|null $view
-     * @return Filter
-     */
-    public static function make(?string $column = null, ?string $uriKey = null, ?string $view = null): Filter
-    {
-        return new static($column, $uriKey, $view);
-    }
-
-    /**
      * @param string $name
      * @return Filter
      */
@@ -82,14 +71,6 @@ abstract class Filter
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function uriKey(): string
-    {
-        return $this->uriKey ?? '';
     }
 
     /**
