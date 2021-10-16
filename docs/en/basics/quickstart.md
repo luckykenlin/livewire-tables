@@ -57,6 +57,7 @@ class UserTable extends LivewireTables
             Action::make()
         ];
     }
+}
 ```
 
 !> Your component must implement two methods:
