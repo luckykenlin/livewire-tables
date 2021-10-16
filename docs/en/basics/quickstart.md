@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Luckykenlin\LivewireTables\LivewireTables;
 use Luckykenlin\LivewireTables\Views\Action;
 use Luckykenlin\LivewireTables\Views\Column;
+use Luckykenlin\LivewireTables\Views\Boolean;
 
 class UserTable extends LivewireTables
 {
@@ -40,9 +41,19 @@ class UserTable extends LivewireTables
     {
         return [
             Column::make('#', 'id')->sortable(),
+            
             Column::make('Avatar', 'id')->render(fn(User $user) => view('users.avatar')),
+            
             Column::make('Name')->sortable()->searchable(),
-
+            
+            Column::make('Email')->sortable()->searchable(),
+            
+            Boolean::make('is_admin')->sortable(),
+            
+            Column::make('Created At')
+                ->sortable()
+                ->format(fn(Carbon $v) => $v->diffForHumans()),
+                
             Action::make()
         ];
     }
@@ -79,15 +90,6 @@ In the view, you will need to call the `Livewire Component`:
 <livewire:users-table /> 
 ```
 
-If you are testing the abobe example, remember that you need to create the view: `profile.avatar`, because is rendering directly from the `Table Component`:
+This is the result:
+![Livewire Tables with Livewire](../../assets/livewire-tables.png ':class=image')
 
-```php 
-Column::make('Avatar', 'profile.profile_avatar')
-    ->searchable()
-    ->sortable()
-    ->render(function(User $user) {
-        return view('profile.avatar', compact('user'));
-    })
-```
-
-And this is the result:
