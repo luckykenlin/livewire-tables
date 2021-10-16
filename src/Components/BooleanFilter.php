@@ -69,7 +69,7 @@ class BooleanFilter extends Filter
         return [
             '' => trans('livewire-tables::filters.all'),
             'true' => $this->trueValue,
-            'false' => $this->falseValue
+            'false' => $this->falseValue,
         ];
     }
 
@@ -81,7 +81,7 @@ class BooleanFilter extends Filter
         return view($this->view(), [
             'uriKey' => $this->uriKey,
             'name' => $this->name,
-            'options' => $this->options()
+            'options' => $this->options(),
         ]);
     }
 
