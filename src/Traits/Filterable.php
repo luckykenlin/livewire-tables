@@ -30,12 +30,10 @@ trait Filterable
     {
         collect($this->filters())
             ->each(function ($filter) use ($builder) {
-
                 tap(
                     $this->getFilterValue($filter),
-                    fn($value) => !empty($value) && $filter->apply(request(), $builder, $value)
+                    fn ($value) => ! empty($value) && $filter->apply(request(), $builder, $value)
                 );
-
             });
 
         return $builder;
@@ -78,7 +76,7 @@ trait Filterable
     public function countFilterValues(): int
     {
         return collect($this->filterValues)
-            ->reject(fn($value) => $value === '')
+            ->reject(fn ($value) => $value === '')
             ->count();
     }
 }
