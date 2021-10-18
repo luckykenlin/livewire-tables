@@ -2,7 +2,7 @@
 
 !> Note: This package assumes you already have `Laravel Livewire 2.x` and `Alpine.js 2.x` installed.
 
-You can install the package via composer:
+You can install the package via `composer`:
 
 ```bash
 composer require luckykenlin/livewire-tables
@@ -11,7 +11,11 @@ composer require luckykenlin/livewire-tables
 !> Publishing assets are optional unless you want to customize this package.
 
 ```bash
-php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider"
+php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag=livewire-tables-config
+
+php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag=livewire-tables-views
+
+php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag=livewire-tables-translations
 ```
 
 ### Tailwind Purge

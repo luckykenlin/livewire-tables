@@ -14,21 +14,28 @@ class Action extends Column
      *
      * @var bool
      */
-    public bool $hideShowButton;
+    protected bool $hideShowButton;
 
     /**
      * Hide edit button on default view.
      *
      * @var bool
      */
-    public bool $hideEditButton;
+    protected bool $hideEditButton;
 
     /**
      * Hide delete button on default view.
      *
      * @var bool
      */
-    public bool $hideDeleteButton;
+    protected bool $hideDeleteButton;
+
+    /**
+     * Stick action column.
+     *
+     * @var bool
+     */
+    protected bool $sticky;
 
     /**
      * Action construct.
@@ -40,11 +47,13 @@ class Action extends Column
     {
         parent::__construct($field, $attribute);
 
-        $this->hideShowButton = ! static::enabled(static::enableShowAction());
+        $this->hideShowButton = !static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = ! static::enabled(static::enableEditAction());
+        $this->hideEditButton = !static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
+
+        $this->sticky = static::enabled(static::enableSticky());
 
         $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.table.action';
     }
@@ -58,15 +67,16 @@ class Action extends Column
      */
     public static function make(string $field = 'Action', ?string $attribute = null): Action
     {
-        return tap(new static($field, $attribute), function ($action) {
+        return tap(new static($field, $attribute), function (Action $action) {
             $action->render(
-                fn ($model) => view($action->view, [
+                fn($model) => view($action->view, [
                     'row' => $model,
                     'hideShowButton' => $action->hideShowButton,
                     'hideEditButton' => $action->hideEditButton,
                     'hideDeleteButton' => $action->hideDeleteButton,
                 ])
             )
+                ->addClass($action->sticky ? 'sticky right-0' : '')
                 ->excludeFromExport();
         });
     }
@@ -94,6 +104,7 @@ class Action extends Column
 
         return $this;
     }
+
 
     /**
      * Hide delete button.
@@ -137,6 +148,15 @@ class Action extends Column
     {
         $this->hideDeleteButton = $condition;
 
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function sticky(): static
+    {
+        $this->sticky = true;
 
         return $this;
     }
@@ -180,5 +200,15 @@ class Action extends Column
     public static function enableDeleteAction(): string
     {
         return 'delete-action';
+    }
+
+    /**
+     * Enable stick feature.
+     *
+     * @return string
+     */
+    public static function enableSticky(): string
+    {
+        return 'sticky';
     }
 }

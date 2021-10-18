@@ -1,8 +1,8 @@
-# Quick start
+# Basic Example
 
 > At the very least, you need to give the table component a list of `columns` and a base `query` to start with:
 
-## Basic Example
+### Quick Start
 To create a table component you may draw inspiration from the below stub:
 
 ```bash
@@ -73,7 +73,7 @@ public function query() : Builder;
  */
 public function columns() : array;
 ```
-## Route
+### Route
 
 Now you need to create a route for this table:
 
@@ -83,7 +83,7 @@ Route::view('/users', 'dashboard.users-table')->name('dashboard.users');
 
 Of course, you can do this from a `Controller`.
 
-## Blade Component
+### Blade Component
 
 In the view, you will need to call the `Livewire Component`:
 

@@ -1,5 +1,6 @@
 <div>
     <div
+        class="relative"
         @if ($refresh)
             @if ($refreshInSeconds)
                 wire:poll.{{ $refreshInSeconds * 1000 }}ms
