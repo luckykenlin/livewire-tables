@@ -34,14 +34,14 @@ The attributes that you can use in a `Table Component` are described below. Thes
 | Attribute | Default | Example | Description |
 | :---------- |:------------ |:------------| :-----------| 
 | $showPagination | true | `public bool $showPagination = true`| show or hide the pagination. |
-| $paginationTheme | tailwind | `public string $paginationTheme = 'talwind'`| Defines The pagination theme used by Laravel. By default will use the selection from the config file. |
+| $paginationTheme | 'tailwind' | `public string $paginationTheme = 'talwind'`| Defines The pagination theme used by Laravel. By default will use the selection from the config file. |
 
 ## Per page attributes
 
 | Attribute | Default | Example | Description |
 | :---------- |:------------ |:------------| :-----------| 
 | $showPerPage | true | `public bool $showPerPage = true`| Show the selector with the per page options. |
-| $perPageOptions | 10, 25, 50, 100 | `public array $perPageOptions = [10, 25, 50, 100]` | Define the interval of values for the attribute. |
+| $perPageOptions | [10, 25, 50, 100] | `public array $perPageOptions = [10, 25, 50, 100]` | Define the interval of values for the attribute. |
 | $perPage | 25 | `public int $perPage = 25`| Set the current value for the attribute. |
 
 ## Search attributes
@@ -60,7 +60,7 @@ The attributes that you can use in a `Table Component` are described below. Thes
 | $sorts | [] | `protected string $sorts = []`| Sorts variable. |
 | $sortingEnabled | true | `public bool $sortingEnabled = true`| Show or hide the sort function. |
 | $singleColumnSorting | false | `protected bool $singleColumnSorting = false`| Enable single column sorting. |
-| $defaultSortColumn | id | `protected string $defaultSortColumn = 'id'`| The default sort field for the table. |
+| $defaultSortColumn | 'updated_at' | `protected string $defaultSortColumn = 'updated_at'`| The default sort field for the table. |
 | $defaultSortDirection | desc | `protected string $defaultSortDirection = 'desc'`| The default sort direction for the table. |
 
 
