@@ -30,6 +30,7 @@ trait Relation
 
         $this->table = $this->getTable($this->builder);
     }
+
     /**
      * Get column by field.
      *
