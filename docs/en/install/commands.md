@@ -1,5 +1,5 @@
 # Commands
-> Generating table Components
+> Generating Table Components
 
 To generate a new table component you can use the `make:table` command:
 

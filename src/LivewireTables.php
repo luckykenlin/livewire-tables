@@ -6,7 +6,6 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Deletable;
 use Luckykenlin\LivewireTables\Traits\Filterable;
@@ -28,16 +27,6 @@ abstract class LivewireTables extends Component
      * @var string
      */
     public string $primaryKey = 'id';
-
-    /**
-     * @var Model
-     */
-    public Model $model;
-
-    /**
-     * @var string
-     */
-    public string $table;
 
     /**
      * Whether to refresh the table at a certain interval
@@ -105,17 +94,9 @@ abstract class LivewireTables extends Component
     {
         parent::__construct($id);
 
-        $this->paginationTheme = config('livewire-tables.theme') ?? 'tailwind';
-
-        $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message') ?? 'Whoops! No results.';
+        $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message', 'Whoops! No results.');
 
         $this->builder = $this->query();
-
-        $this->model = $this->getModel($this->builder);
-
-        $this->table = $this->getTable($this->builder);
-
-        $this->newResource = $this->newResource();
     }
 
     /**

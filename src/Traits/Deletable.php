@@ -7,8 +7,8 @@ trait Deletable
     /**
      * Delete an element base on its ID.
      */
-    public function delete(string $id): void
+    public function delete(string $primaryKey): void
     {
-        $this->model->query()->findOrFail($id)->delete();
+        $this->model->query()->where($this->primaryKey, $primaryKey)->delete();
     }
 }

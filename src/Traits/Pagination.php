@@ -13,21 +13,21 @@ trait Pagination
      *
      * @var string
      */
-    public string $paginationTheme = 'tailwind';
+    public string $paginationTheme;
 
     /**
      * Amount of items to show per page.
      *
      * @var int
      */
-    public int $perPage = 10;
+    public int $perPage;
 
     /**
      * The options to limit the amount of results per page.
      *
      * @var array <int>
      */
-    public array $perPageOptions = [10, 25, 50, 100];
+    public array $perPageOptions;
 
     /**
      * Show the per page select.
@@ -49,6 +49,18 @@ trait Pagination
      * @var bool
      */
     public bool $paginationEnabled = true;
+
+    /**
+     * Initialize
+     */
+    protected function initializePagination()
+    {
+        $this->paginationTheme = $this->paginationTheme ?? config('livewire-tables.tailwind', 'tailwind');
+
+        $this->perPage = $this->perPage ?? config('livewire-tables.per_page', 10);
+
+        $this->perPageOptions = $this->perPageOptions ?? config('livewire-tables.per_page_options', [10, 25, 50, 100]);
+    }
 
     /**
      * Resolve page name for multiple component present.

@@ -18,4 +18,12 @@ trait NewResource
     {
         return '';
     }
+
+    /**
+     * Initialize
+     */
+    protected function initializeNewResource()
+    {
+        $this->newResource = $this->newResource();
+    }
 }

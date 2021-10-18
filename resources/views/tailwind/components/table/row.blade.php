@@ -1,9 +1,9 @@
-@props(['url' => null, 'reordering' => false])
+@props(['clickable' => false, 'row'=> null])
 
 <tr {{ $attributes}}
-    @if ($url)
-        onclick="window.location='{{ $url }}';"
-        style="cursor:pointer"
+    @if($clickable)
+        wire:click="rowOnClick({{$row}})"
+        style="cursor: pointer"
     @endif
 >
     {{ $slot }}

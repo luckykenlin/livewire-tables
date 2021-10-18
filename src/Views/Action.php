@@ -76,7 +76,7 @@ class Action extends Column
                     'hideDeleteButton' => $action->hideDeleteButton,
                 ])
             )
-                ->addClass($action->sticky ? 'sticky right-0' : '')
+                ->addClass($action->sticky ? 'sticky right-0 z-10' : '')
                 ->excludeFromExport();
         });
     }
