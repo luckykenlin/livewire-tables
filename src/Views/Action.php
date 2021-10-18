@@ -47,11 +47,11 @@ class Action extends Column
     {
         parent::__construct($field, $attribute);
 
-        $this->hideShowButton = !static::enabled(static::enableShowAction());
+        $this->hideShowButton = ! static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = !static::enabled(static::enableEditAction());
+        $this->hideEditButton = ! static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
 
         $this->sticky = static::enabled(static::enableSticky());
 
@@ -69,7 +69,7 @@ class Action extends Column
     {
         return tap(new static($field, $attribute), function (Action $action) {
             $action->render(
-                fn($model) => view($action->view, [
+                fn ($model) => view($action->view, [
                     'row' => $model,
                     'hideShowButton' => $action->hideShowButton,
                     'hideEditButton' => $action->hideEditButton,
@@ -104,7 +104,6 @@ class Action extends Column
 
         return $this;
     }
-
 
     /**
      * Hide delete button.
