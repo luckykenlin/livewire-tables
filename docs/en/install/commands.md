@@ -1,5 +1,5 @@
 # Commands
-> Generating Datatable Components
+> Generating table Components
 
 To generate a new table component you can use the `make:table` command:
 
