@@ -18,7 +18,7 @@ trait Filterable
      *
      * @var array
      */
-    public array $filterValues = [];
+    public array $filters = [];
 
     /**
      * Trick of search.
@@ -47,7 +47,7 @@ trait Filterable
      */
     public function getFilterValue($filter): mixed
     {
-        return $this->filterValues[$filter->uriKey] ?? '';
+        return $this->filters[$filter->uriKey] ?? '';
     }
 
     /**
@@ -55,7 +55,7 @@ trait Filterable
      */
     public function resetFilters(): void
     {
-        $this->filterValues = [];
+        $this->filters = [];
     }
 
     /**
@@ -73,9 +73,9 @@ trait Filterable
      *
      * @return int
      */
-    public function countFilterValues(): int
+    public function countFilters(): int
     {
-        return collect($this->filterValues)
+        return collect($this->filters)
             ->reject(fn ($value) => $value === '')
             ->count();
     }

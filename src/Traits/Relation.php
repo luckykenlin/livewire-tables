@@ -14,12 +14,12 @@ trait Relation
     /**
      * @var Model
      */
-    public Model $model;
+    protected Model $model;
 
     /**
      * @var string
      */
-    public string $table;
+    protected string $table;
 
     /**
      * Initialize

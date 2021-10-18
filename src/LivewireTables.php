@@ -11,6 +11,7 @@ use Luckykenlin\LivewireTables\Traits\Deletable;
 use Luckykenlin\LivewireTables\Traits\Filterable;
 use Luckykenlin\LivewireTables\Traits\NewResource;
 use Luckykenlin\LivewireTables\Traits\Pagination;
+use Luckykenlin\LivewireTables\Traits\Refreshable;
 use Luckykenlin\LivewireTables\Traits\Relation;
 use Luckykenlin\LivewireTables\Traits\Searchable;
 use Luckykenlin\LivewireTables\Traits\Sortable;
@@ -21,26 +22,12 @@ use Luckykenlin\LivewireTables\Traits\Sortable;
  */
 abstract class LivewireTables extends Component
 {
-    use NewResource, Pagination, Relation, Sortable, Searchable, Filterable, Deletable;
+    use NewResource, Pagination, Relation, Sortable, Searchable, Filterable, Deletable, Refreshable;
 
     /**
      * @var string
      */
     public string $primaryKey = 'id';
-
-    /**
-     * Whether to refresh the table at a certain interval
-     * false is off
-     * If it's an integer it will be treated as milliseconds (2000 = refresh every 2 seconds)
-     *
-     * @var bool
-     */
-    public bool $refresh = false;
-
-    /**
-     * Refresh table each XX seconds.
-     */
-    public int $refreshInSeconds = 2;
 
     /**
      * Display a responsive table.
@@ -83,6 +70,7 @@ abstract class LivewireTables extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'sorts' => ['except' => ''],
+        'filters' => ['except' => ''],
     ];
 
     /**

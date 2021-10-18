@@ -23,21 +23,21 @@ trait Sortable
      *
      * @var bool
      */
-    public bool $singleColumnSorting = false;
+    protected bool $singleColumnSorting = false;
 
     /**
      * Set default sort column.
      *
      * @var string
      */
-    public string $defaultSortColumn = 'updated_at';
+    protected string $defaultSortColumn = 'updated_at';
 
     /**
      * Set default sort direction.
      *
      * @var string
      */
-    public string $defaultSortDirection = 'desc';
+    protected string $defaultSortDirection = 'desc';
 
     /**
      * Trick of sorting.

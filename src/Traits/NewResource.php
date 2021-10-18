@@ -24,6 +24,6 @@ trait NewResource
      */
     protected function initializeNewResource()
     {
-        $this->newResource = $this->newResource();
+        $this->newResource = $this->newResource ?? $this->newResource();
     }
 }
