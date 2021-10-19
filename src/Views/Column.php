@@ -300,7 +300,7 @@ class Column
      */
     public function isIncludeFromExport(): bool
     {
-        return !$this->hideOnExport;
+        return ! $this->hideOnExport;
     }
 
     /**
