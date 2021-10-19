@@ -87,7 +87,6 @@ class Column
      */
     protected $searchCallback = null;
 
-
     /**
      * Column constructor.
      * @param string|null $field
