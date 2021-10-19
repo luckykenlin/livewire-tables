@@ -43,13 +43,13 @@ trait Searchable
      */
     protected function applySearch(Builder $builder): Builder
     {
-        if (trim($this->search) === '' || !$this->showSearch) {
+        if (trim($this->search) === '' || ! $this->showSearch) {
             return $builder;
         }
 
         $builder->where(function ($builder) {
             collect($this->columns())
-                ->reject(fn($column) => !$column->isSearchable())
+                ->reject(fn ($column) => ! $column->isSearchable())
                 ->each(function (Column $column) use ($builder) {
 
                     // If the column has a search callback, just use that
@@ -58,7 +58,7 @@ trait Searchable
                         // Call the callback
                         ($column->getSearchCallback())($builder, trim($this->search));
 
-                        // Search for relation
+                    // Search for relation
                     } elseif ($column->hasRelationship()) {
 
                         // Get relation of column
@@ -69,7 +69,7 @@ trait Searchable
                             $builder->where($relationship->attribute, 'like', $this->searchString());
                         });
 
-                        //  Only search the column.
+                    //  Only search the column.
                     } else {
                         $builder->orWhere($this->getColumnAttribute($builder, $column), 'like', $this->searchString());
                     }

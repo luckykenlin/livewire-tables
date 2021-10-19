@@ -51,12 +51,12 @@ trait Sortable
             return $builder;
         }
 
-        if (!empty($this->defaultSortColumn) && !count($this->sorts)) {
+        if (! empty($this->defaultSortColumn) && ! count($this->sorts)) {
             return $builder->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
         }
 
         foreach ($this->sorts as $attribute => $direction) {
-            if (!in_array($direction, ['asc', 'desc'])) {
+            if (! in_array($direction, ['asc', 'desc'])) {
                 $direction = 'desc';
             }
 
@@ -86,15 +86,15 @@ trait Sortable
      */
     public function sortBy(string $attribute): array|string|null
     {
-        if (!$this->sortingEnabled) {
+        if (! $this->sortingEnabled) {
             return null;
         }
 
-        if ($this->singleColumnSorting && count($this->sorts) && !isset($this->sorts[$attribute])) {
+        if ($this->singleColumnSorting && count($this->sorts) && ! isset($this->sorts[$attribute])) {
             $this->sorts = [];
         }
 
-        if (!isset($this->sorts[$attribute])) {
+        if (! isset($this->sorts[$attribute])) {
             return $this->sorts[$attribute] = 'asc';
         }
 
@@ -133,7 +133,6 @@ trait Sortable
     {
         // Check if the column has relationship
         if (str_contains($attribute, '.')) {
-
             $relationship = $this->relationship($attribute);
 
             // left join attribute by relationship.
