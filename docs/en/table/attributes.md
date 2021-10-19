@@ -50,14 +50,14 @@ The attributes that you can use in a `Table Component` are described below. Thes
 | :---------- |:------------ |:------------| :-----------| 
 | $search | '' | `public bool $search = ''`| Search variable . |
 | $showSearch | true | `public bool $showSearch = true`| Show or hide the search box. |
-| $searchDebounce | 350 | `protected int $searchDebounce = 350` | Amount of time in ms to wait to send the search query and refresh the table. |
-| $clearSearchButton | true | `protected bool $clearSearchButton = true`| Show or hide a button to clear the search box. |
+| $searchDebounce | 350 | `public int $searchDebounce = 350` | Amount of time in ms to wait to send the search query and refresh the table. |
+| $clearSearchButton | true | `public bool $clearSearchButton = true`| Show or hide a button to clear the search box. |
 
 ## Sort attributes
 
 | Attribute | Default | Example | Description |
 | :---------- |:------------ |:------------| :-----------| 
-| $sorts | [] | `protected string $sorts = []`| Sorts variable. |
+| $sorts | [] | `public string $sorts = []`| Sorts variable. |
 | $sortingEnabled | true | `public bool $sortingEnabled = true`| Show or hide the sort function. |
 | $singleColumnSorting | false | `protected bool $singleColumnSorting = false`| Enable single column sorting. |
 | $defaultSortColumn | 'updated_at' | `protected string $defaultSortColumn = 'updated_at'`| The default sort field for the table. |
@@ -68,7 +68,7 @@ The attributes that you can use in a `Table Component` are described below. Thes
 
 | Attribute | Default | Example | Description |
 | :---------- |:------------ |:------------| :-----------| 
-| $filters | [] | `protected string $filters = []`| Filters variable. |
+| $filters | [] | `public string $filters = []`| Filters variable. |
 | $showFilter | true | `public bool $showFilter = true`| Show or hide the filter function. |
 
 ## Other attributes

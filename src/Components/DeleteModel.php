@@ -5,7 +5,7 @@ namespace Luckykenlin\LivewireTables\Components;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class DeleteComponent extends Component
+class DeleteModel extends Component
 {
     /**
      * @var string

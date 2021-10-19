@@ -2,11 +2,11 @@
     <div
         class="relative"
         @if ($refresh)
-            @if ($refreshInSeconds)
-                wire:poll.{{ $refreshInSeconds * 1000 }}ms
-            @else
-                wire:poll
-            @endif
+        @if ($refreshInSeconds)
+        wire:poll.{{ $refreshInSeconds * 1000 }}ms
+        @else
+        wire:poll
+        @endif
         @endif
     >
         <div class="flex-col">
@@ -32,4 +32,6 @@
             </div>
         </div>
     </div>
+
+    <x-livewire-tables::modals.delete-button-modal wire:model.defer="confirmDelete" :itemKey="$itemKey" />
 </div>

@@ -301,7 +301,7 @@ class Column
      */
     public function isIncludeFromExport(): bool
     {
-        return ! $this->hideOnExport;
+        return !$this->hideOnExport;
     }
 
     /**
@@ -352,7 +352,7 @@ class Column
      */
     public function addClass(string $class): static
     {
-        $this->class = $class;
+        $this->class = $this->class . ' ' . $class;
 
         return $this;
     }

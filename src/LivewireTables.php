@@ -73,11 +73,6 @@ abstract class LivewireTables extends Component
         'filters' => ['except' => ''],
     ];
 
-    /**
-     * @var string[]
-     */
-    protected $listeners = ['delete'];
-
     public function __construct(?string $id = null)
     {
         parent::__construct($id);
