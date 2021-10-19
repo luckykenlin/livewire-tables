@@ -1,6 +1,6 @@
-@props(['clickable' => false, 'row'=> null])
+@props(['clickable' => false, 'row'=> null, 'customAttributes' => []])
 
-<tr {{ $attributes}}
+<tr {{ $attributes->merge($customAttributes) }}
     @if($clickable)
         wire:click="rowOnClick({{$row}})"
         style="cursor: pointer"

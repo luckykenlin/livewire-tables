@@ -26,7 +26,7 @@ trait Filterable
      * @param Builder $builder
      * @return Builder
      */
-    public function applyFilter(Builder $builder): Builder
+    protected function applyFilter(Builder $builder): Builder
     {
         collect($this->filters())
             ->each(function ($filter) use ($builder) {
@@ -45,7 +45,7 @@ trait Filterable
      * @param $filter
      * @return mixed
      */
-    public function getFilterValue($filter): mixed
+    protected function getFilterValue($filter): mixed
     {
         return $this->filters[$filter->uriKey] ?? '';
     }

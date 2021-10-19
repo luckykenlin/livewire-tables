@@ -129,7 +129,7 @@ abstract class LivewireTables extends Component
      *
      * @return string
      */
-    public function view(): string
+    protected function view(): string
     {
         return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
     }
@@ -139,7 +139,7 @@ abstract class LivewireTables extends Component
      *
      * @return LengthAwarePaginator|Collection
      */
-    public function rows(): LengthAwarePaginator|Collection
+    protected function rows(): LengthAwarePaginator|Collection
     {
         $this->applyFilter($this->builder);
 

@@ -15,12 +15,12 @@ class Column
     /**
      * @var string|null
      */
-    protected ?string $field;
+    public ?string $field;
 
     /**
      * @var string|null
      */
-    protected ?string $attribute;
+    public ?string $attribute;
 
     /**
      * @var string|null
@@ -70,12 +70,23 @@ class Column
     /**
      * @var Closure|null
      */
-    protected Closure|null $formatCallback = null;
+    protected $formatCallback = null;
 
     /**
      * @var Closure|null
      */
-    protected Closure|null $renderCallback = null;
+    protected $renderCallback = null;
+
+    /**
+     * @var Closure|null
+     */
+    protected $sortCallback = null;
+
+    /**
+     * @var Closure|null
+     */
+    protected $searchCallback = null;
+
 
     /**
      * Column constructor.
@@ -118,9 +129,11 @@ class Column
     /**
      * @return $this
      */
-    public function searchable(): static
+    public function searchable(callable $callback = null): static
     {
         $this->searchable = true;
+
+        $this->searchCallback = $callback;
 
         return $this;
     }
@@ -139,9 +152,11 @@ class Column
     /**
      * @return $this
      */
-    public function sortable(): static
+    public function sortable($callback = null): static
     {
         $this->sortable = true;
+
+        $this->sortCallback = $callback;
 
         return $this;
     }
@@ -372,6 +387,38 @@ class Column
     }
 
     /**
+     * @return bool
+     */
+    public function hasSortCallback(): bool
+    {
+        return $this->sortCallback !== null;
+    }
+
+    /**
+     * @return callable|null
+     */
+    public function getSortCallback(): ?callable
+    {
+        return $this->sortCallback;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSearchCallback(): bool
+    {
+        return $this->searchCallback !== null;
+    }
+
+    /**
+     * @return callable|null
+     */
+    public function getSearchCallback(): ?callable
+    {
+        return $this->searchCallback;
+    }
+
+    /**
      * Render the callback.
      */
     public function renderCallback(object $model): object
@@ -405,7 +452,7 @@ class Column
         if ($column->isRenderable()) {
             return $column->renderCallback($model);
         }
-        
+
         if ($column->isFormatted()) {
             return $column->formatted($value, $column, $model);
         }

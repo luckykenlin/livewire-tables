@@ -1,4 +1,6 @@
-<x-livewire-tables::table>
+<x-livewire-tables::table
+    :class="method_exists($this, 'setTableClass') ? ' ' . $this->setTableClass() : '' "
+>
     <x-slot name="head">
 
         @foreach($columns as $column)
@@ -34,6 +36,8 @@
                     (method_exists($this, 'rowOnClick') ? ' hover:bg-gray-100 dark:hover:bg-gray-900 transition' : '') .
                     (method_exists($this, 'setTableRowClass') ? ' ' . $this->setTableRowClass($row) : '')
                 "
+                :id="method_exists($this, 'setTableRowId') ? $this->setTableRowId($row) : ''"
+                :customAttributes="method_exists($this, 'setTableRowAttributes') ? $this->setTableRowAttributes($row) : []"
             >
                 @include('livewire-tables::tailwind.components.table.row-columns')
             </x-livewire-tables::table.row>

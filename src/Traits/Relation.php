@@ -35,12 +35,25 @@ trait Relation
      * Get column by field.
      *
      * @param string $field
-     * @return mixed
+     * @return Column
      */
-    protected function getColumn(string $field): mixed
+    protected function getColumn(string $field): Column
     {
         return collect($this->columns())
             ->where('field', $field)
+            ->first();
+    }
+
+    /**
+     * Get column by field.
+     *
+     * @param string $attribute
+     * @return Column
+     */
+    protected function getColumnByAttribute(string $attribute): Column
+    {
+        return collect($this->columns())
+            ->where('attribute', $attribute)
             ->first();
     }
 
@@ -83,7 +96,7 @@ trait Relation
      * @param $attribute
      * @return object
      */
-    public function relationship($attribute): object
+    protected function relationship($attribute): object
     {
         $parts = explode('.', $attribute);
 
@@ -101,7 +114,7 @@ trait Relation
      * @param $attribute
      * @return string
      */
-    public function attribute($query, $relationships, $attribute): string
+    protected function attribute($query, $relationships, $attribute): string
     {
         $table = '';
         $last_query = $query;

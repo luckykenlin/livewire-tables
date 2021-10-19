@@ -67,7 +67,7 @@ trait Pagination
      *
      * @return string
      */
-    public function pageName(): string
+    protected function pageName(): string
     {
         return 'page';
     }
@@ -76,7 +76,7 @@ trait Pagination
      * https://laravel-livewire.com/docs/pagination
      * Resetting Pagination After Filtering Data.
      */
-    public function updatingSearch(): void
+    protected function updatingSearch(): void
     {
         $this->resetPage();
     }
@@ -85,7 +85,7 @@ trait Pagination
      * https://laravel-livewire.com/docs/pagination
      * Resetting Pagination After Changing the perPage.
      */
-    public function updatingPerPage(): void
+    protected function updatingPerPage(): void
     {
         $this->resetPage();
     }

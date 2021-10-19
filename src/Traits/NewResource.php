@@ -14,7 +14,7 @@ trait NewResource
      *
      * @return string
      */
-    public function newResource(): string
+    protected function newResource(): string
     {
         return '';
     }

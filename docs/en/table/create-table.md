@@ -24,9 +24,10 @@ The `query()` method will allow us to show the results of the database in our ta
  */
 public function query(): Builder
 {
-    //some code...
-};
+   return User::query();
+}
 ```
+The query is where you will append custom searching and filters later in the documentation. You should also eager load any relationships you need here as well.
 
 !> It is important to note that you must create an instance of `\Illuminate\Database\Eloquent\Builder`.
 
@@ -105,7 +106,7 @@ public function filters(): array
 }
 ```
 
-Later, in the point on [Filters](en/filter/filter.md), all the available options and methods will be discussed in depth. If we don't want to add filters, we must return an `empty array`, Due to this you `don't need to` define filters manually, Livewire tables define empty array by default:
+Later, in the point on [Filters](en/filter/filter.md), all the available options and methods will be discussed in depth. If we don't want to add filters, we must return an `empty array`, Due to this you `don't need to` define filters manually, package define empty array by default:
 
 ```php
 public function filters(): array
@@ -114,4 +115,4 @@ public function filters(): array
 }
 ```
 
-!> **Remember!!!** the three methods are mandatory.
+!> **Remember!**  `query()` and `columns()` are mandatory.

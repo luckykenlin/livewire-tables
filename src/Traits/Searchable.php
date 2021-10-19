@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Views\Column;
 
 trait Searchable
 {
@@ -40,25 +41,35 @@ trait Searchable
      * @param Builder $builder
      * @return Builder
      */
-    public function applySearch(Builder $builder): Builder
+    protected function applySearch(Builder $builder): Builder
     {
-        if (trim($this->search) === '' || ! $this->showSearch) {
+        if (trim($this->search) === '' || !$this->showSearch) {
             return $builder;
         }
 
         $builder->where(function ($builder) {
             collect($this->columns())
-                ->reject(fn ($column) => ! $column->isSearchable())
-                ->each(function ($column) use ($builder) {
+                ->reject(fn($column) => !$column->isSearchable())
+                ->each(function (Column $column) use ($builder) {
 
-                    // Search into relation.
-                    if ($column->hasRelationship()) {
+                    // If the column has a search callback, just use that
+                    if ($column->hasSearchCallback()) {
+
+                        // Call the callback
+                        ($column->getSearchCallback())($builder, trim($this->search));
+
+                        // Search for relation
+                    } elseif ($column->hasRelationship()) {
+
+                        // Get relation of column
                         $relationship = $this->relationship($column->attribute);
+
+                        // Search using or whereHas
                         $builder->orWhereHas($relationship->name, function (Builder $builder) use ($relationship) {
                             $builder->where($relationship->attribute, 'like', $this->searchString());
                         });
 
-                    //  Only search the column.
+                        //  Only search the column.
                     } else {
                         $builder->orWhere($this->getColumnAttribute($builder, $column), 'like', $this->searchString());
                     }

@@ -8,7 +8,7 @@ Create a new table component called UserTable in App\Http\Livewire
 php artisan make:table UserTable
 ```
 
-Create a new datatable component called UserTable in App\Http\Livewire that uses the App\Models\User model.
+Create a new table component called UserTable in App\Http\Livewire that uses the App\Models\User model.
 ```bash
 php artisan make:table UserTable --model=User
 ```

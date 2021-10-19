@@ -2,9 +2,9 @@
     @if ($column->isVisible())
 
         <x-livewire-tables::table.cell
-            :class="method_exists($this, 'setTableDataClass') ? $this->setTableDataClass($column, $row) : ''"
-            :id="method_exists($this, 'setTableDataId') ? $this->setTableDataId($column, $row) : ''"
-            :customAttributes="method_exists($this, 'setTableDataAttributes') ? $this->setTableDataAttributes($column, $row) : []"
+            :class="method_exists($this, 'setTableCellClass') ? $this->setTableCellClass($column, $row) : ''"
+            :id="method_exists($this, 'setTableCellId') ? $this->setTableCellId($column, $row) : ''"
+            :customAttributes="method_exists($this, 'setTableCellAttributes') ? $this->setTableCellAttributes($column, $row) : []"
             :columnClass="$column->class()"
         >
 

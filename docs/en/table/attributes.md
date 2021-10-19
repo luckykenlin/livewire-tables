@@ -68,7 +68,7 @@ The attributes that you can use in a `Table Component` are described below. Thes
 
 | Attribute | Default | Example | Description |
 | :---------- |:------------ |:------------| :-----------| 
-| $filter | [] | `protected string $sorts = []`| Filters variable. |
+| $filters | [] | `protected string $filters = []`| Filters variable. |
 | $showFilter | true | `public bool $showFilter = true`| Show or hide the filter function. |
 
 ## Other attributes

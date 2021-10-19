@@ -8,7 +8,6 @@
     ->merge(['class' => $this->responsive ? 'whitespace-nowrap' : ''])
     ->merge(['class' => $columnClass])
     ->merge($customAttributes) }}
-    style="background-color: inherit"
 >
     {{ $slot }}
 </td>
