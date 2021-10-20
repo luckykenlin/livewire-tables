@@ -9,7 +9,7 @@ use Luckykenlin\LivewireTables\Tests\Models\DummyModel;
 
 class LivewireTableTest extends TestCase
 {
-//    /** @test */
+    /** @test */
 //    public function it_can_mount_using_the_class()
 //    {
 //        DummyModel::factory()
