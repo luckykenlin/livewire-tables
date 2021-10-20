@@ -57,6 +57,9 @@ You can easily use this packge in a local Laravel project, after cloning:
 composer require luckykenlin/livewire-tables
 ```
 
+## Documentation
+[https://luckykenlin.github.io/livewire-tables/](https://luckykenlin.github.io/livewire-tables/)
+
 ## Usage
 
 ### Creating Tables

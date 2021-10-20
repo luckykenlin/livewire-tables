@@ -42,7 +42,7 @@ class UserTable extends LivewireTables
         return [
             Column::make('#', 'id')->sortable(),
             
-            Column::make('Avatar', 'id')->render(fn(User $user) => view('users.avatar')),
+            Column::make('Avatar')->render(fn(User $user) => view('users.avatar')),
             
             Column::make('Name')->sortable()->searchable(),
             
