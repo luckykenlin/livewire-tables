@@ -2,18 +2,19 @@
 
 namespace Luckykenlin\LivewireTables;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use Luckykenlin\LivewireTables\Traits\Delete;
-use Luckykenlin\LivewireTables\Traits\Export;
-use Luckykenlin\LivewireTables\Traits\Filter;
-use Luckykenlin\LivewireTables\Traits\Helper;
+use Luckykenlin\LivewireTables\Traits\Deletable;
+use Luckykenlin\LivewireTables\Traits\Filterable;
+use Luckykenlin\LivewireTables\Traits\NewResource;
 use Luckykenlin\LivewireTables\Traits\Pagination;
-use Luckykenlin\LivewireTables\Traits\Search;
-use Luckykenlin\LivewireTables\Traits\Sort;
-use Luckykenlin\LivewireTables\Traits\Uri;
+use Luckykenlin\LivewireTables\Traits\Refreshable;
+use Luckykenlin\LivewireTables\Traits\Relation;
+use Luckykenlin\LivewireTables\Traits\Searchable;
+use Luckykenlin\LivewireTables\Traits\Sortable;
 
 /**
  * Class LivewireTables
@@ -21,19 +22,45 @@ use Luckykenlin\LivewireTables\Traits\Uri;
  */
 abstract class LivewireTables extends Component
 {
-    use Pagination;
-    use Filter;
-    use Search;
-    use Uri;
-    use Sort;
-    use Export;
-    use Delete;
-    use Helper;
+    use NewResource, Pagination, Relation, Sortable, Searchable, Filterable, Deletable, Refreshable;
+
+    /**
+     * @var string
+     */
+    public string $primaryKey = 'id';
+
+    /**
+     * Display a responsive table.
+     *
+     * @var bool
+     */
+    public bool $responsive = true;
+
+    /**
+     * Display a debug info.
+     *
+     * @var bool
+     */
+    public bool $debugEnabled = false;
+
+    /**
+     * Display an offline message when there is no connection.
+     *
+     * @var bool
+     */
+    public bool $offlineIndicator = true;
+
+    /**
+     * The message to show when there are no results from a search or query.
+     *
+     * @var string
+     */
+    public string $emptyMessage;
 
     /**
      * @var Builder
      */
-    protected $query;
+    protected Builder $builder;
 
     /**
      * Show query string on url.
@@ -42,19 +69,17 @@ abstract class LivewireTables extends Component
      */
     protected $queryString = [
         'search' => ['except' => ''],
-        'page' => ['except' => 1],
+        'sorts' => ['except' => ''],
+        'filters' => ['except' => ''],
     ];
 
-    /**
-     * LivewireTables constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
+    public function __construct(?string $id = null)
     {
         parent::__construct($id);
-        $this->query = $this->initialQuery();
-        $this->setUriKey($this->uriKey() ?: $this->getTable($this->query));
-        $this->initFilter();
+
+        $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message', 'Whoops! No results.');
+
+        $this->builder = $this->query();
     }
 
     /**
@@ -76,66 +101,51 @@ abstract class LivewireTables extends Component
      *
      * @return array
      */
-//    abstract protected function filters(): array;
-
-    /**
-     * Customize table ui.
-     *
-     * @return string
-     */
-    public function view()
+    public function filters(): array
     {
-        return 'livewire-tables::table';
+        return [];
     }
 
     /**
      * Render table.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return View
      */
-    public function render()
+    public function render(): View
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows' => $this->models(),
+            'rows' => $this->rows(),
         ]);
+    }
+
+    /**
+     * Default table ui.
+     *
+     * @return string
+     */
+    protected function view(): string
+    {
+        return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
     }
 
     /**
      * Get table data.
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator|Collection
      */
-    public function models()
+    protected function rows(): LengthAwarePaginator|Collection
     {
-        $this->addFilter()->addSearch()->addSort();
+        $this->applyFilter($this->builder);
 
-        return $this->query->paginate($this->perPage);
-    }
+        $this->applySearch($this->builder);
 
-    /**
-     * Get column value.
-     *
-     * @param $row
-     * @param $column
-     * @return array|\ArrayAccess|mixed
-     */
-    public function columnValue($row, $column)
-    {
-        if ($column->isFormatted()) {
-            return app()->call($column->formatCallback, ['value' => Arr::get($row->toArray(), $column->attribute), 'record' => $row]);
+        $this->applySorting($this->builder);
+
+        if ($this->paginationEnabled) {
+            return $this->builder->paginate(perPage: $this->perPage, pageName: $this->pageName());
         }
 
-        return Arr::get($row->toArray(), Str::snake($column->attribute));
-    }
-
-    /**
-     * Initial query and avoid sql ambiguous column name via join connection.
-     *
-     * @return Builder
-     */
-    private function initialQuery()
-    {
-        return $this->query()->select("{$this->getTable($this->query())}.*");
+        return $this->builder->get();
     }
 }

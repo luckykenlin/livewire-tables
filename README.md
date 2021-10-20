@@ -4,10 +4,10 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/luckykenlin/livewire-tables/run-tests?label=tests)](https://github.com/luckykenlin/livewire-tables/actions?query=workflow%3ATests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/luckykenlin/livewire-tables.svg?style=flat-square)](https://packagist.org/packages/luckykenlin/livewire-tables)
 
-
 A dynamic livewire table component for laravel.
 
 ## Requirements
+
 - [Laravel](https://laravel.com/docs)
 - [Livewire](https://laravel-livewire.com/docs)
 - [TailwindCSS](https://tailwindcss.com/docs)
@@ -21,24 +21,23 @@ composer require luckykenlin/livewire-tables
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
 You can publish the views file with:
+
 ```bash
 php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-views"
 ```
+
 ### Using this package in a Laravel project
+
 You can easily use this packge in a local Laravel project, after cloning:
 
 1. Specify a new repository in your composer.json file of the Laravel project (not this package!):
+
 ```
 // composer.json
 
@@ -53,6 +52,7 @@ You can easily use this packge in a local Laravel project, after cloning:
 ```
 
 2. Require the package in the local Laravel project:
+
 ``` 
 composer require luckykenlin/livewire-tables
 ```
@@ -62,11 +62,13 @@ composer require luckykenlin/livewire-tables
 ### Creating Tables
 
 To create a table component you draw inspiration from the below stub:
+
 ```bash
 php artisan make:table UsersTable
 ```
 
 To specific model use --model:
+
 ```bash
 php artisan make:table UsersTable --model=User
 ```
@@ -78,9 +80,8 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Columns\Action;
-use Luckykenlin\LivewireTables\Columns\Column;
-use Luckykenlin\LivewireTables\Columns\ID;
+use Luckykenlin\LivewireTables\Views\Action;
+use Luckykenlin\LivewireTables\Views\Column;
 use Luckykenlin\LivewireTables\LivewireTables;
 
 class UsersTable extends LivewireTables
@@ -93,11 +94,11 @@ class UsersTable extends LivewireTables
     public function columns(): array
     {
         return [
-            ID::make()->sortable()->label("#"),
+            Column::make('#', 'id')->sortable(),
             Column::make('Name', 'name')->searchable()->sortable(),
             Column::make('Email', 'email')->searchable()->sortable(),
 
-            Action::make()->view("livewire-tables::table-actions")
+            Action::make()
         ];
     }
 }
@@ -125,6 +126,7 @@ Place the following where you want the table to appear.
 `<livewire:users-table />`
 
 ### Column Methods
+
 | Method | Arguments | Result | Example |
 |----|----|----|----|
 |**label**|*String* $name|Changes the display name of a column|```Column::name('id')->label('ID)```|

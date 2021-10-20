@@ -4,45 +4,88 @@ namespace Luckykenlin\LivewireTables\Traits;
 
 use Livewire\WithPagination;
 
-/**
- * Trait Pagination
- * @package Luckykenlin\LivewireTables\Traits
- */
 trait Pagination
 {
     use WithPagination;
 
     /**
-     * @var bool
+     * Theme of pagination.
+     *
+     * @var string
      */
-    public $paginate = true;
-    /**
-     * @var int
-     */
-    public $perPage = 10;
+    public string $paginationTheme;
 
     /**
-     * Customize ui.
+     * Amount of items to show per page.
      *
-     * @return string
+     * @var int
      */
-    public function paginationView()
+    public int $perPage;
+
+    /**
+     * The options to limit the amount of results per page.
+     *
+     * @var array <int>
+     */
+    public array $perPageOptions;
+
+    /**
+     * Show the per page select.
+     *
+     * @var bool
+     */
+    public bool $showPerPage = true;
+
+    /**
+     * Show pagination.
+     *
+     * @var bool
+     */
+    public bool $showPagination = true;
+
+    /**
+     * Enable pagination.
+     *
+     * @var bool
+     */
+    public bool $paginationEnabled = true;
+
+    /**
+     * Initialize
+     */
+    protected function initializePagination()
     {
-        return "livewire-tables::pagination";
+        $this->paginationTheme = $this->paginationTheme ?? config('livewire-tables.tailwind', 'tailwind');
+
+        $this->perPage = $this->perPage ?? config('livewire-tables.per_page', 10);
+
+        $this->perPageOptions = $this->perPageOptions ?? config('livewire-tables.per_page_options', [10, 25, 50, 100]);
     }
 
     /**
-     * Reset page hook when update search.
+     * Resolve page name for multiple component present.
+     *
+     * @return string
      */
-    public function updatingSearch()
+    protected function pageName(): string
+    {
+        return 'page';
+    }
+
+    /**
+     * https://laravel-livewire.com/docs/pagination
+     * Resetting Pagination After Filtering Data.
+     */
+    protected function updatingSearch(): void
     {
         $this->resetPage();
     }
 
     /**
-     * Reset page hook when update per page.
+     * https://laravel-livewire.com/docs/pagination
+     * Resetting Pagination After Changing the perPage.
      */
-    public function updatingPerPage()
+    protected function updatingPerPage(): void
     {
         $this->resetPage();
     }
