@@ -12,7 +12,7 @@ public function query(): Builder
 }
 ```
 ## columns()
-?> This defines the columns of the table, they don't necessarily have to map to columns on the database table. This must return [`Columns`](en/column/general-methods.md) array.
+?> This defines the columns of the table, they don't necessarily have to map to columns on the database table. This must return [`Columns`](en/columns/define-columns.md) array.
 
 ```php
 public function columns(): array
@@ -56,7 +56,7 @@ public function view(): string
 php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag=livewire-tables-views
 ```
 ## newResource()
-?> There is a way to add a add-new-resource-button to the model shown in the table. This button looks like this (at the top right of the image):
+?> There is a way to add a `new-resource-button` to the model shown in the table. This button looks like this (at the top right of the image):
 
 ![New Resource](/../../assets/new-resource.png ':class=image')
 
@@ -69,17 +69,3 @@ public function rowOnClick(User $user)
     return redirect(route('users.edit', $user->id));
 }
 ```
-
-[comment]: <> (## setTableClass&#40;&#41;)
-
-[comment]: <> (## setTableRowClass&#40;&#41;)
-
-[comment]: <> (## setTableRowId&#40;&#41;)
-
-[comment]: <> (## setTableRowAttributes&#40;&#41;)
-
-[comment]: <> (## setTableCellClass&#40;&#41;)
-
-[comment]: <> (## setTableCellId&#40;&#41;)
-
-[comment]: <> (## setTableCellAttributes&#40;&#41;)

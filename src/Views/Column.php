@@ -23,6 +23,11 @@ class Column
     public ?string $attribute;
 
     /**
+     * @var array
+     */
+    public array $attributes = [];
+
+    /**
      * @var string|null
      */
     protected ?string $class = null;
@@ -365,14 +370,23 @@ class Column
     }
 
     /**
-     * Set view.
+     * @param array $attributes
      *
-     * @param string $view
-     * @return string|null
+     * @return $this
      */
-    public function view(string $view): ?string
+    public function addAttributes(array $attributes): static
     {
-        return $this->view = $view;
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return $this->attributes;
     }
 
     /**

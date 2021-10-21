@@ -21,6 +21,7 @@ Make sure your query returns a column that is being used as the primary key for 
 
 Livewire uses this as the `wire:key` to know which rows to keep and remove during its dom-diffing.
 
+!> Livewire table store all filter values as an array. please make sure all your filter has `unique` `uriKey`. livewire table use uriKey to retrieve filter value from query string.
 ### 5. Enable debugging
 
 If you would like to dump sql above the table you may enable this flag:

@@ -15,6 +15,7 @@
                         :field="$column->getField()"
                         :direction="$column->getField() ? $sorts[$column->getField()] ?? null : null"
                         :class="$column->class() ?? ''"
+                        :customAttributes="$column->attributes()"
                     />
                 @endif
             @endif

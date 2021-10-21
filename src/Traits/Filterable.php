@@ -11,7 +11,7 @@ trait Filterable
      *
      * @var bool
      */
-    public bool $showFilter = true;
+    public bool $showFilters = true;
 
     /**
      * Filter values.
@@ -32,7 +32,7 @@ trait Filterable
             ->each(function ($filter) use ($builder) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn ($value) => ! empty($value) && $filter->apply(request(), $builder, $value)
+                    fn($value) => !empty($value) && $filter->apply(request(), $builder, $value)
                 );
             });
 
@@ -47,7 +47,7 @@ trait Filterable
      */
     protected function getFilterValue($filter): mixed
     {
-        return $this->filters[$filter->uriKey] ?? '';
+        return $this->filters[$filter->getUriKey()] ?? null;
     }
 
     /**
@@ -76,7 +76,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn ($value) => $value === '')
+            ->reject(fn($value) => $value === '')
             ->count();
     }
 }

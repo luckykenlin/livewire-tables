@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Luckykenlin\LivewireTables\Helper;
 
 class BooleanFilter extends Filter
 {
@@ -13,6 +14,20 @@ class BooleanFilter extends Filter
      * @var string
      */
     public static string $type = 'boolean-filter';
+
+    /**
+     * Front show name.
+     *
+     * @var string
+     */
+    protected string $name;
+
+    /**
+     * Table column for filter.
+     *
+     * @var string|null
+     */
+    protected ?string $column;
 
     /**
      * @var string
@@ -27,17 +42,18 @@ class BooleanFilter extends Filter
     /**
      * @param string $column
      * @param string|null $name
-     * @param string|null $view
      */
-    public function __construct(string $column, ?string $name = null, ?string $view = null)
+    public function __construct(string $column, ?string $name = null)
     {
-        parent::__construct(column: $column);
+        parent::__construct();
+
+        $this->column = $column;
 
         $this->name = $name ?? Str::replace('_', ' ', Str::upper($column));
 
-        $this->uriKey = $this->uriKey();
+        $this->uriKey = self::$type . '_' . $column;
 
-        $this->view = $view ?? 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';
+        $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';
 
         $this->trueValue = trans('livewire-tables::filters.trueValue');
 
@@ -46,34 +62,35 @@ class BooleanFilter extends Filter
 
     /**
      * @param string $column
+     * @param string|null $name
      * @return BooleanFilter
      */
-    public static function make(string $column): BooleanFilter
+    public static function make(string $column, ?string $name = null): BooleanFilter
     {
-        return new static($column);
+        return new static($column, $name);
     }
 
     /**
      * Apply the filter to the given query.
      *
      * @param Request $request
-     * @param Builder $query
+     * @param Builder $builder
      * @param mixed $value
      * @return Builder
      */
-    public function apply(Request $request, Builder $query, mixed $value): Builder
+    public function apply(Request $request, Builder $builder, mixed $value): Builder
     {
-        $column = $this->getColumn($query);
+        $column = Helper::getTableColumn($builder, $this->column);
 
         $value = $this->getBooleanValue($value);
 
-        return $query->where($column, $value);
+        return $builder->where($column, $value);
     }
 
     /**
      * @return array
      */
-    public function options(): array
+    protected function options(): array
     {
         return [
             '' => trans('livewire-tables::filters.all'),
@@ -83,33 +100,17 @@ class BooleanFilter extends Filter
     }
 
     /**
+     * Render filter view
+     *
      * @return View
      */
     public function render(): View
     {
-        return view($this->view(), [
+        return view($this->view, [
             'uriKey' => $this->uriKey,
             'name' => $this->name,
             'options' => $this->options(),
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function view(): string
-    {
-        return 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';
-    }
-
-    /**
-     * Get the key for the filter.
-     *
-     * @return string
-     */
-    public function uriKey(): string
-    {
-        return 'boolean_' . $this->column;
     }
 
     /**
@@ -138,5 +139,24 @@ class BooleanFilter extends Filter
     private function getBooleanValue(string $value): bool
     {
         return $value === 'true';
+    }
+
+    /**
+     * @param string $name
+     * @return BooleanFilter
+     */
+    public function name(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

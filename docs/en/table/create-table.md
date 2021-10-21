@@ -77,7 +77,7 @@ public function columns() : array
     ];
 }
 ```
-Later, in the point on [Columns](en/column/general-methods.md), all the available options and methods will be discussed in depth. Now, let's focus on the basics.
+Later, in the point on [Columns](en/columns/define-columns.md), all the available options and methods will be discussed in depth. Now, let's focus on the basics.
 
 Each column is initialized with a `make()` method, which supports two parameters: the name and the database column. In the next example you can see it in detail:
 
@@ -106,7 +106,7 @@ public function filters(): array
 }
 ```
 
-Later, in the point on [Filters](en/filter/filter.md), all the available options and methods will be discussed in depth. If we don't want to add filters, we must return an `empty array`, Due to this you `don't need to` define filters manually, package define empty array by default:
+Later, in the point on [Filters](en/filters/boolean-filter.md), all the available options and methods will be discussed in depth. If we don't want to add filters, we must return an `empty array`, Due to this you `don't need to` define filters manually, package define empty array by default:
 
 ```php
 public function filters(): array

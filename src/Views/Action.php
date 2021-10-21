@@ -41,35 +41,35 @@ class Action extends Column
      * Action construct.
      *
      * @param string|null $field
-     * @param string|null $attribute
+     * @param string|null $view
      */
-    public function __construct(?string $field, ?string $attribute)
+    public function __construct(?string $field, ?string $view)
     {
-        parent::__construct($field, $attribute);
+        parent::__construct($field);
 
-        $this->hideShowButton = ! static::enabled(static::enableShowAction());
+        $this->hideShowButton = !static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = ! static::enabled(static::enableEditAction());
+        $this->hideEditButton = !static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
 
         $this->sticky = static::enabled(static::enableSticky());
 
-        $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.table.action';
+        $this->view = $view ?: 'livewire-tables::' . config('livewire-tables.theme') . '.components.table.action';
     }
 
     /**
      * Preset action column with default view.
      *
      * @param string $field
-     * @param string|null $attribute
+     * @param string|null $view
      * @return Action
      */
-    public static function make(string $field = 'Action', ?string $attribute = null): Action
+    public static function make(string $field = 'Action', ?string $view = null): Action
     {
-        return tap(new static($field, $attribute), function (Action $action) {
+        return tap(new static($field, $view), function (Action $action) {
             $action->render(
-                fn ($model) => view($action->view, [
+                fn($model) => view($action->view, [
                     'row' => $model,
                     'hideShowButton' => $action->hideShowButton,
                     'hideEditButton' => $action->hideEditButton,

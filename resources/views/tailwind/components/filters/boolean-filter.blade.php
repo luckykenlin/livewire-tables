@@ -1,6 +1,6 @@
 <div class="block text-sm text-gray-700" role="menuitem">
     <label for="filter-{{ $uriKey }}"
-           class="block py-2 px-4 font-semibold leading-5 text-gray-700 dark:text-white bg-indigo-100">
+           class="block py-2 px-4 font-semibold leading-5 text-gray-700 uppercase dark:text-white bg-indigo-100">
         {{$name }}
     </label>
 

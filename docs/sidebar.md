@@ -16,33 +16,31 @@
     - [Attributes](en/table/attributes.md)
     - [Methods](en/table/methods.md)
 
-- Query
-    - [Eloquent Query](en/query/create-table.md)
-
 - Columns
-    - [Making Columns](en/columns/create-table.md)
-    - [Built-in Searching](en/columns/attributes.md)
-    - [Built-in Sorting](en/columns/methods.md)
-    - [Built-in Formating](en/columns/methods.md)
-    - [Styles & Attributes](en/columns/methods.md)
+    - [Define Columns](en/columns/define-columns.md)
+    - [Built-in Searching](en/columns/built-in-search.md)
+    - [Built-in Sorting](en/columns/built-in-sorting.md)
+    - [Built-in Formating](en/columns/built-in-formatting.md)
+    - [Built-in View](en/columns/built-in-view.md)
+    - [Conditionally hiding columns](en/columns/conditionally-hiding-columns.md)
+    - [Boolean Column](en/columns/boolean-column.md)
+    - [Styles & Attributes](en/columns/styles-attributes.md)
 
 - Filters
-    - [Component](en/filters/create-table.md)
-    - [View](en/filters/attributes.md)
-    - [Boolean Filter](en/filters/methods.md)
-    - [Select Filter](en/filters/methods.md)
-    - [Multiple-Select Filter](en/filters/methods.md)
-    - [Date Filter](en/filters/methods.md)
-    - [Customize Filter](en/filters/methods.md)
+    - [Boolean Filter](en/filters/boolean-filter.md)
+    - [Customize Filter](en/filters/customize-component.md)
 
 - Actions
-    - [Basic](en/actions/create-table.md)
-    - [Customize Action](en/actions/create-table.md)
+    - [Basic](en/actions/basic.md)
+    - [Customize Action](en/actions/customize-action.md)
 
 - Display
-    - [Properties](en/display/create-table.md)
-    - [Rows & Cells](en/display/attributes.md)
-    - [Methods](en/display/methods.md)
+    - [Properties](en/display/properties.md)
+    - [Multiple Tables](en/display/multiple-tables.md)
+    - [Rows & Cells](en/display/rows-cells.md)
+
+- Other Features
+    - [Localization](en/others/localization.md)
 
 [comment]: <> (- Column)
 

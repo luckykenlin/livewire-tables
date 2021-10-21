@@ -19,44 +19,6 @@ You can install the package via composer:
 ```bash
 composer require luckykenlin/livewire-tables
 ```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-config"
-```
-
-You can publish the views file with:
-
-```bash
-php artisan vendor:publish --provider="Luckykenlin\LivewireTables\LivewireTablesServiceProvider" --tag="livewire-tables-views"
-```
-
-### Using this package in a Laravel project
-
-You can easily use this packge in a local Laravel project, after cloning:
-
-1. Specify a new repository in your composer.json file of the Laravel project (not this package!):
-
-```
-// composer.json
-
-{
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../../livewire-tables" // the relative path to your package
-    }
-  ]
-}
-```
-
-2. Require the package in the local Laravel project:
-
-``` 
-composer require luckykenlin/livewire-tables
-```
-
 ## Documentation
 [https://luckykenlin.github.io/livewire-tables/](https://luckykenlin.github.io/livewire-tables/)
 
@@ -122,23 +84,23 @@ public function query() : Builder;
 public function columns() : array;
 ```
 
-### Rendering the Table
+## Rendering the Table
 
 Place the following where you want the table to appear.
 
 `<livewire:users-table />`
 
-### Column Methods
 
-| Method | Arguments | Result | Example |
-|----|----|----|----|
-|**label**|*String* $name|Changes the display name of a column|```Column::name('id')->label('ID)```|
-|**format**|[*Callback* $format]| Format display as callback function |```Column::name('price')->format(function($value) => { return '$'.$value}),```|
-|**hideOnTable**| |Marks column to start as hidden|```Column::name('id')->hideOnTable()```|
-|**sortable**| |Marks column can be sorted|```Column::name('dob')->sortable(),```|
-|**searchable**| |Includes the column in the global search|```Column::name('name')->searchable()```|
-|**filterable**| |Adds a filter to the column, according to Column type|```Column::name('status')->filterable()```|
-|**view**|*String* $viewName| customize column render view | ```Column::name('status')->view('vendoer.livewire-tables.boolean.blade.php')```|
+## To-do/Roadmap
+
+- [ ] User Column Selection
+- [ ] Bulk Actions
+- [ ] Date Filter
+- [ ] Selector Filter
+- [ ] Multiple Selector Filter
+- [ ] Bulk Actions
+- [ ] CDN Css
+- [ ] Test Suite
 
 ## Testing
 
