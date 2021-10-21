@@ -2,12 +2,10 @@
 
 namespace Luckykenlin\LivewireTables;
 
-
 use Illuminate\Database\Eloquent\Builder;
 
 class Helper
 {
-
     /**
      * Get the table name from the builder.
      */
@@ -45,4 +43,3 @@ class Helper
         return str_contains($attribute, '.');
     }
 }
-
