@@ -33,7 +33,7 @@ trait Filterable
             ->each(function ($filter) use ($builder) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn($value) => !empty($value) && $filter->apply(request(), $builder, $value)
+                    fn ($value) => ! empty($value) && $filter->apply(request(), $builder, $value)
                 );
             });
 
@@ -102,7 +102,7 @@ trait Filterable
      */
     public function removeFilter($filter): void
     {
-        if (!isset($this->filters[$filter])) {
+        if (! isset($this->filters[$filter])) {
             return;
         }
 
@@ -117,7 +117,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn($value) => $value === '')
+            ->reject(fn ($value) => $value === '')
             ->count();
     }
 }
