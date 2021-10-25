@@ -3,9 +3,7 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Components\BooleanFilter;
 use Luckykenlin\LivewireTables\Components\Filter;
-use Luckykenlin\LivewireTables\Components\SelectFilter;
 
 trait Filterable
 {
