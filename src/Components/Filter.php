@@ -21,6 +21,11 @@ abstract class Filter
     public string $uriKey = '';
 
     /**
+     * @var string
+     */
+    public string $label = '';
+
+    /**
      * Front render view.
      *
      * @var string
@@ -86,5 +91,32 @@ abstract class Filter
     public function getView(): string
     {
         return $this->view;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return static::$type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     * @return BooleanFilter
+     */
+    public function label(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
     }
 }

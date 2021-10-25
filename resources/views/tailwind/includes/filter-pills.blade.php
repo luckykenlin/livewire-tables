@@ -3,16 +3,15 @@
         <div class="md:mb-4 px-6 py-2 md:p-0">
             <small class="text-gray-700 dark:text-white">@lang('livewire-tables::filters.Applied Filters'):</small>
 
-            @foreach($filters as $key => $value)
-                @if (strlen($value))
+            @foreach($filters as $uriKey => $value)
+                @if (filled($value))
                     <span
-                        wire:key="filter-pill-{{ $key }}"
+                        wire:key="filter-pill-{{ $uriKey }}"
                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-indigo-100 text-indigo-800 capitalize dark:bg-indigo-200 dark:text-indigo-900"
                     >
-                        {{collect($this->filters())->pluck('name', 'uriKey')->get($key, ucwords(strtr($key, ['_' => ' ', '-' => ' ']))) }}:
-                         {{ ucwords(strtr($value, ['_' => ' ', '-' => ' '])) }}
+                        {{$this->getFilterComponentLabel($uriKey)}}:{{$this->getFilterComponentValue($uriKey, $value)}}
                         <button
-                            wire:click="removeFilter('{{ $key }}')"
+                            wire:click="removeFilter('{{ $uriKey }}')"
                             type="button"
                             class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
                         >

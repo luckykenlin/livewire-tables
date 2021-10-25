@@ -6,6 +6,7 @@
 
     <div class="px-4 py-3 relative shadow-sm">
         <x-livewire-tables::form.select
+            multiple
             wire:model.stop="filters.{{ $uriKey }}"
             wire:key="{{\Illuminate\Support\Str::random()}}"
             id="filter-{{ $uriKey }}"

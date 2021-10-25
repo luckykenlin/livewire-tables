@@ -256,10 +256,32 @@ public function filters(): array
 }
 ```
 
+### Customize filter pills
+
+Sometime filter pill show incorrect format. 
+
+![Livewire Tables with Filter Pills](/../../assets/filter-pills.png ':class=image')
+
+We can define displayValue function in filter. 
+```php 
+public function displayValue($value): string
+{
+   return match($value){
+        UserType::TYPE_GUEST => 'guest',
+        UserType::TYPE_ADMIN => 'admin',
+        ...
+   }
+}
+```
+
+!> Note, Livewire table just use the filter value.
+
 ### Default filters
 
 **Livewire Tables** includes a list of default filters:
 
 | Filter | Class | Description |
 | :---------- |:------------| :------------|
-| BooleanFilter | `BooleanFilter:class` | It is used to filter `bool column`, very useful for `active` or `not active` fields. |
+| BooleanFilter | `BooleanFilter:class` | It is used to filter `bool column`, builder apply `where($column, $value)`. |
+| SelectFilter | `SelectFilter:class` | It is used to filter `column`, builder apply `where($column, $value)`. |
+| MultiSelect | `MultiSelect:class` | It is used to filter `column`, builder apply `whereIn($column, $value)`. |

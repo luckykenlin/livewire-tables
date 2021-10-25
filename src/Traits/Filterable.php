@@ -3,7 +3,9 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Components\BooleanFilter;
 use Luckykenlin\LivewireTables\Components\Filter;
+use Luckykenlin\LivewireTables\Components\SelectFilter;
 
 trait Filterable
 {
@@ -16,6 +18,9 @@ trait Filterable
 
     /**
      * Filter values.
+     * [
+     *   '$uriKey' => '$value'
+     * ]
      *
      * @var array
      */
@@ -33,7 +38,7 @@ trait Filterable
             ->each(function ($filter) use ($builder) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn($value) => !empty($value) && $filter->apply(request(), $builder, $value)
+                    fn($value) => filled($value) && $filter->apply(request(), $builder, $value)
                 );
             });
 
@@ -68,12 +73,12 @@ trait Filterable
      */
     protected function checkFilters(): void
     {
-        foreach ($this->filters as $key => $filter) {
-            if (filled($this->filters[$key])) {
+        foreach ($this->filters as $uriKey => $filter) {
+            if (filled($this->filters[$uriKey])) {
                 continue;
             }
 
-            unset($this->filters[$key]);
+            unset($this->filters[$uriKey]);
         }
     }
 
@@ -96,17 +101,17 @@ trait Filterable
     }
 
     /**
-     * Set a given filter to null
+     * Set a given uriKey related filter to null
      *
-     * @param $filter
+     * @param $uriKey
      */
-    public function removeFilter($filter): void
+    public function removeFilter($uriKey): void
     {
-        if (!isset($this->filters[$filter])) {
+        if (!isset($this->filters[$uriKey])) {
             return;
         }
 
-        unset($this->filters[$filter]);
+        unset($this->filters[$uriKey]);
     }
 
     /**
@@ -119,5 +124,49 @@ trait Filterable
         return collect($this->filters)
             ->reject(fn($value) => $value === '')
             ->count();
+    }
+
+    /**
+     * Get filter by uriKey.
+     *
+     * @param $uriKey
+     * @return Filter
+     */
+    public function getFilterComponentByUriKey($uriKey): Filter
+    {
+        return collect($this->filters())
+            ->firstWhere('uriKey', $uriKey);
+    }
+
+    /**
+     * Get filter component name.
+     *
+     * @param $uriKey
+     * @return string
+     */
+    public function getFilterComponentLabel($uriKey): string
+    {
+        $filter = $this->getFilterComponentByUriKey($uriKey);
+
+        return $filter->getLabel();
+    }
+
+
+    /**
+     * Get filter component value.
+     *
+     * @param $uriKey
+     * @param $value
+     * @return string
+     */
+    public function getFilterComponentValue($uriKey, $value): string
+    {
+        $filter = $this->getFilterComponentByUriKey($uriKey);
+
+        if (method_exists($filter, 'displayValue')) {
+            return $filter->displayValue($value);
+        }
+
+        return ucwords(strtr($value, ['_' => ' ', '-' => ' ']));
     }
 }

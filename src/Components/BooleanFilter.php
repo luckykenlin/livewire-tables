@@ -16,13 +16,6 @@ class BooleanFilter extends Filter
     public static string $type = 'boolean-filter';
 
     /**
-     * Front show name.
-     *
-     * @var string
-     */
-    public string $name;
-
-    /**
      * Table column for filter.
      *
      * @var string
@@ -41,15 +34,15 @@ class BooleanFilter extends Filter
 
     /**
      * @param string $column
-     * @param string|null $name
+     * @param string|null $label
      */
-    public function __construct(string $column, ?string $name = null)
+    public function __construct(string $column, ?string $label = null)
     {
         parent::__construct();
 
         $this->column = $column;
 
-        $this->name = $name ?? Str::replace('_', ' ', Str::upper($column));
+        $this->label = $label ?? Str::replace('_', ' ', Str::upper($column));
 
         $this->uriKey = $column;
 
@@ -62,12 +55,12 @@ class BooleanFilter extends Filter
 
     /**
      * @param string $column
-     * @param string|null $name
+     * @param string|null $label
      * @return BooleanFilter
      */
-    public static function make(string $column, ?string $name = null): BooleanFilter
+    public static function make(string $column, ?string $label = null): BooleanFilter
     {
-        return new static($column, $name);
+        return new static($column, $label);
     }
 
     /**
@@ -88,6 +81,20 @@ class BooleanFilter extends Filter
     }
 
     /**
+     * Render filter view
+     *
+     * @return View
+     */
+    public function render(): View
+    {
+        return view($this->view, [
+            'uriKey' => $this->uriKey,
+            'label' => $this->label,
+            'options' => $this->options(),
+        ]);
+    }
+
+    /**
      * @return array
      */
     protected function options(): array
@@ -97,20 +104,6 @@ class BooleanFilter extends Filter
             'true' => $this->trueValue,
             'false' => $this->falseValue,
         ];
-    }
-
-    /**
-     * Render filter view
-     *
-     * @return View
-     */
-    public function render(): View
-    {
-        return view($this->view, [
-            'uriKey' => $this->uriKey,
-            'name' => $this->name,
-            'options' => $this->options(),
-        ]);
     }
 
     /**
@@ -139,24 +132,5 @@ class BooleanFilter extends Filter
     private function getBooleanValue(string $value): bool
     {
         return $value === 'true';
-    }
-
-    /**
-     * @param string $name
-     * @return BooleanFilter
-     */
-    public function name(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

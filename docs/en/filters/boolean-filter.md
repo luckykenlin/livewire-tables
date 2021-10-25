@@ -16,3 +16,14 @@ public function filters(): array
 
 ![Livewire Tables with Boolean Filter](/../../assets/boolean-filter.png ':class=image')
 
+### How it works
+```php
+public function apply(Request $request, Builder $builder, mixed $value): Builder
+{
+    $column = Helper::getTableColumn($builder, $this->column);
+
+    $value = $this->getBooleanValue($value);
+
+    return $builder->where($column, $value);
+}
+```

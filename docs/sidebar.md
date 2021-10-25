@@ -28,6 +28,8 @@
 
 - Filters
     - [Boolean Filter](en/filters/boolean-filter.md)
+    - [Select Filter](en/filters/select-filter.md)
+    - [Multiple Select Filter](en/filters/multiple-select-filter.md)
     - [Customize Filter](en/filters/customize-component.md)
 
 - Actions
