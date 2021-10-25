@@ -36,7 +36,7 @@ trait Filterable
             ->each(function ($filter) use ($builder) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn($value) => filled($value) && $filter->apply(request(), $builder, $value)
+                    fn ($value) => filled($value) && $filter->apply(request(), $builder, $value)
                 );
             });
 
@@ -105,7 +105,7 @@ trait Filterable
      */
     public function removeFilter($uriKey): void
     {
-        if (!isset($this->filters[$uriKey])) {
+        if (! isset($this->filters[$uriKey])) {
             return;
         }
 
@@ -120,7 +120,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn($value) => $value === '')
+            ->reject(fn ($value) => $value === '')
             ->count();
     }
 
@@ -148,7 +148,6 @@ trait Filterable
 
         return $filter->getLabel();
     }
-
 
     /**
      * Get filter component value.
