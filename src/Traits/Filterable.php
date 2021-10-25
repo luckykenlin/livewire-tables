@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Luckykenlin\LivewireTables\Components\Filter;
 
 trait Filterable
 {
@@ -32,7 +33,7 @@ trait Filterable
             ->each(function ($filter) use ($builder) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn ($value) => ! empty($value) && $filter->apply(request(), $builder, $value)
+                    fn($value) => !empty($value) && $filter->apply(request(), $builder, $value)
                 );
             });
 
@@ -42,12 +43,38 @@ trait Filterable
     /**
      * Get filter value.
      *
-     * @param $filter
+     * @param Filter $filter
      * @return mixed
      */
-    protected function getFilterValue($filter): mixed
+    protected function getFilterValue(Filter $filter): mixed
     {
         return $this->filters[$filter->getUriKey()] ?? null;
+    }
+
+    /**
+     * Runs when any filter is changed
+     */
+    public function updatedFilters(): void
+    {
+        // Remove any url params that are empty
+        $this->checkFilters();
+
+        // Reset the page when filters are changed
+        $this->resetPage();
+    }
+
+    /**
+     * Removes any filters that are empty
+     */
+    protected function checkFilters(): void
+    {
+        foreach ($this->filters as $key => $filter) {
+            if (filled($this->filters[$key])) {
+                continue;
+            }
+
+            unset($this->filters[$key]);
+        }
     }
 
     /**
@@ -69,6 +96,20 @@ trait Filterable
     }
 
     /**
+     * Set a given filter to null
+     *
+     * @param $filter
+     */
+    public function removeFilter($filter): void
+    {
+        if (!isset($this->filters[$filter])) {
+            return;
+        }
+
+        unset($this->filters[$filter]);
+    }
+
+    /**
      * Count filter values.
      *
      * @return int
@@ -76,7 +117,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn ($value) => $value === '')
+            ->reject(fn($value) => $value === '')
             ->count();
     }
 }

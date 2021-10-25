@@ -133,7 +133,7 @@ class Column
     /**
      * @return $this
      */
-    public function searchable(callable $callback = null): static
+    public function searchable(?callable $callback = null): static
     {
         $this->searchable = true;
 
@@ -156,7 +156,7 @@ class Column
     /**
      * @return $this
      */
-    public function sortable($callback = null): static
+    public function sortable(?callable $callback = null): static
     {
         $this->sortable = true;
 

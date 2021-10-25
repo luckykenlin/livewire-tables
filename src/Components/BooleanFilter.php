@@ -20,14 +20,14 @@ class BooleanFilter extends Filter
      *
      * @var string
      */
-    protected string $name;
+    public string $name;
 
     /**
      * Table column for filter.
      *
-     * @var string|null
+     * @var string
      */
-    protected ?string $column;
+    public string $column;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class BooleanFilter extends Filter
 
         $this->name = $name ?? Str::replace('_', ' ', Str::upper($column));
 
-        $this->uriKey = self::$type . '_' . $column;
+        $this->uriKey = $column;
 
         $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';
 

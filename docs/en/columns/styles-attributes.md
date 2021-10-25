@@ -13,3 +13,8 @@ Column::make('Name')
 Column::make('Name')
     ->addAttributes(['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Tooltip on top']),
 ```
+
+### Localization header
+```php
+Column::make({{__('name')}})
+```

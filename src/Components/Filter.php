@@ -18,14 +18,14 @@ abstract class Filter
      *
      * @var string
      */
-    protected ?string $uriKey = '';
+    public string $uriKey = '';
 
     /**
      * Front render view.
      *
      * @var string
      */
-    protected string $view;
+    public string $view;
 
     /**
      * @param string|null $uriKey

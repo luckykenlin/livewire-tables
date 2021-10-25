@@ -2,14 +2,16 @@
     <div
         class="relative"
         @if ($refresh)
-        @if ($refreshInSeconds)
-        wire:poll.{{ $refreshInSeconds * 1000 }}ms
-        @else
-        wire:poll
-        @endif
+            @if ($refreshInSeconds)
+                 wire:poll.{{ $refreshInSeconds * 1000 }}ms
+            @else
+                 wire:poll
+            @endif
         @endif
     >
         <div class="flex-col">
+            @include('livewire-tables::tailwind.includes.sorting-pills')
+            @include('livewire-tables::tailwind.includes.filter-pills')
             <div class="space-y-4">
                 @includeWhen($debugEnabled,'livewire-tables::tailwind.includes.debug')
                 @includeWhen($offlineIndicator,'livewire-tables::tailwind.includes.offline')

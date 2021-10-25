@@ -1,15 +1,14 @@
 <div>
-    @if ($showSorting && count($sorts))
+    @if ($sortingEnabled && count($sorts))
         <div class="md:mb-4 px-6 py-2 md:p-0">
-            <small class="text-gray-700 dark:text-white">@lang('Applied Sorting'):</small>
+            <small class="text-gray-700 dark:text-white">@lang('livewire-tables::sorts.Applied Sorting'):</small>
 
             @foreach($sorts as $col => $dir)
                 <span
                     wire:key="sorting-pill-{{ $col }}"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-indigo-100 text-indigo-800 capitalize dark:bg-indigo-200 dark:text-indigo-900"
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900"
                 >
-                    {{ $sortNames[$col] ?? collect($this->columns())->pluck('text', 'column')->get($col, ucwords(strtr($col, ['_' => ' ', '-' => ' ']))) }}: {{ $dir === 'asc' ? ($sortDirectionNames[$col]['asc'] ?? 'A-Z') : ($sortDirectionNames[$col]['desc'] ?? 'Z-A') }}
-
+                    {{collect($this->columns())->pluck('field', 'attribute')->get($col, ucwords(strtr($col, ['_' => ' ', '-' => ' ']))) }}: {{ $dir === 'asc' ? 'asc' : 'desc' }}
                     <button
                         wire:click="removeSort('{{ $col }}')"
                         type="button"
