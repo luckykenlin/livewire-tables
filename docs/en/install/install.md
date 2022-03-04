@@ -36,6 +36,34 @@ module.exports = {
 };
 ```
 
+
+### Livewire Assets
+
+Add the following Blade directives in the head tag, and before the end body tag in your template.
+
+```html
+<html>
+<head>
+    ...
+    @livewireStyles
+</head>
+<body>
+    ...
+    @livewireScripts
+</body>
+</html>
+```
+
+You can alternatively use the tag syntax.
+
+```html
+<livewire:styles />
+...
+<livewire:scripts />
+```
+
+That's it! That's all you need to start using Livewire Tables.
+
 ### Using this package in a Laravel project if you want to test...
 
 You can easily use this packge in a local Laravel project, after cloning:
