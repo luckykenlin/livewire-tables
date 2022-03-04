@@ -3,10 +3,10 @@ PHP ^8.0
 Laravel ^8.0
 Laravel Livewire ^2.0
 - `PHP ^8.0`
-- `Laravel ^8.0`
+- `Laravel ^8.0 | ^9.0`
 - `Laravel Livewire ^2.0`
 - `AlpineJS ^2.0`
-- `Tailwind Css ^2.0`
+- `Tailwind Css ^2.0 | ^3.0`
 `
 
 For example:
