@@ -31,6 +31,27 @@ class Action extends Column
     protected bool $hideDeleteButton;
 
     /**
+     * Hide show button via callback.
+     *
+     * @var null|callable
+     */
+    protected $hideShowButtonCallback = null;
+
+    /**
+     * Hide edit button via callback.
+     *
+     * @var null|callable
+     */
+    protected $hideEditButtonCallback = null;
+
+    /**
+     * Hide delete button via callback.
+     *
+     * @var null|callable
+     */
+    protected $hideDeleteButtonCallback = null;
+
+    /**
      * Stick action column.
      *
      * @var bool
@@ -71,9 +92,7 @@ class Action extends Column
             $action->render(
                 fn ($model) => view($action->view, [
                     'row' => $model,
-                    'hideShowButton' => $action->hideShowButton,
-                    'hideEditButton' => $action->hideEditButton,
-                    'hideDeleteButton' => $action->hideDeleteButton,
+                    'action' => $action,
                 ])
             )
                 ->addClass($action->sticky ? 'sticky right-0' : '')
@@ -118,34 +137,52 @@ class Action extends Column
     }
 
     /**
-     * @param bool $condition
+     * @param bool|callable $condition
      * @return $this
      */
-    public function hideShowButtonIf(bool $condition): static
+    public function hideShowButtonIf($condition): static
     {
-        $this->hideShowButton = $condition;
+        if (is_callable($condition)) {
+            $this->hideShowButtonCallback = $condition;
+        }
+
+        if (is_bool($condition)) {
+            $this->hideShowButton = $condition;
+        }
 
         return $this;
     }
 
     /**
-     * @param bool $condition
+     * @param bool|callable $condition
      * @return $this
      */
-    public function hideEditButtonIf(bool $condition): static
+    public function hideEditButtonIf($condition): static
     {
-        $this->hideEditButton = $condition;
+        if (is_callable($condition)) {
+            $this->hideEditButtonCallback = $condition;
+        }
+
+        if (is_bool($condition)) {
+            $this->hideEditButton = $condition;
+        }
 
         return $this;
     }
 
     /**
-     * @param bool $condition
+     * @param bool|callable $condition
      * @return $this
      */
-    public function hideDeleteButtonIf(bool $condition): static
+    public function hideDeleteButtonIf($condition): static
     {
-        $this->hideDeleteButton = $condition;
+        if (is_callable($condition)) {
+            $this->hideDeleteButtonCallback = $condition;
+        }
+
+        if (is_bool($condition)) {
+            $this->hideDeleteButton = $condition;
+        }
 
         return $this;
     }
@@ -209,5 +246,50 @@ class Action extends Column
     public static function enableSticky(): string
     {
         return 'sticky';
+    }
+
+    /**
+     * Resolve hide show button logic.
+     *
+     * @param object $model
+     * @return bool
+     */
+    public function resolveHideShowButton(object $model): bool
+    {
+        if (is_callable($this->hideShowButtonCallback)) {
+            return call_user_func($this->hideShowButtonCallback, $model);
+        }
+
+        return $this->hideShowButton;
+    }
+
+    /**
+     * Resolve hide edit button logic.
+     *
+     * @param object $model
+     * @return bool
+     */
+    public function resolveHideEditButton(object $model): bool
+    {
+        if (is_callable($this->hideEditButtonCallback)) {
+            return call_user_func($this->hideEditButtonCallback, $model);
+        }
+
+        return $this->hideEditButton;
+    }
+
+    /**
+     * Resolve hide delete button logic.
+     *
+     * @param object $model
+     * @return bool
+     */
+    public function resolveHideDeleteButton(object $model): bool
+    {
+        if (is_callable($this->hideDeleteButtonCallback)) {
+            return call_user_func($this->hideDeleteButtonCallback, $model);
+        }
+
+        return $this->hideDeleteButton;
     }
 }

@@ -442,9 +442,9 @@ class Column
     /**
      * Format the callback.
      */
-    public function formatted($value)
+    public function formatted(...$params)
     {
-        return call_user_func($this->formatCallback, $value);
+        return call_user_func_array($this->formatCallback, $params);
     }
 
     /**

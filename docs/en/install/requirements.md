@@ -1,6 +1,6 @@
 # Requirements
 PHP ^8.0
-Laravel ^8.0
+Laravel ^8.0 | ^9.0
 Laravel Livewire ^2.0
 - `PHP ^8.0`
 - `Laravel ^8.0 | ^9.0`

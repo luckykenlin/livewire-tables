@@ -1,5 +1,5 @@
 <div class="flex justify-start text-gray-400 -ml-1">
-@unless($hideShowButton)
+@unless($action->resolveHideShowButton($row))
     <!-- Show button -->
         <a
             href="{{ sprintf('%s/%s', $row->getTable(), $row->id) }}"
@@ -13,7 +13,7 @@
         </a>
 @endunless
 
-@unless($hideEditButton)
+@unless($action->resolveHideEditButton($row))
     <!-- Edit button -->
         <a
             href="{{ sprintf('%s/%s', $row->getTable(), $row->id) }}/edit"
@@ -26,7 +26,7 @@
         </a>
 @endunless
 
-@unless($hideDeleteButton)
+@unless($action->resolveHideDeleteButton($row))
     <!-- Delete button -->
         <a
             href="#"

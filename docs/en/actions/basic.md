@@ -52,8 +52,11 @@ public function columns(): array
     return [
         Column::make('#', 'id')->sortable(),
         Column::make('Name')->sortable()->searchable(),
-
-        Action::make()->hideDeleteButtonIf(! auth()->user()->isAdmin())
+        
+        Action::make()->hideDeleteButtonIf(! auth()->user()->isAdmin()),
+       
+//      Or use callback function 
+//      Action::make()->hideDeleteButtonIf(fn(User $user) => auth()->id() === $user->id)
     ];
 }
 ```
@@ -85,7 +88,7 @@ Below is the code for the default **Blade** view:
 
 ```php 
 <div class="flex justify-start text-gray-400 -ml-1">
-@unless($hideShowButton)
+@unless($action->resolveHideShowButton($row))
     <!-- Show button -->
         <a
             href="{{ sprintf('%s/%s', $row->getTable(), $row->id) }}"
@@ -99,7 +102,7 @@ Below is the code for the default **Blade** view:
         </a>
 @endunless
 
-@unless($hideEditButton)
+@unless($action->resolveHideEditButton($row))
     <!-- Edit button -->
         <a
             href="{{ sprintf('%s/%s', $row->getTable(), $row->id) }}/edit"
@@ -112,7 +115,7 @@ Below is the code for the default **Blade** view:
         </a>
 @endunless
 
-@unless($hideDeleteButton)
+@unless($action->resolveHideDeleteButton($row))
     <!-- Delete button -->
         <a
             href="#"
