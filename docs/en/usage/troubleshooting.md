@@ -22,6 +22,19 @@ Make sure your query returns a column that is being used as the primary key for 
 Livewire uses this as the `wire:key` to know which rows to keep and remove during its dom-diffing.
 
 !> Livewire table store all filter values as an array. please make sure all your filter has `unique` `uriKey`. livewire table use uriKey to retrieve filter value from query string.
+
+### 4. Blip confirm model
+
+Sometimes, when you're using AlpineJS for a part of your template, there is a "blip" where you might see your uninitialized template after the page loads, but before Alpine loads.
+
+x-cloak addresses this scenario by hiding the element it's attached to until Alpine is fully loaded on the page.
+
+For x-cloak to work however, you must add the following CSS to the page.
+
+```css
+[x-cloak] { display: none !important; }
+```
+
 ### 5. Enable debugging
 
 If you would like to dump sql above the table you may enable this flag:
