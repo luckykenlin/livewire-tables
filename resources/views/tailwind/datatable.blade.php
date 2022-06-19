@@ -2,11 +2,11 @@
     <div
         class="relative"
         @if ($refresh)
-            @if ($refreshInSeconds)
-                 wire:poll.{{ $refreshInSeconds * 1000 }}ms
-            @else
-                 wire:poll
-            @endif
+        @if ($refreshInSeconds)
+        wire:poll.{{ $refreshInSeconds * 1000 }}ms
+        @else
+        wire:poll
+        @endif
         @endif
     >
         <div class="flex-col">
@@ -25,7 +25,7 @@
                         {{--                        <div>@include('livewire-tables::tailwind.includes.bulk-actions')</div>--}}
                         {{--                        <div>@include('livewire-tables::tailwind.includes.column-select')</div>--}}
                         <div>@includeWhen($paginationEnabled && $showPerPage,'livewire-tables::tailwind.includes.per-page')</div>
-                        <div>@includeWhen($newResource,'livewire-tables::tailwind.includes.new-resource')</div>
+                        <div>@includeWhen($this->hasNewResource(),'livewire-tables::tailwind.includes.new-resource')</div>
                     </div>
                 </div>
 
@@ -35,5 +35,5 @@
         </div>
     </div>
 
-    <x-livewire-tables::modals.delete-button-modal wire:model.defer="confirmDelete" :itemKey="$itemKey" />
+    <x-livewire-tables::modals.delete-button-modal wire:model.defer="confirmDelete" :itemKey="$itemKey"/>
 </div>
