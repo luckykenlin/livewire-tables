@@ -56,7 +56,7 @@ class Action extends Column
      *
      * @var bool
      */
-    protected bool $sticky;
+    public bool $sticky;
 
     /**
      * Action construct.

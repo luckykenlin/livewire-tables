@@ -7,23 +7,39 @@ trait NewResource
     /**
      * @var string
      */
-    public string $newResource;
+    public string $newResource = '';
 
     /**
-     * Set new resource url.
-     *
-     * @return string
+     * @return \Illuminate\Http\RedirectResponse|void
      */
-    protected function newResource(): string
+    public function invokeNewResource()
     {
-        return '';
+        if (! $this->hasNewResource()) {
+            return;
+        }
+
+        if (method_exists($this, 'newResource')) {
+            return $this->newResource();
+        }
+
+        if ($this->newResource) {
+            return redirect()->to($this->newResource);
+        }
     }
 
     /**
-     * Initialize
+     * @return bool
      */
-    protected function initializeNewResource()
+    public function hasNewResource(): bool
     {
-        $this->newResource = $this->newResource ?? $this->newResource();
+        if ($this->newResource) {
+            return true;
+        }
+
+        if (method_exists($this, 'newResource')) {
+            return true;
+        }
+
+        return false;
     }
 }
