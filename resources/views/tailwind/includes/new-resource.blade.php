@@ -1,5 +1,5 @@
 <a href="#"
-   wire:click.prevent="invokeNewResource"
+   wire:click.prevent="resolveNewResource"
    type="button"
    class="inline-flex items-center shadow-sm ml-2 p-2 rounded border-gray-300 border text-indigo-300 ease-in-out duration-150 hover:text-white bg-white hover:bg-indigo-500 focus:outline-none"
 >
