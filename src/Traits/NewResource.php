@@ -12,7 +12,7 @@ trait NewResource
     /**
      * @return \Illuminate\Http\RedirectResponse|void
      */
-    public function invokeNewResource()
+    public function resolveNewResource()
     {
         if (!$this->hasNewResource()) return;
 
