@@ -1,13 +1,13 @@
-<div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden rounded-none md:rounded-lg">
+<div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden rounded-none md:rounded-lg mb-6">
     <table class="{{ trim($attributes->get('class')) ?: 'min-w-full divide-y divide-gray-200 dark:divide-none'}}">
         <thead>
-            <tr>
-                {{ $head }}
-            </tr>
+        <tr>
+            {{ $head }}
+        </tr>
         </thead>
 
         <tbody class="bg-white divide-y divide-gray-200 dark:divide-none">
-            {{ $body }}
+        {{ $body }}
         </tbody>
     </table>
 </div>
