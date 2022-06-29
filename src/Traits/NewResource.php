@@ -14,7 +14,9 @@ trait NewResource
      */
     public function resolveNewResource()
     {
-        if (!$this->hasNewResource()) return;
+        if (! $this->hasNewResource()) {
+            return;
+        }
 
         if (method_exists($this, 'newResource')) {
             return $this->newResource();
