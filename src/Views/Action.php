@@ -215,7 +215,7 @@ class Action extends Column
      */
     public static function enableShowAction(): string
     {
-        return 'edit-action';
+        return 'show-action';
     }
 
     /**
