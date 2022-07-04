@@ -6,6 +6,7 @@
             :id="method_exists($this, 'setTableCellId') ? $this->setTableCellId($column, $row) : ''"
             :customAttributes="method_exists($this, 'setTableCellAttributes') ? $this->setTableCellAttributes($column, $row) : []"
             :columnClass="$column->class()"
+            :responsive="$this->responsive"
         >
 
             @if ($column->isHtml())
