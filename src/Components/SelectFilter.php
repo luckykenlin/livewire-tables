@@ -5,6 +5,7 @@ namespace Luckykenlin\LivewireTables\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Luckykenlin\LivewireTables\Helper;
 
@@ -79,7 +80,7 @@ class SelectFilter extends Filter
      */
     public function displayValue($value): string
     {
-        return $this->options[$value];
+        return Arr::get($this->options, $value) ?? '';
     }
 
     /**
