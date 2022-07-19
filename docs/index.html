@@ -8,7 +8,8 @@
         name="keywords"
         content="datatable,table,data table,livewire,livewiretable,curd,livewire table, nova"
     />
-    <meta name="description" content="Documentation for Livewire Tables. A dynamic table component for Laravel Livewire, Tailwind and AlpineJS.">
+    <meta name="description"
+          content="Documentation for Livewire Tables. A dynamic table component for Laravel Livewire, Tailwind and AlpineJS.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
@@ -17,9 +18,11 @@
         .content {
             padding-top: 0px;
         }
+
         .markdown-section {
             max-width: 80%;
         }
+
         nav.app-nav li ul {
             min-width: 100px;
         }
@@ -28,18 +31,34 @@
             box-shadow: none !important;
             width: auto !important;
         }
+
+        #algolia-search {
+            margin: 20px 0 20px 0;
+        }
+
+        .app-name {
+            text-align: left !important;
+            padding-left: 15px;
+        }
+
+        .DocSearch-Button {
+            padding-right: 15px !important;
+            padding-left: 15px !important;
+        }
     </style>
     <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 </head>
 <body>
 <div id="app"></div>
 <script>
     window.$docsify = {
         themeColor: '#42b983',
-        name: '<span style="color: #42b983; font-weight: 400">Livewire Tables</span>',
+        name: '<span id="nav_name" style="color: #42b983; font-weight: 400">Livewire Tables</span>',
         repo: 'luckykenlin/livewire-tables',
         auto2top: true,
         maxLevel: 4,
+        loadNavbar: true,
         subMaxLevel: 2,
         homepage: 'home.md',
         loadSidebar: 'sidebar.md',
@@ -47,12 +66,6 @@
         // PLUGINS
         // -----------------------------------------------------------------
         executeScript: true,
-        search: {
-            depth: 3,
-            paths: 'auto',
-            noData: 'No results!',
-            placeholder: 'Search...'
-        },
         footer: {
             copy: '<div><b>Livewire Tables</b> &copy; 2020 - ' + new Date().getFullYear() + ' </div>',
             auth: '<div><b>Author</b>: Ken Lin </div><div style="padding-top: 5px"></div>',
@@ -65,7 +78,6 @@
 </script>
 <!-- Docsify v4 -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/class-change@1"></script>
 <script src="//unpkg.com/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
@@ -73,5 +85,30 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        const navName = document.getElementsByClassName('app-name')[0];
+        const searchBar = document.createElement('div');
+        searchBar.setAttribute("id", "algolia-search");
+        navName.after(searchBar);
+
+        docsearch({
+            appId: 'L22FI335H3',
+
+            apiKey: 'ecb18e36325563539d96ce9a391ce50e',
+
+            indexName: 'livewire-tables',
+
+            container: '#algolia-search',
+
+            debug: false // Set debug to true if you want to inspect the modal
+
+        });
+    }
+
+</script>
 </body>
 </html>
