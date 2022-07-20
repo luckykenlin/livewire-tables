@@ -74,8 +74,8 @@ abstract class LivewireTables extends Component
      * @var array
      */
     protected $queryString = [
-        'search'  => ['except' => ''],
-        'sorts'   => ['except' => ''],
+        'search' => ['except' => ''],
+        'sorts' => ['except' => ''],
         'filters' => ['except' => ''],
     ];
 
@@ -121,7 +121,7 @@ abstract class LivewireTables extends Component
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows'    => $this->rows(),
+            'rows' => $this->rows(),
         ]);
     }
 

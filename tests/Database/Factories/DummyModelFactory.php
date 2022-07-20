@@ -22,10 +22,10 @@ class DummyModelFactory extends Factory
     public function definition()
     {
         return [
-            'subject'    => $this->faker->sentence,
-            'category'   => $this->faker->word,
-            'body'       => $this->faker->paragraph,
-            'flag'       => $this->faker->boolean(),
+            'subject' => $this->faker->sentence,
+            'category' => $this->faker->word,
+            'body' => $this->faker->paragraph,
+            'flag' => $this->faker->boolean(),
             'expires_at' => $this->faker->dateTimeBetween('now', '+ 4 weeks'),
         ];
     }

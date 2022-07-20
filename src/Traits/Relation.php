@@ -107,7 +107,7 @@ trait Relation
 
         return (object) [
             'attribute' => array_pop($parts),
-            'name'      => implode('.', $parts),
+            'name' => implode('.', $parts),
         ];
     }
 

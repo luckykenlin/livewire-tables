@@ -107,7 +107,7 @@ trait Filterable
      */
     public function removeFilter($uriKey): void
     {
-        if (!isset($this->filters[$uriKey])) {
+        if (! isset($this->filters[$uriKey])) {
             return;
         }
 

@@ -14,7 +14,7 @@ trait NewResource
      */
     public function resolveNewResource()
     {
-        if (!$this->hasNewResource()) {
+        if (! $this->hasNewResource()) {
             return;
         }
 

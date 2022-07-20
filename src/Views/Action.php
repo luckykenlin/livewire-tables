@@ -68,11 +68,11 @@ class Action extends Column
     {
         parent::__construct($field);
 
-        $this->hideShowButton = !static::enabled(static::enableShowAction());
+        $this->hideShowButton = ! static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = !static::enabled(static::enableEditAction());
+        $this->hideEditButton = ! static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
 
         $this->sticky = static::enabled(static::enableSticky());
 

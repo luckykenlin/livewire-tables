@@ -109,8 +109,8 @@ class MultiSelectFilter extends Filter
     public function render(): View
     {
         return view($this->view, [
-            'uriKey'  => $this->uriKey,
-            'label'   => $this->label,
+            'uriKey' => $this->uriKey,
+            'label' => $this->label,
             'options' => $this->options,
         ]);
     }

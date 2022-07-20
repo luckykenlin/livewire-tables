@@ -90,8 +90,8 @@ class BooleanFilter extends Filter
     public function render(): View
     {
         return view($this->view, [
-            'uriKey'  => $this->uriKey,
-            'label'   => $this->label,
+            'uriKey' => $this->uriKey,
+            'label' => $this->label,
             'options' => $this->options(),
         ]);
     }
@@ -102,8 +102,8 @@ class BooleanFilter extends Filter
     protected function options(): array
     {
         return [
-            ''      => trans('livewire-tables::filters.all'),
-            'true'  => $this->trueValue,
+            '' => trans('livewire-tables::filters.all'),
+            'true' => $this->trueValue,
             'false' => $this->falseValue,
         ];
     }
