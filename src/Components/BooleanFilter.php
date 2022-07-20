@@ -33,7 +33,7 @@ class BooleanFilter extends Filter
     protected string $falseValue;
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
      */
     public function __construct(string $column, ?string $label = null)
@@ -46,7 +46,7 @@ class BooleanFilter extends Filter
 
         $this->uriKey = $column;
 
-        $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.boolean-filter';
+        $this->view = 'livewire-tables::'.config('livewire-tables.theme').'.components.filters.boolean-filter';
 
         $this->trueValue = trans('livewire-tables::filters.trueValue');
 
@@ -54,8 +54,9 @@ class BooleanFilter extends Filter
     }
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
+     *
      * @return BooleanFilter
      */
     public static function make(string $column, ?string $label = null): BooleanFilter
@@ -68,7 +69,8 @@ class BooleanFilter extends Filter
      *
      * @param Request $request
      * @param Builder $builder
-     * @param mixed $value
+     * @param mixed   $value
+     *
      * @return Builder
      */
     public function apply(Request $request, Builder $builder, mixed $value): Builder
@@ -81,15 +83,15 @@ class BooleanFilter extends Filter
     }
 
     /**
-     * Render filter view
+     * Render filter view.
      *
      * @return View
      */
     public function render(): View
     {
         return view($this->view, [
-            'uriKey' => $this->uriKey,
-            'label' => $this->label,
+            'uriKey'  => $this->uriKey,
+            'label'   => $this->label,
             'options' => $this->options(),
         ]);
     }
@@ -100,8 +102,8 @@ class BooleanFilter extends Filter
     protected function options(): array
     {
         return [
-            '' => trans('livewire-tables::filters.all'),
-            'true' => $this->trueValue,
+            ''      => trans('livewire-tables::filters.all'),
+            'true'  => $this->trueValue,
             'false' => $this->falseValue,
         ];
     }

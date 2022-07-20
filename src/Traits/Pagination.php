@@ -51,7 +51,7 @@ trait Pagination
     public bool $paginationEnabled = true;
 
     /**
-     * Initialize
+     * Initialize.
      */
     protected function initializePagination()
     {

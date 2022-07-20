@@ -25,7 +25,7 @@ class DeleteModel extends Component
      */
     public function render(): View
     {
-        return view('livewire-tables::' . config('livewire-tables.theme') . '.includes.delete-button');
+        return view('livewire-tables::'.config('livewire-tables.theme').'.includes.delete-button');
     }
 
     /**

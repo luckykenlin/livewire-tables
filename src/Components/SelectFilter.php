@@ -31,7 +31,7 @@ class SelectFilter extends Filter
     public array $options = [];
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
      */
     public function __construct(string $column, ?string $label = null)
@@ -44,12 +44,13 @@ class SelectFilter extends Filter
 
         $this->uriKey = $column;
 
-        $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.select-filter';
+        $this->view = 'livewire-tables::'.config('livewire-tables.theme').'.components.filters.select-filter';
     }
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
+     *
      * @return SelectFilter
      */
     public static function make(string $column, ?string $label = null): SelectFilter
@@ -62,7 +63,8 @@ class SelectFilter extends Filter
      *
      * @param Request $request
      * @param Builder $builder
-     * @param mixed $value
+     * @param mixed   $value
+     *
      * @return Builder
      */
     public function apply(Request $request, Builder $builder, mixed $value): Builder
@@ -76,6 +78,7 @@ class SelectFilter extends Filter
      * Define how filter value display on frontend.
      *
      * @param $value
+     *
      * @return string
      */
     public function displayValue($value): string
@@ -85,6 +88,7 @@ class SelectFilter extends Filter
 
     /**
      * @param array $options
+     *
      * @return SelectFilter
      */
     public function options(array $options): static
@@ -95,15 +99,15 @@ class SelectFilter extends Filter
     }
 
     /**
-     * Render filter view
+     * Render filter view.
      *
      * @return View
      */
     public function render(): View
     {
         return view($this->view, [
-            'uriKey' => $this->uriKey,
-            'label' => $this->label,
+            'uriKey'  => $this->uriKey,
+            'label'   => $this->label,
             'options' => $this->options,
         ]);
     }

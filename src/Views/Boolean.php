@@ -33,6 +33,7 @@ class Boolean extends Column
 
     /**
      * @param string $value
+     *
      * @return $this
      */
     public function trueValue(string $value): static
@@ -44,6 +45,7 @@ class Boolean extends Column
 
     /**
      * @param string $value
+     *
      * @return $this
      */
     public function falseValue(string $value): static
@@ -55,6 +57,7 @@ class Boolean extends Column
 
     /**
      * @param $value
+     *
      * @return string
      */
     public function transform($value): string

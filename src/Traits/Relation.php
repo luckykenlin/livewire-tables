@@ -22,7 +22,7 @@ trait Relation
     protected string $table;
 
     /**
-     * Initialize
+     * Initialize.
      */
     protected function initializeRelation()
     {
@@ -35,6 +35,7 @@ trait Relation
      * Get column by field.
      *
      * @param string $field
+     *
      * @return Column
      */
     protected function getColumn(string $field): Column
@@ -48,6 +49,7 @@ trait Relation
      * Get column by field.
      *
      * @param string $attribute
+     *
      * @return Column
      */
     protected function getColumnByAttribute(string $attribute): Column
@@ -61,6 +63,7 @@ trait Relation
      * Get model instance by query builder.
      *
      * @param $query
+     *
      * @return Model
      */
     protected function getModel($query): Model
@@ -72,6 +75,7 @@ trait Relation
      * Get table by query builder.
      *
      * @param $query
+     *
      * @return string
      */
     protected function getTable($query): string
@@ -94,15 +98,16 @@ trait Relation
      * Get relation by attribute.
      *
      * @param $attribute
+     *
      * @return object
      */
     protected function relationship($attribute): object
     {
         $parts = explode('.', $attribute);
 
-        return (object)[
+        return (object) [
             'attribute' => array_pop($parts),
-            'name' => implode('.', $parts),
+            'name'      => implode('.', $parts),
         ];
     }
 
@@ -112,6 +117,7 @@ trait Relation
      * @param $query
      * @param $relationships
      * @param $attribute
+     *
      * @return string
      */
     protected function attribute($query, $relationships, $attribute): string
@@ -132,10 +138,10 @@ trait Relation
                     $related = $model->getRelated();
                     $table = $related->getTable();
                     $tablePK = $related->getForeignKey();
-                    $foreign = $pivot . '.' . $tablePK;
+                    $foreign = $pivot.'.'.$tablePK;
                     $other = $related->getQualifiedKeyName();
 
-                    $last_query->addSelect($table . '.' . $attribute);
+                    $last_query->addSelect($table.'.'.$attribute);
                     $query->leftJoin($table, $foreign, $other);
 
                     break;

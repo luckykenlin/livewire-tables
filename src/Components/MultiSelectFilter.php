@@ -30,7 +30,7 @@ class MultiSelectFilter extends Filter
     public array $options = [];
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
      */
     public function __construct(string $column, ?string $label = null)
@@ -43,12 +43,13 @@ class MultiSelectFilter extends Filter
 
         $this->uriKey = $column;
 
-        $this->view = 'livewire-tables::' . config('livewire-tables.theme') . '.components.filters.multiple-select-filter';
+        $this->view = 'livewire-tables::'.config('livewire-tables.theme').'.components.filters.multiple-select-filter';
     }
 
     /**
-     * @param string $column
+     * @param string      $column
      * @param string|null $label
+     *
      * @return MultiSelectFilter
      */
     public static function make(string $column, ?string $label = null): MultiSelectFilter
@@ -61,7 +62,8 @@ class MultiSelectFilter extends Filter
      *
      * @param Request $request
      * @param Builder $builder
-     * @param mixed $value
+     * @param mixed   $value
+     *
      * @return Builder
      */
     public function apply(Request $request, Builder $builder, mixed $value): Builder
@@ -75,6 +77,7 @@ class MultiSelectFilter extends Filter
      * Define how filter value display on frontend.
      *
      * @param array $value
+     *
      * @return string
      */
     public function displayValue(array $value): string
@@ -88,6 +91,7 @@ class MultiSelectFilter extends Filter
 
     /**
      * @param array $options
+     *
      * @return SelectFilter
      */
     public function options(array $options): static
@@ -98,15 +102,15 @@ class MultiSelectFilter extends Filter
     }
 
     /**
-     * Render filter view
+     * Render filter view.
      *
      * @return View
      */
     public function render(): View
     {
         return view($this->view, [
-            'uriKey' => $this->uriKey,
-            'label' => $this->label,
+            'uriKey'  => $this->uriKey,
+            'label'   => $this->label,
             'options' => $this->options,
         ]);
     }

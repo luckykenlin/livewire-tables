@@ -8,8 +8,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * Class LivewireTablesServiceProvider
- * @package Luckykenlin\LivewireTables
+ * Class LivewireTablesServiceProvider.
  */
 class LivewireTablesServiceProvider extends PackageServiceProvider
 {

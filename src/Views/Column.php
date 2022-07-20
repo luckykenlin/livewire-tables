@@ -94,6 +94,7 @@ class Column
 
     /**
      * Column constructor.
+     *
      * @param string|null $field
      * @param string|null $attribute
      */
@@ -105,8 +106,9 @@ class Column
     }
 
     /**
-     * @param string $field
+     * @param string      $field
      * @param string|null $attribute
+     *
      * @return static
      */
     public static function make(string $field, ?string $attribute = null): Column
@@ -144,6 +146,7 @@ class Column
 
     /**
      * @param bool $condition
+     *
      * @return $this
      */
     public function searchIf(bool $condition): static
@@ -167,6 +170,7 @@ class Column
 
     /**
      * @param bool $condition
+     *
      * @return $this
      */
     public function sortIf(bool $condition): static
@@ -178,6 +182,7 @@ class Column
 
     /**
      * @param bool $shouldExport
+     *
      * @return $this
      */
     public function hideOnExportIf(bool $shouldExport = true): static
@@ -199,6 +204,7 @@ class Column
 
     /**
      * @param bool $condition
+     *
      * @return $this
      */
     public function hideIf(bool $condition): static
@@ -305,7 +311,7 @@ class Column
      */
     public function isIncludeFromExport(): bool
     {
-        return ! $this->hideOnExport;
+        return !$this->hideOnExport;
     }
 
     /**
@@ -332,6 +338,7 @@ class Column
 
     /**
      * @param $field
+     *
      * @return $this
      */
     public function label($field): static
@@ -356,7 +363,7 @@ class Column
      */
     public function addClass(string $class): static
     {
-        $this->class = $this->class . ' ' . $class;
+        $this->class = $this->class.' '.$class;
 
         return $this;
     }
@@ -452,6 +459,7 @@ class Column
      *
      * @param Column $column
      * @param object $model
+     *
      * @return mixed
      */
     public function resolveColumn(Column $column, object $model): mixed
@@ -483,6 +491,7 @@ class Column
 
     /**
      * @param $value
+     *
      * @return mixed
      */
     public function transform($value): mixed

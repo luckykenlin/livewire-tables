@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'filters' => 'Filters',
+    'filters'         => 'Filters',
     'Applied Filters' => 'Applied Filters',
-    'all' => 'All',
-    'trueValue' => 'Yes',
-    'falseValue' => 'No',
-    'clear' => 'Clear',
+    'all'             => 'All',
+    'trueValue'       => 'Yes',
+    'falseValue'      => 'No',
+    'clear'           => 'Clear',
 ];

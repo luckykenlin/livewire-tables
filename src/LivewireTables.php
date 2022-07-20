@@ -17,12 +17,18 @@ use Luckykenlin\LivewireTables\Traits\Searchable;
 use Luckykenlin\LivewireTables\Traits\Sortable;
 
 /**
- * Class LivewireTables
- * @package Luckykenlin\LivewireTables
+ * Class LivewireTables.
  */
 abstract class LivewireTables extends Component
 {
-    use NewResource, Pagination, Relation, Sortable, Searchable, Filterable, Deletable, Refreshable;
+    use NewResource;
+    use Pagination;
+    use Relation;
+    use Sortable;
+    use Searchable;
+    use Filterable;
+    use Deletable;
+    use Refreshable;
 
     /**
      * @var string
@@ -68,8 +74,8 @@ abstract class LivewireTables extends Component
      * @var array
      */
     protected $queryString = [
-        'search' => ['except' => ''],
-        'sorts' => ['except' => ''],
+        'search'  => ['except' => ''],
+        'sorts'   => ['except' => ''],
         'filters' => ['except' => ''],
     ];
 
@@ -115,7 +121,7 @@ abstract class LivewireTables extends Component
     {
         return view($this->view(), [
             'columns' => $this->columns(),
-            'rows' => $this->rows(),
+            'rows'    => $this->rows(),
         ]);
     }
 
@@ -126,7 +132,7 @@ abstract class LivewireTables extends Component
      */
     protected function view(): string
     {
-        return 'livewire-tables::' . config('livewire-tables.theme') . '.datatable';
+        return 'livewire-tables::'.config('livewire-tables.theme').'.datatable';
     }
 
     /**

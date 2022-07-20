@@ -45,7 +45,8 @@ abstract class Filter
      *
      * @param Request $request
      * @param Builder $builder
-     * @param mixed $value
+     * @param mixed   $value
+     *
      * @return Builder
      */
     abstract public function apply(Request $request, Builder $builder, mixed $value): Builder;
@@ -57,6 +58,7 @@ abstract class Filter
 
     /**
      * @param string $view
+     *
      * @return Filter
      */
     public function view(string $view): static
@@ -68,6 +70,7 @@ abstract class Filter
 
     /**
      * @param string $uriKey
+     *
      * @return Filter
      */
     public function setUriKey(string $uriKey): static
@@ -111,6 +114,7 @@ abstract class Filter
 
     /**
      * @param string $label
+     *
      * @return BooleanFilter
      */
     public function label(string $label): static

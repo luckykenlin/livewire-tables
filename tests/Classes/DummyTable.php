@@ -21,14 +21,14 @@ class DummyTable extends LivewireTables
     public function columns(): array
     {
         return [
-            ID::make()->label("#")->sortable(),
-            Column::make("Subject")->searchable(),
-            Column::make("Category"),
-            Boolean::make("Flag")->trueValue("Marked")->falseValue("Unmarked")->filterable(),
-            Text::make("Body"),
-            Date::make("Expiry", "expires_at"),
-            Date::make("Updated At", "updated_at")->hideOnTable(),
-            Date::make("Created At", "created_at"),
+            ID::make()->label('#')->sortable(),
+            Column::make('Subject')->searchable(),
+            Column::make('Category'),
+            Boolean::make('Flag')->trueValue('Marked')->falseValue('Unmarked')->filterable(),
+            Text::make('Body'),
+            Date::make('Expiry', 'expires_at'),
+            Date::make('Updated At', 'updated_at')->hideOnTable(),
+            Date::make('Created At', 'created_at'),
         ];
     }
 }

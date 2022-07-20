@@ -62,7 +62,7 @@ return [
         Action::enableShowAction(),
         Action::enableEditAction(),
         Action::enableDeleteAction(),
-//      Action::enableSticky()
-    ]
+        //      Action::enableSticky()
+    ],
 
 ];

@@ -18,7 +18,8 @@ class Helper
      * Get column with table name.
      *
      * @param Builder $builder
-     * @param string $column
+     * @param string  $column
+     *
      * @return string
      */
     public static function getTableColumn(Builder $builder, string $column): string
@@ -36,6 +37,7 @@ class Helper
      * Check if attribute has relationship.
      *
      * @param $attribute
+     *
      * @return bool
      */
     public static function hasRelationship($attribute): bool

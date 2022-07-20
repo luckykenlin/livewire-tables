@@ -68,22 +68,23 @@ class Action extends Column
     {
         parent::__construct($field);
 
-        $this->hideShowButton = ! static::enabled(static::enableShowAction());
+        $this->hideShowButton = !static::enabled(static::enableShowAction());
 
-        $this->hideEditButton = ! static::enabled(static::enableEditAction());
+        $this->hideEditButton = !static::enabled(static::enableEditAction());
 
-        $this->hideDeleteButton = ! static::enabled(static::enableDeleteAction());
+        $this->hideDeleteButton = !static::enabled(static::enableDeleteAction());
 
         $this->sticky = static::enabled(static::enableSticky());
 
-        $this->view = $view ?: 'livewire-tables::' . config('livewire-tables.theme') . '.components.table.action';
+        $this->view = $view ?: 'livewire-tables::'.config('livewire-tables.theme').'.components.table.action';
     }
 
     /**
      * Preset action column with default view.
      *
-     * @param string $field
+     * @param string      $field
      * @param string|null $view
+     *
      * @return Action
      */
     public static function make(string $field = 'Action', ?string $view = null): Action
@@ -138,6 +139,7 @@ class Action extends Column
 
     /**
      * @param bool|callable $condition
+     *
      * @return $this
      */
     public function hideShowButtonIf($condition): static
@@ -155,6 +157,7 @@ class Action extends Column
 
     /**
      * @param bool|callable $condition
+     *
      * @return $this
      */
     public function hideEditButtonIf($condition): static
@@ -172,6 +175,7 @@ class Action extends Column
 
     /**
      * @param bool|callable $condition
+     *
      * @return $this
      */
     public function hideDeleteButtonIf($condition): static
@@ -201,6 +205,7 @@ class Action extends Column
      * Determine if default action enable.
      *
      * @param string $feature
+     *
      * @return bool
      */
     public static function enabled(string $feature): bool
@@ -252,6 +257,7 @@ class Action extends Column
      * Resolve hide show button logic.
      *
      * @param object $model
+     *
      * @return bool
      */
     public function resolveHideShowButton(object $model): bool
@@ -267,6 +273,7 @@ class Action extends Column
      * Resolve hide edit button logic.
      *
      * @param object $model
+     *
      * @return bool
      */
     public function resolveHideEditButton(object $model): bool
@@ -282,6 +289,7 @@ class Action extends Column
      * Resolve hide delete button logic.
      *
      * @param object $model
+     *
      * @return bool
      */
     public function resolveHideDeleteButton(object $model): bool

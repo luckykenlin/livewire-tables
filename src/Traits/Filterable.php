@@ -18,7 +18,7 @@ trait Filterable
      * Filter values.
      * [
      *   '$uriKey' => '$value'
-     * ]
+     * ].
      *
      * @var array
      */
@@ -28,6 +28,7 @@ trait Filterable
      * Trick of search.
      *
      * @param Builder $builder
+     *
      * @return Builder
      */
     protected function applyFilter(Builder $builder): Builder
@@ -47,6 +48,7 @@ trait Filterable
      * Get filter value.
      *
      * @param Filter $filter
+     *
      * @return mixed
      */
     protected function getFilterValue(Filter $filter): mixed
@@ -55,7 +57,7 @@ trait Filterable
     }
 
     /**
-     * Runs when any filter is changed
+     * Runs when any filter is changed.
      */
     public function updatedFilters(): void
     {
@@ -67,7 +69,7 @@ trait Filterable
     }
 
     /**
-     * Removes any filters that are empty
+     * Removes any filters that are empty.
      */
     protected function checkFilters(): void
     {
@@ -99,13 +101,13 @@ trait Filterable
     }
 
     /**
-     * Set a given uriKey related filter to null
+     * Set a given uriKey related filter to null.
      *
      * @param $uriKey
      */
     public function removeFilter($uriKey): void
     {
-        if (! isset($this->filters[$uriKey])) {
+        if (!isset($this->filters[$uriKey])) {
             return;
         }
 
@@ -128,6 +130,7 @@ trait Filterable
      * Get filter by uriKey.
      *
      * @param $uriKey
+     *
      * @return Filter
      */
     public function getFilterComponentByUriKey($uriKey): Filter
@@ -140,6 +143,7 @@ trait Filterable
      * Get filter component name.
      *
      * @param $uriKey
+     *
      * @return string
      */
     public function getFilterComponentLabel($uriKey): string
@@ -154,6 +158,7 @@ trait Filterable
      *
      * @param $uriKey
      * @param $value
+     *
      * @return string
      */
     public function getFilterComponentValue($uriKey, $value): string

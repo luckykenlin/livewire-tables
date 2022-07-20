@@ -7,7 +7,7 @@ trait Refreshable
     /**
      * Whether to refresh the table at a certain interval
      * false is off
-     * If it's an integer it will be treated as milliseconds (2000 = refresh every 2 seconds)
+     * If it's an integer it will be treated as milliseconds (2000 = refresh every 2 seconds).
      *
      * @var bool
      */
