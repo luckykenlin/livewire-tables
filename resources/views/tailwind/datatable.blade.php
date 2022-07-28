@@ -21,11 +21,13 @@
                         @includeWhen($showFilters, 'livewire-tables::tailwind.includes.filters')
                     </div>
 
-                    <div class="md:flex md:items-center">
+                    <div class="md:flex md:items-center space-y-4 md:space-y-0">
                         {{--                        <div>@include('livewire-tables::tailwind.includes.bulk-actions')</div>--}}
                         {{--                        <div>@include('livewire-tables::tailwind.includes.column-select')</div>--}}
                         <div>@includeWhen($paginationEnabled && $showPerPage,'livewire-tables::tailwind.includes.per-page')</div>
-                        <div>@includeWhen($this->hasNewResource(),'livewire-tables::tailwind.includes.new-resource')</div>
+                        <div class="flex justify-end">
+                            @includeWhen($this->hasNewResource(),'livewire-tables::tailwind.includes.new-resource')
+                        </div>
                     </div>
                 </div>
 
