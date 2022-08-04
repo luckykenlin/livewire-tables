@@ -78,8 +78,7 @@
         },
         plugins: [
             EditOnGithubPlugin.create('https://github.com/luckykenlin/livewire-tables/blob/main/docs/')
-        ],
-        ga: 'G-3WLLE6HQD0'
+        ]
     }
 </script>
 <!-- Docsify v4 -->
@@ -93,7 +92,16 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3WLLE6HQD0"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3WLLE6HQD0');
+</script>
+
 
 <script type="text/javascript">
 
