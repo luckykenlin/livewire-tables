@@ -3,6 +3,7 @@
 namespace Luckykenlin\LivewireTables;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -89,7 +90,7 @@ abstract class LivewireTables extends Component
      */
     public function boot(): void
     {
-        $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message', 'Whoops! No results.');
+        $this->emptyMessage = empty($this->emptyMessage) ? config('livewire-tables.empty_message', 'Whoops! No results.') : $this->emptyMessage;
     }
 
     public function booted(): void
@@ -128,9 +129,9 @@ abstract class LivewireTables extends Component
     /**
      * Render table.
      *
-     * @return View
+     * @return View|Factory
      */
-    public function render(): View
+    public function render(): View|Factory
     {
         return view($this->view(), [
             'columns' => $this->columns(),
@@ -151,15 +152,15 @@ abstract class LivewireTables extends Component
     /**
      * Get table data.
      *
-     * @return LengthAwarePaginator|Collection
+     * @return Collection|LengthAwarePaginator|array
      */
-    protected function rows(): LengthAwarePaginator|Collection
+    protected function rows(): Collection|LengthAwarePaginator|array
     {
-        $this->applyFilter($this->builder);
+        $this->applyFilter();
 
-        $this->applySearch($this->builder);
+        $this->applySearch();
 
-        $this->applySorting($this->builder);
+        $this->applySorting();
 
         if ($this->paginationEnabled) {
             return $this->builder->paginate(perPage: $this->perPage, pageName: $this->pageName());

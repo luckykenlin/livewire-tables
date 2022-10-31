@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class SelectFilter extends Filter
      * @param array $options
      * @return SelectFilter
      */
-    public function options(array $options): static
+    public function options(array $options): SelectFilter
     {
         $this->options = $options;
 
@@ -97,9 +98,9 @@ class SelectFilter extends Filter
     /**
      * Render filter view
      *
-     * @return View
+     * @return View|Factory
      */
-    public function render(): View
+    public function render(): View|Factory
     {
         return view($this->view, [
             'uriKey' => $this->uriKey,

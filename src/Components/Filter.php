@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ abstract class Filter
      * Unique key for filters component.
      *
      * @var string
-     */
+    */
     public string $uriKey = '';
 
     /**
@@ -51,15 +52,15 @@ abstract class Filter
     abstract public function apply(Request $request, Builder $builder, mixed $value): Builder;
 
     /**
-     * @return View
+     * @return View|Factory
      */
-    abstract protected function render(): View;
+    abstract protected function render(): View|Factory;
 
     /**
      * @param string $view
      * @return Filter
      */
-    public function view(string $view): static
+    public function view(string $view): Filter
     {
         $this->view = $view;
 
@@ -70,7 +71,7 @@ abstract class Filter
      * @param string $uriKey
      * @return Filter
      */
-    public function setUriKey(string $uriKey): static
+    public function setUriKey(string $uriKey): Filter
     {
         $this->uriKey = $uriKey;
 
@@ -111,9 +112,9 @@ abstract class Filter
 
     /**
      * @param string $label
-     * @return BooleanFilter
+     * @return Filter
      */
-    public function label(string $label): static
+    public function label(string $label): Filter
     {
         $this->label = $label;
 

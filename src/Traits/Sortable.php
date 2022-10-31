@@ -42,17 +42,16 @@ trait Sortable
     /**
      * Trick of sorting.
      *
-     * @param Builder $builder
      * @return Builder
      */
-    protected function applySorting(Builder $builder): Builder
+    protected function applySorting(): Builder
     {
         if ($this->sortingEnabled === false) {
-            return $builder;
+            return $this->builder;
         }
 
         if (! empty($this->defaultSortColumn) && ! count($this->sorts)) {
-            return $builder->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
+            return $this->builder->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
         }
 
         foreach ($this->sorts as $attribute => $direction) {
@@ -69,13 +68,13 @@ trait Sortable
             // If the column has a sort callback, just use that
             if ($column->hasSortCallback()) {
                 // call sort callback
-                ($column->getSortCallback())($builder, $direction);
+                ($column->getSortCallback())($this->builder, $direction);
             } else {
-                $builder->orderBy($this->getSortAttribute($builder, $attribute), $direction);
+                $this->builder->orderBy($this->getSortAttribute($this->builder, $attribute), $direction);
             }
         }
 
-        return $builder;
+        return $this->builder;
     }
 
     /**

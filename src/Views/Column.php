@@ -2,7 +2,6 @@
 
 namespace Luckykenlin\LivewireTables\Views;
 
-use Closure;
 use Illuminate\Support\Str;
 
 class Column
@@ -73,22 +72,22 @@ class Column
     protected bool $asHtml = false;
 
     /**
-     * @var Closure|null
+     * @var callable|null
      */
     protected $formatCallback = null;
 
     /**
-     * @var Closure|null
+     * @var callable|null
      */
     protected $renderCallback = null;
 
     /**
-     * @var Closure|null
+     * @var callable|null
      */
     protected $sortCallback = null;
 
     /**
-     * @var Closure|null
+     * @var callable|null
      */
     protected $searchCallback = null;
 
@@ -107,7 +106,9 @@ class Column
     /**
      * @param string $field
      * @param string|null $attribute
-     * @return static
+     * @no-named-arguments
+     *
+     * @return Column
      */
     public static function make(string $field, ?string $attribute = null): Column
     {

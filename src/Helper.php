@@ -11,7 +11,7 @@ class Helper
      */
     public static function getTableNameFromBuilder(Builder $builder): string
     {
-        return $builder?->getModel()?->getTable();
+        return $builder->getModel()->getTable();
     }
 
     /**

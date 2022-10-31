@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -21,9 +22,9 @@ class DeleteModel extends Component
     }
 
     /**
-     * @return View
+     * @return View|Factory
      */
-    public function render(): View
+    public function render(): View|Factory
     {
         return view('livewire-tables::' . config('livewire-tables.theme') . '.includes.delete-button');
     }

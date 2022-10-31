@@ -10,24 +10,18 @@ trait Pagination
 
     /**
      * Theme of pagination.
-     *
-     * @var string
      */
-    public string $paginationTheme;
+    public $paginationTheme;
 
     /**
      * Amount of items to show per page.
-     *
-     * @var int
      */
-    public int $perPage;
+    public $perPage;
 
     /**
      * The options to limit the amount of results per page.
-     *
-     * @var array <int>
      */
-    public array $perPageOptions;
+    public $perPageOptions;
 
     /**
      * Show the per page select.

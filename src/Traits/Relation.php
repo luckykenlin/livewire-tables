@@ -28,9 +28,9 @@ trait Relation
      * Get column by field.
      *
      * @param string $attribute
-     * @return Column
+     * @return Column|null
      */
-    protected function getColumnByAttribute(string $attribute): Column
+    protected function getColumnByAttribute(string $attribute): Column|null
     {
         return collect($this->columns())
             ->where('attribute', $attribute)

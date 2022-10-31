@@ -38,16 +38,15 @@ trait Searchable
     /**
      * Trick of search.
      *
-     * @param Builder $builder
      * @return Builder
      */
-    protected function applySearch(Builder $builder): Builder
+    protected function applySearch(): Builder
     {
         if (trim($this->search) === '' || ! $this->showSearch) {
-            return $builder;
+            return $this->builder;
         }
 
-        $builder->where(function ($builder) {
+        $this->builder->where(function ($builder) {
             collect($this->columns())
                 ->reject(fn ($column) => ! $column->isSearchable())
                 ->each(function (Column $column) use ($builder) {
@@ -73,7 +72,7 @@ trait Searchable
                 });
         });
 
-        return $builder;
+        return $this->builder;
     }
 
     /**

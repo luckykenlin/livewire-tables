@@ -27,20 +27,23 @@ trait Filterable
     /**
      * Trick of search.
      *
-     * @param Builder $builder
      * @return Builder
      */
-    protected function applyFilter(Builder $builder): Builder
+    protected function applyFilter(): Builder
     {
         collect($this->filters())
-            ->each(function ($filter) use ($builder) {
+            ->each(function ($filter) {
                 tap(
                     $this->getFilterValue($filter),
-                    fn ($value) => filled($value) && $filter->apply(request(), $builder, $value)
+                    function ($value) use ($filter) {
+                        if (filled($value)) {
+                            $filter->apply(request(), $this->builder, $value);
+                        }
+                    }
                 );
             });
 
-        return $builder;
+        return $this->builder;
     }
 
     /**
@@ -51,7 +54,7 @@ trait Filterable
      */
     protected function getFilterValue(Filter $filter): mixed
     {
-        return $this->filters[$filter->getUriKey()] ?? null;
+        return $this->filters[$filter->getUriKey()];
     }
 
     /**
@@ -71,7 +74,7 @@ trait Filterable
      */
     protected function checkFilters(): void
     {
-        foreach ($this->filters as $uriKey => $filter) {
+        foreach ($this->filters as $uriKey => $_) {
             if (filled($this->filters[$uriKey])) {
                 continue;
             }
@@ -95,7 +98,7 @@ trait Filterable
      */
     public function hasFilters(): bool
     {
-        return count($this->filters());
+        return count($this->filters()) > 0;
     }
 
     /**
@@ -105,7 +108,7 @@ trait Filterable
      */
     public function removeFilter($uriKey): void
     {
-        if (! isset($this->filters[$uriKey])) {
+        if (!isset($this->filters[$uriKey])) {
             return;
         }
 
@@ -120,7 +123,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn ($value) => $value === '')
+            ->reject(fn($value) => $value === '')
             ->count();
     }
 

@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -83,9 +84,9 @@ class BooleanFilter extends Filter
     /**
      * Render filter view
      *
-     * @return View
+     * @return View|Factory
      */
-    public function render(): View
+    public function render(): View|Factory
     {
         return view($this->view, [
             'uriKey' => $this->uriKey,

@@ -2,6 +2,7 @@
 
 namespace Luckykenlin\LivewireTables\Components;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -80,7 +81,7 @@ class MultiSelectFilter extends Filter
     public function displayValue(array $value): string
     {
         return collect($this->options)
-            ->filter(function ($item, $key) use ($value) {
+            ->filter(function ($key) use ($value) {
                 return in_array($key, $value);
             })
             ->implode(', ');
@@ -88,9 +89,9 @@ class MultiSelectFilter extends Filter
 
     /**
      * @param array $options
-     * @return SelectFilter
+     * @return MultiSelectFilter
      */
-    public function options(array $options): static
+    public function options(array $options): MultiSelectFilter
     {
         $this->options = $options;
 
@@ -100,9 +101,9 @@ class MultiSelectFilter extends Filter
     /**
      * Render filter view
      *
-     * @return View
+     * @return View|Factory
      */
-    public function render(): View
+    public function render(): View|Factory
     {
         return view($this->view, [
             'uriKey' => $this->uriKey,
