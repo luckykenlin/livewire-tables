@@ -51,16 +51,13 @@ trait Searchable
             collect($this->columns())
                 ->reject(fn ($column) => ! $column->isSearchable())
                 ->each(function (Column $column) use ($builder) {
-
                     // If the column has a search callback, just use that
                     if ($column->hasSearchCallback()) {
-
                         // Call the callback
                         ($column->getSearchCallback())($builder, trim($this->search));
 
                     // Search for relation
                     } elseif ($column->hasRelationship()) {
-
                         // Get relation of column
                         $relationship = $this->relationship($column->attribute);
 
