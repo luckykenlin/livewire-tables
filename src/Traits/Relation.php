@@ -12,26 +12,6 @@ use Luckykenlin\LivewireTables\Views\Column;
 trait Relation
 {
     /**
-     * @var Model
-     */
-    protected Model $model;
-
-    /**
-     * @var string
-     */
-    protected string $table;
-
-    /**
-     * Initialize
-     */
-    protected function initializeRelation()
-    {
-        $this->model = $this->getModel($this->builder);
-
-        $this->table = $this->getTable($this->builder);
-    }
-
-    /**
      * Get column by field.
      *
      * @param string $field

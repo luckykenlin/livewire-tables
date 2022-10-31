@@ -6,6 +6,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Luckykenlin\LivewireTables\Traits\Deletable;
 use Luckykenlin\LivewireTables\Traits\Filterable;
@@ -55,12 +56,22 @@ abstract class LivewireTables extends Component
      *
      * @var string
      */
-    public string $emptyMessage;
+    public string $emptyMessage = '';
 
     /**
-     * @var Builder
+     * @var ?Builder
      */
-    protected Builder $builder;
+    protected ?Builder $builder = null;
+
+    /**
+     * @var Model
+     */
+    protected Model $model;
+
+    /**
+     * @var string
+     */
+    protected string $table;
 
     /**
      * Show query string on url.
@@ -73,13 +84,21 @@ abstract class LivewireTables extends Component
         'filters' => ['except' => ''],
     ];
 
-    public function __construct(?string $id = null)
+    /**
+     * Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
+     */
+    public function boot(): void
     {
-        parent::__construct($id);
-
         $this->emptyMessage = $this->emptyMessage ?? config('livewire-tables.empty_message', 'Whoops! No results.');
+    }
 
+    public function booted(): void
+    {
         $this->builder = $this->query();
+
+        $this->model = $this->getModel($this->builder);
+
+        $this->table = $this->getTable($this->builder);
     }
 
     /**
