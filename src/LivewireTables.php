@@ -59,9 +59,9 @@ abstract class LivewireTables extends Component
     public string $emptyMessage = '';
 
     /**
-     * @var ?Builder
+     * @var Builder
      */
-    protected ?Builder $builder = null;
+    protected Builder $builder;
 
     /**
      * @var Model
