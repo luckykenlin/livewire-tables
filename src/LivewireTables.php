@@ -162,6 +162,9 @@ abstract class LivewireTables extends Component
 
         $this->applySorting();
 
+        /* prevent duplicate records after paginate */
+        $this->builder->orderBy('id');
+
         if ($this->paginationEnabled) {
             return $this->builder->paginate(perPage: $this->perPage, pageName: $this->pageName());
         }
