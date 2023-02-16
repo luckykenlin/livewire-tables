@@ -11,17 +11,17 @@ trait Pagination
     /**
      * Theme of pagination.
      */
-    public $paginationTheme;
+    public string $paginationTheme;
 
     /**
      * Amount of items to show per page.
      */
-    public $perPage;
+    public int $perPage;
 
     /**
      * The options to limit the amount of results per page.
      */
-    public $perPageOptions;
+    public array $perPageOptions;
 
     /**
      * Show the per page select.
@@ -47,7 +47,7 @@ trait Pagination
     /**
      * Initialize
      */
-    protected function initializePagination()
+    protected function initializePagination(): void
     {
         $this->paginationTheme = $this->paginationTheme ?? config('livewire-tables.tailwind', 'tailwind');
 

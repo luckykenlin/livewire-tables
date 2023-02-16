@@ -2,6 +2,8 @@
 
 namespace Luckykenlin\LivewireTables\Traits;
 
+use Illuminate\Http\RedirectResponse;
+
 trait NewResource
 {
     /**
@@ -10,11 +12,11 @@ trait NewResource
     public string $newResource = '';
 
     /**
-     * @return \Illuminate\Http\RedirectResponse|void
+     * @return RedirectResponse|void
      */
     public function resolveNewResource()
     {
-        if (! $this->hasNewResource()) {
+        if (!$this->hasNewResource()) {
             return;
         }
 

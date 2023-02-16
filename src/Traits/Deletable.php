@@ -29,7 +29,7 @@ trait Deletable
      *
      * @param $id
      */
-    public function confirmDeletion($id)
+    public function confirmDeletion($id): void
     {
         $this->itemKey = $id;
 
