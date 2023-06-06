@@ -55,7 +55,7 @@ trait Searchable
                         // Call the callback
                         ($column->getSearchCallback())($builder, trim($this->search));
 
-                    // Search for relation
+                        // Search for relation
                     } elseif ($column->hasRelationship()) {
                         // Get relation of column
                         $relationship = $this->relationship($column->attribute);
@@ -65,7 +65,7 @@ trait Searchable
                             $builder->where($relationship->attribute, 'like', $this->searchString());
                         });
 
-                    //  Only search the column.
+                        //  Only search the column.
                     } else {
                         $builder->orWhere($this->getColumnAttribute($builder, $column), 'like', $this->searchString());
                     }
