@@ -11,6 +11,7 @@ public function columns() : array
         Column::make('ID')
             ->searchable()
             ->sortable(),
+            
         Column::make('Name')
             ->searchable()
             ->sortable()
@@ -18,12 +19,12 @@ public function columns() : array
                 return Str::of($value)
                     ->title();
             })
+            
         Column::make('Profile', 'profile.profile_telephone')
             ->searchable()
             ->sortable()
-            ->render(function(User $user) {
-                return view('dashboard.user.profile', compact('user'));
-            }),
+            ->render(static fn(User $user) => view('dashboard.user.profile', compact('user'))),
+            
         Column::make('E-mail', 'email')
     ];
 }
