@@ -54,7 +54,7 @@ trait Filterable
      */
     protected function getFilterValue(Filter $filter): mixed
     {
-        return $this->filters[$filter->getUriKey()];
+        return data_get($this->filters, $filter->getUriKey());
     }
 
     /**
