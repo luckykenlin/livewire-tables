@@ -123,7 +123,7 @@ trait Filterable
     public function countFilters(): int
     {
         return collect($this->filters)
-            ->reject(fn($value) => $value === '')
+            ->reject(fn ($value) => $value === '')
             ->count();
     }
 
