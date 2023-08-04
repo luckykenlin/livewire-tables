@@ -79,7 +79,7 @@ abstract class LivewireTables extends Component
      *
      * @var array
      */
-    protected $queryString = [
+    protected array $queryString = [
         'search' => ['except' => ''],
         'sorts' => ['except' => ''],
         'filters' => ['except' => ''],

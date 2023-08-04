@@ -11,7 +11,7 @@ trait Pagination
     /**
      * Theme of pagination.
      */
-    public string $paginationTheme;
+    public ?string $paginationTheme;
 
     /**
      * Amount of items to show per page.
@@ -47,7 +47,7 @@ trait Pagination
     /**
      * Initialize
      */
-    protected function initializePagination(): void
+    public function initializePagination(): void
     {
         $this->paginationTheme = $this->paginationTheme ?? config('livewire-tables.tailwind', 'tailwind');
 
@@ -61,7 +61,7 @@ trait Pagination
      *
      * @return string
      */
-    protected function pageName(): string
+    public function pageName(): string
     {
         return 'page';
     }
@@ -70,7 +70,7 @@ trait Pagination
      * https://laravel-livewire.com/docs/pagination
      * Resetting Pagination After Filtering Data.
      */
-    protected function updatingSearch(): void
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
@@ -79,7 +79,7 @@ trait Pagination
      * https://laravel-livewire.com/docs/pagination
      * Resetting Pagination After Changing the perPage.
      */
-    protected function updatingPerPage(): void
+    public function updatingPerPage(): void
     {
         $this->resetPage();
     }
