@@ -75,7 +75,8 @@ You can easily use this packge in a local Laravel project, after cloning:
   "repositories": [
     {
       "type": "path",
-      "url": "../../livewire-tables" // the relative path to your package
+      "url": "../../livewire-tables", // the relative path to your package
+      "canonical": false
     }
   ]
 }

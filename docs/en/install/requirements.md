@@ -1,15 +1,17 @@
 # Requirements
-PHP ^8.0
-Laravel ^8.0 | ^9.0
-Laravel Livewire ^2.0
-- `PHP ^8.0`
-- `Laravel ^8.0 | ^9.0`
-- `Laravel Livewire ^2.0`
-- `AlpineJS ^2.0`
+PHP ^8.1 | ^8.2
+Laravel ^9.0 | ^10.0
+Laravel Livewire ^3.0
+- `PHP ^8.1 | ^8.2`
+- `Laravel ^9.0 | ^10.0`
+- `Laravel Livewire ^3.0`
+- `AlpineJS ^3.0`
 - `Tailwind Css ^2.0 | ^3.0`
 `
 
-For example:
+Since Livewire V3 auto injected assets feature, no need to do anything.
+
+For Livewire v2 example:
 
 ```html 
 <!DOCTYPE html>
