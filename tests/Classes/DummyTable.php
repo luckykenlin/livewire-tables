@@ -3,13 +3,10 @@
 namespace Luckykenlin\LivewireTables\Tests\Classes;
 
 use Illuminate\Database\Eloquent\Builder;
-use Luckykenlin\LivewireTables\Columns\Boolean;
-use Luckykenlin\LivewireTables\Columns\Column;
-use Luckykenlin\LivewireTables\Columns\Date;
-use Luckykenlin\LivewireTables\Columns\ID;
-use Luckykenlin\LivewireTables\Columns\Text;
 use Luckykenlin\LivewireTables\LivewireTables;
 use Luckykenlin\LivewireTables\Tests\Models\DummyModel;
+use Luckykenlin\LivewireTables\Views\Boolean;
+use Luckykenlin\LivewireTables\Views\Column;
 
 class DummyTable extends LivewireTables
 {
@@ -21,14 +18,14 @@ class DummyTable extends LivewireTables
     public function columns(): array
     {
         return [
-            ID::make()->label("#")->sortable(),
+            Column::make('#', 'id')->sortable(),
             Column::make("Subject")->searchable(),
             Column::make("Category"),
             Boolean::make("Flag")->trueValue("Marked")->falseValue("Unmarked")->filterable(),
-            Text::make("Body"),
-            Date::make("Expiry", "expires_at"),
-            Date::make("Updated At", "updated_at")->hideOnTable(),
-            Date::make("Created At", "created_at"),
+            Column::make("Body"),
+            Column::make("Expiry", "expires_at"),
+            Column::make('Created At')->sortable(),
+            Column::make('Updated At')->sortable(),
         ];
     }
 }

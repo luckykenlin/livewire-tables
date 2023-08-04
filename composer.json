@@ -1,69 +1,67 @@
 {
-    "name": "luckykenlin/livewire-tables",
-    "description": "livewire-tables",
-    "keywords": [
-        "luckykenlin",
-        "CRUD",
-        "livewire tables",
-        "livewire",
-        "datatables",
-        "tables",
-        "laravel",
-        "laravel tables"
-    ],
-    "homepage": "https://github.com/luckykenlin/livewire-tables",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ken Lin",
-            "email": "luckykenlin@gmail.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.1|^8.2",
-        "illuminate/support": "^9.0|^10.0|^11.0",
-        "livewire/livewire": "^v3.0.0-beta.1",
-        "spatie/laravel-package-tools": "^1.9.2"
-    },
-    "require-dev": {
-        "laravel/framework": "^10.0|^11.0",
-        "brianium/paratest": "^6.2",
-        "laravel/legacy-factories": "^1.1",
-        "nunomaduro/collision": "^v7.7.0",
-        "orchestra/testbench": "^7.0|^8.0",
-        "phpunit/phpunit": "^9.5.4",
-        "spatie/laravel-ray": "^1.9",
-        "vimeo/psalm": "^4.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Luckykenlin\\LivewireTables\\": "src",
-            "Luckykenlin\\LivewireTables\\Tests\\": "tests",
-            "Luckykenlin\\LivewireTables\\Database\\Factories\\": "database/factories"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Luckykenlin\\LivewireTables\\Tests\\": "tests",
-            "App\\Http\\Livewire\\": "tests/classes"
-        }
-    },
-    "scripts": {
-        "psalm": "vendor/bin/psalm --output-format=github",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Luckykenlin\\LivewireTables\\LivewireTablesServiceProvider"
-            ]
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "luckykenlin/livewire-tables",
+  "description": "livewire-tables",
+  "keywords": [
+    "luckykenlin",
+    "CRUD",
+    "livewire tables",
+    "livewire",
+    "datatables",
+    "tables",
+    "laravel",
+    "laravel tables"
+  ],
+  "homepage": "https://github.com/luckykenlin/livewire-tables",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ken Lin",
+      "email": "luckykenlin@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.1|^8.2",
+    "illuminate/support": "^9.0|^10.0|^11.0",
+    "livewire/livewire": "^v3.0.0-beta.1"
+  },
+  "require-dev": {
+    "laravel/framework": "^10.0|^11.0",
+    "brianium/paratest": "^v7.2.4",
+    "laravel/legacy-factories": "^v1.3.2",
+    "nunomaduro/collision": "^v7.7.0",
+    "orchestra/testbench": "^7.0|^8.0",
+    "phpunit/phpunit": "^9.5.4",
+    "spatie/laravel-package-tools": "^1.15.0",
+    "vimeo/psalm": "^4.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Luckykenlin\\LivewireTables\\": "src",
+      "Luckykenlin\\LivewireTables\\Tests\\": "tests"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Luckykenlin\\LivewireTables\\Tests\\": "tests",
+      "App\\Livewire\\": "tests/Classes"
+    }
+  },
+  "scripts": {
+    "psalm": "vendor/bin/psalm --output-format=github",
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Luckykenlin\\LivewireTables\\LivewireTablesServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
