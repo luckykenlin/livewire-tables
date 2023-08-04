@@ -9,7 +9,8 @@ use Luckykenlin\LivewireTables\Tests\Models\DummyModel;
 
 class LivewireTableTest extends TestCase
 {
-    public function test_true_is_true(){
+    public function test_true_is_true()
+    {
         $this->assertTrue(true);
     }
     /** @test */

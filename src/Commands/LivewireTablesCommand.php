@@ -20,7 +20,7 @@ class LivewireTablesCommand extends Command
 
         File::ensureDirectoryExists(app_path('Livewire'));
 
-        if (!File::exists($path) || $this->confirm($this->argument('name') . ' already exists. Overwrite it?')) {
+        if (! File::exists($path) || $this->confirm($this->argument('name') . ' already exists. Overwrite it?')) {
             File::put($path, $stub);
             $this->info($this->argument('name') . ' was made!');
         }
