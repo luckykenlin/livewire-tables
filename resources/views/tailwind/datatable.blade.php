@@ -37,5 +37,5 @@
         </div>
     </div>
 
-    <x-livewire-tables::modals.delete-button-modal wire:model.defer="confirmDelete" :itemKey="$itemKey"/>
+    <x-livewire-tables::modals.delete-button-modal wire:model="confirmDelete" :itemKey="$itemKey"/>
 </div>

@@ -3,7 +3,8 @@
 ])
 
 <div
-    x-data="{ showModal: @entangle($attributes->wire('model')).defer }"
+    x-cloak
+    x-data="{ showModal: @entangle($attributes->wire('model')) }"
 >
     <div
         class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-gray-500 bg-opacity-75"
@@ -14,7 +15,6 @@
         x-transition:leave="transform duration-200"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-100"
-        x-cloak
     >
         {{-- Modal inner --}}
         <div

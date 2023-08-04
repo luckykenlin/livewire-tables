@@ -34,6 +34,6 @@ class DeleteModel extends Component
      */
     public function delete(?string $id = null): void
     {
-        $this->emit('delete', $id);
+        $this->dispatch('delete', $id);
     }
 }
