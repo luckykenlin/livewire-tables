@@ -13,19 +13,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
  */
 class LivewireTablesServiceProvider extends PackageServiceProvider
 {
-    public function boot()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/livewire-tables.php' => config_path('livewire-tables.php'),
-            ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/livewire-tables'),
-            ], 'views');
-        }
-    }
-
     public function bootingPackage(): void
     {
         Blade::component('livewire-tables::tailwind.components.table.table', 'livewire-tables::table');
