@@ -26,40 +26,17 @@ In your `tailwind.config.js` purge configuration
 
 ```javascript
 module.exports = {
-    mode: 'jit',
-    purge: [
+    ...,
+    content: [
         ...
-        './app/Http/Livewire/**/*.php',
         './vendor/luckykenlin/livewire-tables/**/*.blade.php'
     ],
     ...
 };
 ```
 
-
-### Livewire Assets
-
-Add the following Blade directives in the head tag, and before the end body tag in your template.
-
-```html
-<html>
-<head>
-    ...
-    @livewireStyles
-</head>
-<body>
-    ...
-    @livewireScripts
-</body>
-</html>
-```
-
-You can alternatively use the tag syntax.
-
-```html
-<livewire:styles />
-...
-<livewire:scripts />
+```bash
+npm run build
 ```
 
 That's it! That's all you need to start using Livewire Tables.
@@ -85,7 +62,7 @@ You can easily use this packge in a local Laravel project, after cloning:
 2. Require the package in the local Laravel project:
 
 ```bash
-composer require luckykenlin/livewire-tables
+composer require luckykenlin/livewire-tables:dev-main
 ```
 
 
