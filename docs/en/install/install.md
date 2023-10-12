@@ -1,6 +1,6 @@
 # Installation
 
-!> Note: This package assumes you already have `Laravel Livewire 2.x` and `Alpine.js 2.x` installed.
+!> Note: This package assumes you already have `Laravel Livewire 3.x` and `Alpine.js 3.x` installed.
 
 You can install the package via `composer`:
 
